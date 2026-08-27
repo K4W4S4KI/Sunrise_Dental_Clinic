@@ -1,0 +1,652 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f4f1ff;
+    min-height: 100vh;
+}
+
+
+/* ================================
+   MAIN PAGE
+================================ */
+
+.page {
+    min-height: 100vh;
+    display: flex;
+}
+
+
+/* ================================
+   LEFT CLINIC SECTION
+================================ */
+
+.clinic-section {
+    width: 48%;
+    min-height: 100vh;
+
+    background: linear-gradient(
+        135deg,
+        #6A5ACD,
+        #7B68EE,
+        #8A2BE2
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Decorative circles */
+
+.clinic-section::before {
+    content: "";
+    position: absolute;
+
+    width: 450px;
+    height: 450px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    top: -180px;
+    left: -180px;
+}
+
+
+.clinic-section::after {
+    content: "";
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    bottom: -150px;
+    right: -120px;
+}
+
+
+/* ================================
+   CLINIC CONTENT
+================================ */
+
+.clinic-content {
+    position: relative;
+    z-index: 2;
+
+    text-align: center;
+    color: #ffffff;
+
+    padding: 40px;
+}
+
+
+.clinic-logo {
+    width: 110px;
+    height: 110px;
+
+    margin: 0 auto 25px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+
+.tooth-icon {
+    width: 82px;
+    height: 82px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 45px;
+}
+
+
+.clinic-content h1 {
+    font-size: 52px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.clinic-content h2 {
+    font-size: 27px;
+    font-weight: 400;
+
+    letter-spacing: 4px;
+
+    margin-top: 8px;
+}
+
+
+.line {
+    width: 70px;
+    height: 3px;
+
+    background: #ffffff;
+
+    margin: 25px auto;
+}
+
+
+.clinic-content p {
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    opacity: 0.95;
+
+    margin-bottom: 30px;
+}
+
+
+/* ================================
+   CLINIC FEATURES
+================================ */
+
+.clinic-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    text-align: left;
+
+    width: 240px;
+
+    margin: auto;
+}
+
+
+.clinic-info span {
+    font-size: 14px;
+
+    opacity: 0.95;
+}
+
+
+/* ================================
+   LOGIN SECTION
+================================ */
+
+.login-section {
+    width: 52%;
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px;
+}
+
+
+/* ================================
+   LOGIN CARD
+================================ */
+
+.login-card {
+    width: 460px;
+    max-width: 100%;
+
+    background: #ffffff;
+
+    padding: 45px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 50px rgba(75, 60, 167, 0.15);
+}
+
+
+/* ================================
+   MOBILE LOGO
+================================ */
+
+.mobile-logo {
+    display: none;
+}
+
+
+/* ================================
+   LOGIN HEADER
+================================ */
+
+.login-header {
+    margin-bottom: 30px;
+}
+
+
+.login-header h2 {
+    color: #333333;
+
+    font-size: 31px;
+
+    margin-bottom: 8px;
+}
+
+
+.login-header p {
+    color: #777777;
+
+    font-size: 14px;
+}
+
+
+/* ================================
+   ERROR MESSAGE
+================================ */
+
+.error-message {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: #fff0f0;
+
+    color: #d8000c;
+
+    border: 1px solid #ffcaca;
+
+    border-radius: 8px;
+
+    padding: 12px 14px;
+
+    margin-bottom: 22px;
+
+    font-size: 13px;
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+
+.form-group label {
+    display: block;
+
+    color: #333333;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+
+.input-wrapper {
+    position: relative;
+}
+
+
+.input-wrapper input {
+    width: 100%;
+
+    height: 52px;
+
+    padding: 0 50px;
+
+    border: 1px solid #d8d3f0;
+
+    border-radius: 9px;
+
+    background: #faf9ff;
+
+    color: #333333;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: all 0.25s ease;
+}
+
+
+.input-wrapper input::placeholder {
+    color: #999999;
+}
+
+
+.input-wrapper input:focus {
+    border-color: #6A5ACD;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(106, 90, 205, 0.12);
+}
+
+
+/* ================================
+   INPUT ICON
+================================ */
+
+.input-icon {
+    position: absolute;
+
+    left: 17px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 17px;
+
+    color: #6A5ACD;
+
+    z-index: 2;
+}
+
+
+/* ================================
+   SHOW PASSWORD
+================================ */
+
+.show-password {
+    position: absolute;
+
+    right: 12px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: #6A5ACD;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.show-password:hover {
+    color: #4B3CA7;
+}
+
+
+/* ================================
+   LOGIN BUTTON
+================================ */
+
+.login-btn {
+    width: 100%;
+
+    height: 54px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: linear-gradient(
+        90deg,
+        #6A5ACD,
+        #8A2BE2
+    );
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    transition: all 0.25s ease;
+
+    box-shadow:
+        0 7px 18px rgba(106, 90, 205, 0.25);
+}
+
+
+.login-btn:hover {
+    background: linear-gradient(
+        90deg,
+        #4B3CA7,
+        #6A1BB1
+    );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(106, 90, 205, 0.35);
+}
+
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+
+.arrow {
+    font-size: 21px;
+
+    transition: transform 0.2s ease;
+}
+
+
+.login-btn:hover .arrow {
+    transform: translateX(4px);
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+.login-footer {
+    text-align: center;
+
+    margin-top: 30px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #eeeaf9;
+}
+
+
+.login-footer p {
+    color: #999999;
+
+    font-size: 12px;
+
+    margin-bottom: 5px;
+}
+
+
+.login-footer span {
+    color: #6A5ACD;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 850px) {
+
+    .clinic-section {
+        width: 40%;
+    }
+
+    .login-section {
+        width: 60%;
+
+        padding: 25px;
+    }
+
+    .clinic-content h1 {
+        font-size: 40px;
+    }
+
+    .clinic-content h2 {
+        font-size: 20px;
+    }
+
+    .clinic-content p {
+        font-size: 14px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .page {
+        display: block;
+    }
+
+    .clinic-section {
+        width: 100%;
+
+        min-height: 240px;
+
+        padding: 30px 20px;
+    }
+
+    .clinic-content {
+        padding: 20px;
+    }
+
+    .clinic-logo {
+        width: 70px;
+
+        height: 70px;
+
+        margin-bottom: 12px;
+    }
+
+    .tooth-icon {
+        width: 52px;
+
+        height: 52px;
+
+        font-size: 28px;
+    }
+
+    .clinic-content h1 {
+        font-size: 32px;
+    }
+
+    .clinic-content h2 {
+        font-size: 17px;
+
+        letter-spacing: 2px;
+    }
+
+    .clinic-content p,
+    .clinic-info,
+    .line {
+        display: none;
+    }
+
+    .login-section {
+        width: 100%;
+
+        min-height: auto;
+
+        padding: 25px 18px 40px;
+    }
+
+    .login-card {
+        padding: 30px 25px;
+    }
+
+    .mobile-logo {
+        display: block;
+
+        text-align: center;
+
+        margin-bottom: 25px;
+    }
+
+    .small-tooth {
+        font-size: 35px;
+
+        margin-bottom: 8px;
+    }
+
+    .mobile-logo h2 {
+        color: #6A5ACD;
+
+        font-size: 19px;
+    }
+
+}
+
+
+@media (max-width: 400px) {
+
+    .login-card {
+        padding: 25px 18px;
+    }
+
+    .login-header h2 {
+        font-size: 27px;
+    }
+
+    .input-wrapper input {
+        height: 49px;
+    }
+
+    .login-btn {
+        height: 51px;
+    }
+
+}
