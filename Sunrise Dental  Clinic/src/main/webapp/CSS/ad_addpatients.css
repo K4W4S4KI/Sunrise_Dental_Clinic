@@ -1,0 +1,789 @@
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #F4F1FF;
+    color: #333333;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   TOP NAVIGATION
+========================================================= */
+
+.top-navbar {
+    height: 72px;
+    width: 100%;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    padding: 0 42px;
+    border-bottom: 1px solid #E9E5FF;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 235px;
+}
+
+.brand-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 9px;
+    background: #E9E5FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6A5ACD;
+    font-size: 19px;
+}
+
+.brand-text h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #4B3CA7;
+    line-height: 19px;
+}
+
+.brand-text span {
+    font-size: 9px;
+    color: #777777;
+    letter-spacing: .4px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.navigation {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.navigation a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 13px;
+    border-radius: 6px;
+    color: #777777;
+    font-size: 12px;
+    font-weight: 500;
+    transition: .2s ease;
+}
+
+.navigation a i {
+    font-size: 12px;
+}
+
+.navigation a:hover {
+    color: #6A5ACD;
+    background: #F4F1FF;
+}
+
+.navigation a.active {
+    background: #6A5ACD;
+    color: #FFFFFF;
+}
+
+
+/* =========================================================
+   ADMIN AREA
+========================================================= */
+
+.admin-area {
+    min-width: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 9px;
+}
+
+.admin-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #E9E5FF;
+    color: #6A5ACD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.admin-details {
+    display: flex;
+    flex-direction: column;
+    line-height: 15px;
+}
+
+.admin-details strong {
+    font-size: 11px;
+    color: #333333;
+    max-width: 85px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.admin-details span {
+    font-size: 9px;
+    color: #777777;
+}
+
+.logout-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #E9E5FF;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777777;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+.logout-btn:hover {
+    background: #F4F1FF;
+    color: #4B3CA7;
+    border-color: #E9E5FF;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.main-content {
+    width: 100%;
+    max-width: 1500px;
+    margin: auto;
+    padding: 27px 32px 35px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-header {
+    background: #FFFFFF;
+    min-height: 82px;
+    padding: 17px 22px;
+    border: 1px solid #E9E5FF;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.page-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #6A5ACD;
+    letter-spacing: 1.2px;
+}
+
+.page-header h1 {
+    font-size: 22px;
+    color: #4B3CA7;
+    margin-top: 3px;
+    margin-bottom: 2px;
+}
+
+.page-header p {
+    color: #777777;
+    font-size: 11px;
+}
+
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.header-user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #E9E5FF;
+    color: #6A5ACD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-user div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-user span {
+    color: #777777;
+    font-size: 9px;
+}
+
+.header-user strong {
+    color: #333333;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.message {
+    min-height: 42px;
+    padding: 10px 14px;
+    border-radius: 7px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.message i {
+    font-size: 14px;
+}
+
+.error-message {
+    background: #E9E5FF;
+    color: #4B3CA7;
+    border: 1px solid #E9E5FF;
+}
+
+.success-message {
+    background: #E9E5FF;
+    color: #4B3CA7;
+    border: 1px solid #E9E5FF;
+}
+
+
+/* =========================================================
+   FORM CARD
+========================================================= */
+
+.form-card {
+    background: #FFFFFF;
+    border: 1px solid #E9E5FF;
+    border-radius: 9px;
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   FORM HEADER
+========================================================= */
+
+.form-header {
+    min-height: 72px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    border-bottom: 1px solid #E9E5FF;
+    background: #FFFFFF;
+}
+
+.form-header-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: #E9E5FF;
+    color: #6A5ACD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.form-header h2 {
+    color: #4B3CA7;
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.form-header p {
+    color: #777777;
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.patient-form {
+    padding: 21px 22px 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-width {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    color: #333333;
+    font-size: 10px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.form-group label span {
+    color: #6A5ACD;
+    margin-left: 2px;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.input-wrapper {
+    height: 40px;
+    position: relative;
+}
+
+.input-wrapper i,
+.textarea-wrapper i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6A5ACD;
+    font-size: 12px;
+    z-index: 2;
+}
+
+.input-wrapper input,
+.input-wrapper select {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #E9E5FF;
+    border-radius: 7px;
+    background: #F4F1FF;
+    padding: 0 12px 0 35px;
+    color: #333333;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 11px;
+    outline: none;
+    transition: .2s ease;
+}
+
+.input-wrapper input::placeholder,
+.textarea-wrapper textarea::placeholder {
+    color: #777777;
+}
+
+.input-wrapper input:focus,
+.input-wrapper select:focus,
+.textarea-wrapper textarea:focus {
+    border-color: #6A5ACD;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.08);
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.select-wrapper select {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 35px;
+}
+
+.select-wrapper::after {
+    content: "\f107";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777777;
+    font-size: 10px;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+.textarea-wrapper {
+    position: relative;
+}
+
+.textarea-wrapper i {
+    top: 17px;
+    transform: none;
+}
+
+.textarea-wrapper textarea {
+    width: 100%;
+    min-height: 82px;
+    resize: vertical;
+    border: 1px solid #E9E5FF;
+    border-radius: 7px;
+    background: #F4F1FF;
+    padding: 11px 12px 10px 35px;
+    color: #333333;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 11px;
+    outline: none;
+    transition: .2s ease;
+}
+
+
+/* =========================================================
+   SMALL NOTE
+========================================================= */
+
+.form-group small {
+    color: #777777;
+    font-size: 8px;
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   REQUIRED NOTE
+========================================================= */
+
+.required-note {
+    color: #777777;
+    font-size: 9px;
+    margin-top: 2px;
+    padding-top: 4px;
+}
+
+.required-note span {
+    color: #6A5ACD;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 19px;
+    padding-top: 16px;
+    border-top: 1px solid #E9E5FF;
+}
+
+.form-actions button,
+.form-actions a {
+    height: 38px;
+    border-radius: 6px;
+    padding: 0 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+
+/* CANCEL */
+
+.cancel-btn {
+    background: #FFFFFF;
+    color: #777777;
+    border: 1px solid #E9E5FF;
+}
+
+.cancel-btn:hover {
+    background: #F4F1FF;
+    color: #4B3CA7;
+}
+
+
+/* RESET */
+
+.reset-btn {
+    background: #E9E5FF;
+    color: #4B3CA7;
+    border: 1px solid #E9E5FF;
+}
+
+.reset-btn:hover {
+    background: #F4F1FF;
+}
+
+
+/* SUBMIT */
+
+.submit-btn {
+    background: #6A5ACD;
+    color: #FFFFFF;
+    border: 1px solid #6A5ACD;
+}
+
+.submit-btn:hover {
+    background: #4B3CA7;
+    border-color: #4B3CA7;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CLINIC CARD
+========================================================= */
+
+.clinic-card {
+    background: #FFFFFF;
+    border: 1px solid #E9E5FF;
+    border-radius: 9px;
+    padding: 15px 19px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0;
+}
+
+.clinic-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: #E9E5FF;
+    color: #6A5ACD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.clinic-card-text {
+    flex: 1;
+}
+
+.clinic-card-text h3 {
+    font-size: 12px;
+    color: #333333;
+    margin-bottom: 2px;
+}
+
+.clinic-card-text p {
+    font-size: 9px;
+    color: #777777;
+}
+
+.clinic-status {
+    font-size: 9px;
+    color: #4B3CA7;
+    background: #F4F1FF;
+    padding: 6px 9px;
+    border-radius: 15px;
+}
+
+.clinic-status i {
+    font-size: 5px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 4px 0;
+    color: #777777;
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .top-navbar {
+        padding: 0 20px;
+    }
+
+    .brand {
+        min-width: 190px;
+    }
+
+    .navigation a {
+        padding: 8px 9px;
+        font-size: 11px;
+    }
+
+    .navigation a i {
+        display: none;
+    }
+
+    .admin-area {
+        min-width: 160px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .top-navbar {
+        height: auto;
+        min-height: 72px;
+        padding: 10px 15px;
+        flex-wrap: wrap;
+    }
+
+    .brand {
+        min-width: auto;
+    }
+
+    .admin-area {
+        margin-left: auto;
+        min-width: auto;
+    }
+
+    .navigation {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 7px 0 2px;
+    }
+
+    .navigation a i {
+        display: inline-block;
+    }
+
+    .main-content {
+        padding: 18px 15px 25px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .page-header {
+        align-items: flex-start;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 550px) {
+
+    .brand-text {
+        display: none;
+    }
+
+    .admin-details {
+        display: none;
+    }
+
+    .header-user {
+        display: none;
+    }
+
+    .page-header {
+        min-height: 82px;
+        padding: 17px;
+    }
+
+    .page-header h1 {
+        font-size: 20px;
+    }
+
+    .patient-form {
+        padding: 18px 15px;
+    }
+
+    .form-actions {
+        flex-wrap: wrap;
+        justify-content: stretch;
+    }
+
+    .form-actions button,
+    .form-actions a {
+        flex: 1;
+    }
+
+    .clinic-card {
+        align-items: flex-start;
+    }
+
+    .clinic-status {
+        display: none;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+}
+

@@ -1,4 +1,6 @@
-
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     margin: 0;
@@ -8,7 +10,7 @@
 
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background: #F4F1FF;
+    background: #f4f1ff;
     color: #333333;
     min-height: 100vh;
 }
@@ -21,11 +23,11 @@ body {
 .top-navbar {
     height: 72px;
     width: 100%;
-    background: #FFFFFF;
+    background: #ffffff;
     display: flex;
     align-items: center;
     padding: 0 42px;
-    border-bottom: 1px solid #E9E5FF;
+    border-bottom: 1px solid #e9e5ff;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -47,18 +49,18 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 9px;
-    background: #E9E5FF;
+    background: #e9e5ff;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #6A5ACD;
-    font-size: 18px;
+    color: #6a5acd;
+    font-size: 19px;
 }
 
 .clinic-name h2 {
     font-size: 16px;
     font-weight: 700;
-    color: #4B3CA7;
+    color: #4b3ca7;
     line-height: 19px;
 }
 
@@ -95,18 +97,18 @@ body {
 }
 
 .navigation a:hover {
-    color: #6A5ACD;
-    background: #F4F1FF;
+    color: #6a5acd;
+    background: #f4f1ff;
 }
 
 .navigation a.active {
-    background: #6A5ACD;
-    color: #FFFFFF;
+    background: #6a5acd;
+    color: #ffffff;
 }
 
 
 /* =========================================================
-   ADMIN PROFILE
+   ADMIN AREA
 ========================================================= */
 
 .admin-profile {
@@ -121,8 +123,8 @@ body {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: #E9E5FF;
-    color: #6A5ACD;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -135,11 +137,6 @@ body {
     line-height: 15px;
 }
 
-.profile-info small {
-    font-size: 9px;
-    color: #777777;
-}
-
 .profile-info strong {
     font-size: 11px;
     color: #333333;
@@ -149,23 +146,28 @@ body {
     text-overflow: ellipsis;
 }
 
+.profile-info small {
+    font-size: 9px;
+    color: #777777;
+}
+
 .logout-btn {
     width: 32px;
     height: 32px;
-    border: 1px solid #E9E5FF;
+    border: 1px solid #e9e5ff;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #777777;
     text-decoration: none;
-    font-size: 11px;
+    font-size: 12px;
     transition: 0.2s ease;
 }
 
 .logout-btn:hover {
-    background: #F4F1FF;
-    color: #4B3CA7;
+    background: #f4f1ff;
+    color: #4b3ca7;
 }
 
 
@@ -186,10 +188,10 @@ body {
 ========================================================= */
 
 .page-header {
-    background: #FFFFFF;
+    background: #ffffff;
     min-height: 82px;
     padding: 17px 22px;
-    border: 1px solid #E9E5FF;
+    border: 1px solid #e9e5ff;
     border-radius: 9px;
     display: flex;
     align-items: center;
@@ -200,13 +202,13 @@ body {
 .page-label {
     font-size: 9px;
     font-weight: 700;
-    color: #6A5ACD;
+    color: #6a5acd;
     letter-spacing: 1.2px;
 }
 
 .header-content h1 {
     font-size: 22px;
-    color: #4B3CA7;
+    color: #4b3ca7;
     margin-top: 3px;
     margin-bottom: 2px;
 }
@@ -219,9 +221,9 @@ body {
 .header-icon {
     width: 40px;
     height: 40px;
-    border-radius: 9px;
-    background: #E9E5FF;
-    color: #6A5ACD;
+    border-radius: 50%;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,15 +232,15 @@ body {
 
 
 /* =========================================================
-   SUMMARY
+   SUMMARY CARD
 ========================================================= */
 
 .summary-card {
-    background: #FFFFFF;
-    border: 1px solid #E9E5FF;
-    border-radius: 8px;
-    min-height: 82px;
-    padding: 14px 18px;
+    background: #ffffff;
+    border: 1px solid #e9e5ff;
+    border-radius: 9px;
+    min-height: 92px;
+    padding: 15px 18px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -246,15 +248,16 @@ body {
 }
 
 .summary-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    background: #E9E5FF;
-    color: #6A5ACD;
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .summary-content {
@@ -268,9 +271,9 @@ body {
 }
 
 .summary-content strong {
-    color: #4B3CA7;
+    color: #333333;
     font-size: 20px;
-    line-height: 24px;
+    line-height: 25px;
 }
 
 .summary-content small {
@@ -284,10 +287,10 @@ body {
 ========================================================= */
 
 .search-card {
-    background: #FFFFFF;
-    border: 1px solid #E9E5FF;
+    background: #ffffff;
+    border: 1px solid #e9e5ff;
     border-radius: 9px;
-    padding: 18px 20px;
+    padding: 20px 22px;
     margin-bottom: 18px;
 }
 
@@ -295,15 +298,15 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 13px;
+    margin-bottom: 14px;
 }
 
 .search-title-icon {
-    width: 34px;
-    height: 34px;
+    width: 37px;
+    height: 37px;
     border-radius: 7px;
-    background: #E9E5FF;
-    color: #6A5ACD;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -311,8 +314,8 @@ body {
 }
 
 .search-title h2 {
-    font-size: 15px;
-    color: #333333;
+    color: #4b3ca7;
+    font-size: 17px;
     margin-bottom: 2px;
 }
 
@@ -337,29 +340,31 @@ body {
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
+    color: #6a5acd;
     font-size: 12px;
-    color: #6A5ACD;
 }
 
 .search-input-wrapper input {
     width: 100%;
     height: 40px;
-    border: 1px solid #E9E5FF;
-    border-radius: 7px;
-    background: #F4F1FF;
-    padding: 0 12px 0 36px;
+    border: 1px solid #e9e5ff;
+    border-radius: 6px;
+    background: #f4f1ff;
     color: #333333;
+    padding: 0 12px 0 35px;
+    font-family: inherit;
     font-size: 11px;
     outline: none;
+    transition: 0.2s ease;
 }
 
 .search-input-wrapper input::placeholder {
-    color: #777777;
+    color: #999999;
 }
 
 .search-input-wrapper input:focus {
-    border-color: #6A5ACD;
-    background: #FFFFFF;
+    background: #ffffff;
+    border-color: #6a5acd;
     box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.08);
 }
 
@@ -367,9 +372,10 @@ body {
     height: 40px;
     padding: 0 17px;
     border: none;
-    border-radius: 7px;
-    background: #6A5ACD;
-    color: #FFFFFF;
+    border-radius: 6px;
+    background: #6a5acd;
+    color: #ffffff;
+    font-family: inherit;
     font-size: 11px;
     font-weight: 600;
     cursor: pointer;
@@ -377,52 +383,53 @@ body {
 }
 
 .search-btn:hover {
-    background: #4B3CA7;
+    background: #4b3ca7;
 }
 
 .clear-btn {
     height: 40px;
     padding: 0 15px;
-    border: 1px solid #E9E5FF;
-    border-radius: 7px;
+    border: 1px solid #e9e5ff;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
+    justify-content: center;
     text-decoration: none;
-    color: #6A5ACD;
     font-size: 11px;
     font-weight: 600;
-    background: #FFFFFF;
     transition: 0.2s ease;
 }
 
 .clear-btn:hover {
-    background: #F4F1FF;
+    background: #f4f1ff;
 }
 
 
 /* =========================================================
-   PATIENT RECORDS
+   PATIENT RECORDS CARD
 ========================================================= */
 
 .patients-card {
-    background: #FFFFFF;
-    border: 1px solid #E9E5FF;
+    background: #ffffff;
+    border: 1px solid #e9e5ff;
     border-radius: 9px;
     overflow: hidden;
     margin-bottom: 18px;
 }
 
 .card-header {
-    padding: 16px 19px;
+    padding: 16px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #E9E5FF;
+    border-bottom: 1px solid #e9e5ff;
 }
 
 .card-header h2 {
-    color: #4B3CA7;
-    font-size: 16px;
+    color: #4b3ca7;
+    font-size: 17px;
     margin-bottom: 2px;
 }
 
@@ -432,8 +439,8 @@ body {
 }
 
 .record-count {
-    background: #F4F1FF;
-    color: #6A5ACD;
+    color: #6a5acd;
+    background: #f4f1ff;
     padding: 6px 10px;
     border-radius: 15px;
     font-size: 9px;
@@ -452,29 +459,29 @@ body {
 
 .patient-table {
     width: 100%;
+    min-width: 1050px;
     border-collapse: collapse;
-    min-width: 950px;
 }
 
 .patient-table thead {
-    background: #F4F1FF;
+    background: #f4f1ff;
 }
 
 .patient-table th {
     padding: 11px 12px;
     text-align: left;
     color: #777777;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
-    border-bottom: 1px solid #E9E5FF;
+    border-bottom: 1px solid #e9e5ff;
     white-space: nowrap;
 }
 
 .patient-table td {
     padding: 11px 12px;
-    border-bottom: 1px solid #E9E5FF;
     color: #333333;
-    font-size: 11px;
+    font-size: 10px;
+    border-bottom: 1px solid #e9e5ff;
     vertical-align: middle;
 }
 
@@ -483,7 +490,7 @@ body {
 }
 
 .patient-table tbody tr:hover {
-    background: #F4F1FF;
+    background: #f9f7ff;
 }
 
 .patient-table tbody tr:last-child td {
@@ -496,7 +503,7 @@ body {
 ========================================================= */
 
 .patient-id {
-    color: #6A5ACD;
+    color: #6a5acd;
     font-size: 10px;
     font-weight: 700;
 }
@@ -516,18 +523,19 @@ body {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: #E9E5FF;
-    color: #6A5ACD;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
+    flex-shrink: 0;
+    font-size: 10px;
     font-weight: 700;
 }
 
 .patient-name strong {
     color: #333333;
-    font-size: 11px;
+    font-size: 10px;
     white-space: nowrap;
 }
 
@@ -537,9 +545,9 @@ body {
 ========================================================= */
 
 .address-text {
-    color: #777777;
     display: block;
-    max-width: 150px;
+    max-width: 160px;
+    color: #777777;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -562,10 +570,10 @@ body {
 
 .gender-badge {
     display: inline-block;
-    background: #F4F1FF;
-    color: #6A5ACD;
-    padding: 4px 8px;
-    border-radius: 12px;
+    background: #f4f1ff;
+    color: #6a5acd;
+    padding: 5px 9px;
+    border-radius: 15px;
     font-size: 9px;
     font-weight: 600;
 }
@@ -577,7 +585,7 @@ body {
 
 .date-text {
     color: #777777;
-    font-size: 10px;
+    font-size: 9px;
     white-space: nowrap;
 }
 
@@ -590,20 +598,20 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    padding: 5px 8px;
+    padding: 5px 9px;
     border-radius: 15px;
     font-size: 9px;
     font-weight: 600;
 }
 
 .status-active {
-    color: #4B3CA7;
-    background: #F4F1FF;
+    color: #4b3ca7;
+    background: #f4f1ff;
 }
 
 .status-inactive {
     color: #777777;
-    background: #E9E5FF;
+    background: #e9e5ff;
 }
 
 .status-dot {
@@ -625,8 +633,8 @@ body {
 }
 
 .action-buttons a {
-    width: 27px;
-    height: 27px;
+    width: 28px;
+    height: 28px;
     border-radius: 6px;
     display: flex;
     align-items: center;
@@ -637,31 +645,25 @@ body {
 }
 
 .view-btn {
-    background: #F4F1FF;
-    color: #6A5ACD;
+    background: #f4f1ff;
+    color: #6a5acd;
 }
 
 .edit-btn {
-    background: #E9E5FF;
-    color: #4B3CA7;
+    background: #e9e5ff;
+    color: #4b3ca7;
 }
 
 .delete-btn {
-    background: #E9E5FF;
+    background: #f4f1ff;
     color: #777777;
 }
 
-.view-btn:hover {
-    background: #E9E5FF;
-}
-
-.edit-btn:hover {
-    background: #F4F1FF;
-}
-
+.view-btn:hover,
+.edit-btn:hover,
 .delete-btn:hover {
-    background: #F4F1FF;
-    color: #4B3CA7;
+    background: #e9e5ff;
+    color: #4b3ca7;
 }
 
 
@@ -675,12 +677,12 @@ body {
 }
 
 .no-data-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: #E9E5FF;
-    color: #6A5ACD;
+    width: 45px;
+    height: 45px;
     margin: 0 auto 10px;
+    border-radius: 50%;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -705,10 +707,10 @@ body {
 ========================================================= */
 
 .clinic-footer-card {
-    background: #FFFFFF;
-    border: 1px solid #E9E5FF;
+    background: #ffffff;
+    border: 1px solid #e9e5ff;
     border-radius: 9px;
-    padding: 15px 18px;
+    padding: 15px 19px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -717,9 +719,9 @@ body {
 .footer-icon {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    background: #E9E5FF;
-    color: #6A5ACD;
+    border-radius: 8px;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -731,28 +733,27 @@ body {
 }
 
 .footer-content h3 {
-    color: #4B3CA7;
-    font-size: 13px;
+    font-size: 12px;
+    color: #333333;
     margin-bottom: 2px;
 }
 
 .footer-content p {
-    color: #777777;
     font-size: 9px;
+    color: #777777;
 }
 
 .portal-badge {
-    color: #6A5ACD;
-    background: #F4F1FF;
-    padding: 6px 10px;
-    border-radius: 15px;
     font-size: 9px;
-    font-weight: 600;
+    color: #4b3ca7;
+    background: #f4f1ff;
+    padding: 6px 9px;
+    border-radius: 15px;
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE - TABLET
 ========================================================= */
 
 @media (max-width: 1050px) {
@@ -765,20 +766,28 @@ body {
         min-width: 190px;
     }
 
-    .admin-profile {
-        min-width: 160px;
-    }
-
     .navigation a {
         padding: 8px 9px;
         font-size: 11px;
     }
 
+    .admin-profile {
+        min-width: 160px;
+    }
+
     .main-content {
-        padding: 22px 20px 35px;
+        padding: 22px 20px 30px;
+    }
+
+    .patient-table {
+        min-width: 950px;
     }
 }
 
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
 
 @media (max-width: 800px) {
 
@@ -806,6 +815,10 @@ body {
         padding: 7px 0 2px;
     }
 
+    .navigation a {
+        white-space: nowrap;
+    }
+
     .main-content {
         padding: 18px 15px 25px;
     }
@@ -818,8 +831,21 @@ body {
         width: 100%;
         flex: 100%;
     }
+
+    .search-btn,
+    .clear-btn {
+        flex: 1;
+    }
+
+    .page-header {
+        padding: 17px 18px;
+    }
 }
 
+
+/* =========================================================
+   RESPONSIVE - SMALL MOBILE
+========================================================= */
 
 @media (max-width: 550px) {
 
@@ -832,29 +858,42 @@ body {
     }
 
     .main-content {
-        padding: 18px 12px 25px;
+        padding: 15px 12px 22px;
     }
 
     .page-header {
-        align-items: flex-start;
+        min-height: 78px;
+        padding: 16px;
     }
 
     .header-content h1 {
         font-size: 20px;
     }
 
+    .header-content p {
+        font-size: 10px;
+    }
+
     .header-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 15px;
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .summary-card {
+        min-height: 82px;
     }
 
     .search-card {
-        padding: 14px;
+        padding: 16px;
     }
 
     .card-header {
-        padding: 14px;
+        padding: 14px 15px;
+    }
+
+    .record-count {
+        font-size: 8px;
     }
 
     .clinic-footer-card {
@@ -866,7 +905,7 @@ body {
     }
 
     .logout-btn {
-        padding: 6px 9px;
+        width: 30px;
+        height: 30px;
     }
 }
-
