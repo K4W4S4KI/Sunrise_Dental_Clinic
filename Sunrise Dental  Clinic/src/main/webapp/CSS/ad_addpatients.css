@@ -1,4 +1,3 @@
-
 /* =========================================================
    RESET
 ========================================================= */
@@ -9,31 +8,33 @@
     box-sizing: border-box;
 }
 
+/* =========================================================
+   BODY
+========================================================= */
+
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background: #F4F1FF;
+    background: #f4f1ff;
     color: #333333;
     min-height: 100vh;
 }
 
-
 /* =========================================================
-   TOP NAVIGATION
+   TOP NAVBAR
 ========================================================= */
 
 .top-navbar {
     height: 72px;
     width: 100%;
-    background: #FFFFFF;
+    background: #ffffff;
     display: flex;
     align-items: center;
     padding: 0 42px;
-    border-bottom: 1px solid #E9E5FF;
+    border-bottom: 1px solid #e9e5ff;
     position: sticky;
     top: 0;
     z-index: 1000;
 }
-
 
 /* =========================================================
    BRAND
@@ -50,27 +51,26 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 9px;
-    background: #E9E5FF;
+    background: #e9e5ff;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #6A5ACD;
+    color: #6a5acd;
     font-size: 19px;
 }
 
 .brand-text h2 {
     font-size: 16px;
     font-weight: 700;
-    color: #4B3CA7;
+    color: #4b3ca7;
     line-height: 19px;
 }
 
 .brand-text span {
     font-size: 9px;
     color: #777777;
-    letter-spacing: .4px;
+    letter-spacing: 0.4px;
 }
-
 
 /* =========================================================
    NAVIGATION
@@ -94,7 +94,7 @@ body {
     color: #777777;
     font-size: 12px;
     font-weight: 500;
-    transition: .2s ease;
+    transition: 0.2s ease;
 }
 
 .navigation a i {
@@ -102,15 +102,14 @@ body {
 }
 
 .navigation a:hover {
-    color: #6A5ACD;
-    background: #F4F1FF;
+    color: #6a5acd;
+    background: #f4f1ff;
 }
 
 .navigation a.active {
-    background: #6A5ACD;
-    color: #FFFFFF;
+    background: #6a5acd;
+    color: #ffffff;
 }
-
 
 /* =========================================================
    ADMIN AREA
@@ -128,8 +127,8 @@ body {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: #E9E5FF;
-    color: #6A5ACD;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,22 +158,21 @@ body {
 .logout-btn {
     width: 32px;
     height: 32px;
-    border: 1px solid #E9E5FF;
+    border: 1px solid #e9e5ff;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #777777;
     text-decoration: none;
-    transition: .2s ease;
+    transition: 0.2s ease;
 }
 
 .logout-btn:hover {
-    background: #F4F1FF;
-    color: #4B3CA7;
-    border-color: #E9E5FF;
+    background: #f4f1ff;
+    color: #4b3ca7;
+    border-color: #e9e5ff;
 }
-
 
 /* =========================================================
    MAIN CONTENT
@@ -187,16 +185,15 @@ body {
     padding: 27px 32px 35px;
 }
 
-
 /* =========================================================
    PAGE HEADER
 ========================================================= */
 
 .page-header {
-    background: #FFFFFF;
+    background: #ffffff;
     min-height: 82px;
     padding: 17px 22px;
-    border: 1px solid #E9E5FF;
+    border: 1px solid #e9e5ff;
     border-radius: 9px;
     display: flex;
     align-items: center;
@@ -207,13 +204,13 @@ body {
 .page-label {
     font-size: 9px;
     font-weight: 700;
-    color: #6A5ACD;
+    color: #6a5acd;
     letter-spacing: 1.2px;
 }
 
 .page-header h1 {
     font-size: 22px;
-    color: #4B3CA7;
+    color: #4b3ca7;
     margin-top: 3px;
     margin-bottom: 2px;
 }
@@ -222,6 +219,10 @@ body {
     color: #777777;
     font-size: 11px;
 }
+
+/* =========================================================
+   HEADER USER
+========================================================= */
 
 .header-user {
     display: flex;
@@ -233,8 +234,8 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #E9E5FF;
-    color: #6A5ACD;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -255,277 +256,306 @@ body {
     font-size: 11px;
 }
 
-
 /* =========================================================
-   MESSAGE
+   ALERTS
 ========================================================= */
 
-.message {
-    min-height: 42px;
+.alert {
+    min-height: 55px;
     padding: 10px 14px;
-    border-radius: 7px;
+    border-radius: 8px;
     margin-bottom: 18px;
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 11px;
+    border: 1px solid;
+}
+
+.alert-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.alert > div:nth-child(2) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.alert strong {
     font-size: 11px;
-    font-weight: 500;
 }
 
-.message i {
+.alert span {
+    font-size: 9px;
+}
+
+.alert-error {
+    background: #fff5f5;
+    border-color: #f1cccc;
+    color: #9b3d3d;
+}
+
+.alert-error .alert-icon {
+    background: #fbe2e2;
+}
+
+.alert-success {
+    background: #f2fbf5;
+    border-color: #ccebd5;
+    color: #36754a;
+}
+
+.alert-success .alert-icon {
+    background: #dff3e5;
+}
+
+.alert-close {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: inherit;
     font-size: 14px;
+    padding: 5px;
 }
-
-.error-message {
-    background: #E9E5FF;
-    color: #4B3CA7;
-    border: 1px solid #E9E5FF;
-}
-
-.success-message {
-    background: #E9E5FF;
-    color: #4B3CA7;
-    border: 1px solid #E9E5FF;
-}
-
 
 /* =========================================================
    FORM CARD
 ========================================================= */
 
 .form-card {
-    background: #FFFFFF;
-    border: 1px solid #E9E5FF;
+    background: #ffffff;
+    border: 1px solid #e9e5ff;
     border-radius: 9px;
-    overflow: hidden;
     margin-bottom: 18px;
+    overflow: hidden;
 }
-
 
 /* =========================================================
-   FORM HEADER
+   FORM CARD HEADER
 ========================================================= */
 
-.form-header {
-    min-height: 72px;
-    padding: 14px 20px;
+.form-card-header {
+    min-height: 78px;
+    padding: 15px 22px;
+    border-bottom: 1px solid #eeeafe;
     display: flex;
     align-items: center;
-    gap: 11px;
-    border-bottom: 1px solid #E9E5FF;
-    background: #FFFFFF;
+    justify-content: space-between;
 }
 
-.form-header-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    background: #E9E5FF;
-    color: #6A5ACD;
+.form-title-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.form-main-icon {
+    width: 43px;
+    height: 43px;
+    border-radius: 9px;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 17px;
 }
 
-.form-header h2 {
-    color: #4B3CA7;
-    font-size: 16px;
+.form-title-area h2 {
+    color: #4b3ca7;
+    font-size: 17px;
     margin-bottom: 2px;
 }
 
-.form-header p {
+.form-title-area p {
     color: #777777;
     font-size: 10px;
 }
 
+.required-note {
+    color: #777777;
+    font-size: 9px;
+}
+
+.required-note span {
+    color: #6a5acd;
+    font-weight: 700;
+}
 
 /* =========================================================
    FORM
 ========================================================= */
 
 .patient-form {
-    padding: 21px 22px 20px;
-}
-
-.form-row {
+    padding: 22px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 15px;
+    gap: 18px 20px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
+    gap: 6px;
 }
 
 .full-width {
-    margin-bottom: 15px;
+    grid-column: 1 / -1;
 }
 
 .form-group label {
-    color: #333333;
+    color: #4b3ca7;
     font-size: 10px;
     font-weight: 600;
-    margin-bottom: 6px;
 }
 
 .form-group label span {
-    color: #6A5ACD;
+    color: #6a5acd;
     margin-left: 2px;
 }
 
-
 /* =========================================================
-   INPUT
+   INPUT WRAPPER
 ========================================================= */
 
 .input-wrapper {
-    height: 40px;
     position: relative;
+    width: 100%;
 }
 
-.input-wrapper i,
-.textarea-wrapper i {
+.input-icon {
     position: absolute;
-    left: 12px;
+    left: 13px;
     top: 50%;
     transform: translateY(-50%);
-    color: #6A5ACD;
+    color: #8b80c9;
     font-size: 12px;
+    pointer-events: none;
     z-index: 2;
 }
 
 .input-wrapper input,
+.input-wrapper textarea,
 .input-wrapper select {
     width: 100%;
-    height: 40px;
-    border: 1px solid #E9E5FF;
+    border: 1px solid #ddd8f4;
+    background: #ffffff;
     border-radius: 7px;
-    background: #F4F1FF;
-    padding: 0 12px 0 35px;
+    outline: none;
     color: #333333;
     font-family: "Segoe UI", Arial, sans-serif;
     font-size: 11px;
-    outline: none;
-    transition: .2s ease;
+    transition: 0.2s ease;
+}
+
+.input-wrapper input {
+    height: 42px;
+    padding: 0 13px 0 37px;
+}
+
+.input-wrapper textarea {
+    min-height: 86px;
+    padding: 12px 13px 12px 37px;
+    resize: vertical;
+    line-height: 18px;
 }
 
 .input-wrapper input::placeholder,
-.textarea-wrapper textarea::placeholder {
-    color: #777777;
+.input-wrapper textarea::placeholder {
+    color: #aaa6b7;
 }
 
 .input-wrapper input:focus,
-.input-wrapper select:focus,
-.textarea-wrapper textarea:focus {
-    border-color: #6A5ACD;
-    background: #FFFFFF;
+.input-wrapper textarea:focus,
+.input-wrapper select:focus {
+    border-color: #6a5acd;
     box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.08);
 }
 
+/* =========================================================
+   TEXTAREA ICON
+========================================================= */
+
+.textarea-wrapper .input-icon {
+    top: 17px;
+    transform: none;
+}
 
 /* =========================================================
    SELECT
 ========================================================= */
 
 .select-wrapper select {
+    height: 42px;
+    padding: 0 38px 0 37px;
     appearance: none;
     cursor: pointer;
-    padding-right: 35px;
 }
 
-.select-wrapper::after {
-    content: "\f107";
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
+.select-arrow {
     position: absolute;
-    right: 12px;
+    right: 13px;
     top: 50%;
     transform: translateY(-50%);
-    color: #777777;
-    font-size: 10px;
+    color: #8b80c9;
+    font-size: 9px;
     pointer-events: none;
 }
 
-
 /* =========================================================
-   TEXTAREA
+   FIELD HELP
 ========================================================= */
 
-.textarea-wrapper {
-    position: relative;
-}
-
-.textarea-wrapper i {
-    top: 17px;
-    transform: none;
-}
-
-.textarea-wrapper textarea {
-    width: 100%;
-    min-height: 82px;
-    resize: vertical;
-    border: 1px solid #E9E5FF;
-    border-radius: 7px;
-    background: #F4F1FF;
-    padding: 11px 12px 10px 35px;
-    color: #333333;
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 11px;
-    outline: none;
-    transition: .2s ease;
-}
-
-
-/* =========================================================
-   SMALL NOTE
-========================================================= */
-
-.form-group small {
-    color: #777777;
+.field-help {
+    color: #9993a7;
     font-size: 8px;
-    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
-
-/* =========================================================
-   REQUIRED NOTE
-========================================================= */
-
-.required-note {
-    color: #777777;
-    font-size: 9px;
-    margin-top: 2px;
-    padding-top: 4px;
+.field-help i {
+    color: #8b80c9;
+    font-size: 8px;
 }
-
-.required-note span {
-    color: #6A5ACD;
-    font-weight: 700;
-}
-
 
 /* =========================================================
    FORM ACTIONS
 ========================================================= */
 
 .form-actions {
+    grid-column: 1 / -1;
+    border-top: 1px solid #eeeafe;
+    padding-top: 18px;
+    margin-top: 2px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-top: 19px;
-    padding-top: 16px;
-    border-top: 1px solid #E9E5FF;
+    justify-content: space-between;
 }
 
-.form-actions button,
-.form-actions a {
-    height: 38px;
+.right-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.primary-btn,
+.secondary-btn,
+.reset-btn {
+    min-height: 38px;
     border-radius: 6px;
-    padding: 0 14px;
+    padding: 0 15px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -533,110 +563,103 @@ body {
     font-family: "Segoe UI", Arial, sans-serif;
     font-size: 10px;
     font-weight: 600;
-    text-decoration: none;
     cursor: pointer;
-    transition: .2s ease;
+    text-decoration: none;
+    transition: 0.2s ease;
 }
 
-
-/* CANCEL */
-
-.cancel-btn {
-    background: #FFFFFF;
-    color: #777777;
-    border: 1px solid #E9E5FF;
+.primary-btn {
+    border: 1px solid #6a5acd;
+    background: #6a5acd;
+    color: #ffffff;
 }
 
-.cancel-btn:hover {
-    background: #F4F1FF;
-    color: #4B3CA7;
-}
-
-
-/* RESET */
-
-.reset-btn {
-    background: #E9E5FF;
-    color: #4B3CA7;
-    border: 1px solid #E9E5FF;
-}
-
-.reset-btn:hover {
-    background: #F4F1FF;
-}
-
-
-/* SUBMIT */
-
-.submit-btn {
-    background: #6A5ACD;
-    color: #FFFFFF;
-    border: 1px solid #6A5ACD;
-}
-
-.submit-btn:hover {
-    background: #4B3CA7;
-    border-color: #4B3CA7;
+.primary-btn:hover {
+    background: #5848b8;
+    border-color: #5848b8;
     transform: translateY(-1px);
 }
 
+.secondary-btn {
+    border: 1px solid #ddd8f4;
+    background: #ffffff;
+    color: #66617a;
+}
+
+.secondary-btn:hover {
+    background: #f4f1ff;
+    border-color: #cfc8ef;
+    color: #4b3ca7;
+}
+
+.reset-btn {
+    border: 1px solid #ddd8f4;
+    background: #ffffff;
+    color: #777777;
+}
+
+.reset-btn:hover {
+    background: #f8f7fc;
+    border-color: #cfc8ef;
+    color: #4b3ca7;
+}
 
 /* =========================================================
-   CLINIC CARD
+   INFORMATION CARD
 ========================================================= */
 
-.clinic-card {
-    background: #FFFFFF;
-    border: 1px solid #E9E5FF;
+.info-card {
+    background: #ffffff;
+    border: 1px solid #e9e5ff;
     border-radius: 9px;
     padding: 15px 19px;
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 0;
+    margin-bottom: 18px;
 }
 
-.clinic-card-icon {
+.info-icon {
     width: 40px;
     height: 40px;
     border-radius: 8px;
-    background: #E9E5FF;
-    color: #6A5ACD;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 16px;
+    flex-shrink: 0;
 }
 
-.clinic-card-text {
+.info-content {
     flex: 1;
 }
 
-.clinic-card-text h3 {
+.info-content h3 {
     font-size: 12px;
     color: #333333;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 }
 
-.clinic-card-text p {
+.info-content p {
     font-size: 9px;
     color: #777777;
+    line-height: 14px;
 }
 
-.clinic-status {
+.info-badge {
     font-size: 9px;
-    color: #4B3CA7;
-    background: #F4F1FF;
+    color: #4b3ca7;
+    background: #f4f1ff;
     padding: 6px 9px;
     border-radius: 15px;
+    white-space: nowrap;
 }
 
-.clinic-status i {
-    font-size: 5px;
-    vertical-align: middle;
+.info-badge i {
     margin-right: 4px;
 }
-
 
 /* =========================================================
    FOOTER
@@ -649,7 +672,6 @@ footer {
     color: #777777;
     font-size: 9px;
 }
-
 
 /* =========================================================
    TABLET
@@ -677,9 +699,7 @@ footer {
     .admin-area {
         min-width: 160px;
     }
-
 }
-
 
 /* =========================================================
    MOBILE
@@ -719,17 +739,33 @@ footer {
         padding: 18px 15px 25px;
     }
 
-    .form-row {
+    .patient-form {
         grid-template-columns: 1fr;
-        gap: 15px;
     }
 
-    .page-header {
-        align-items: flex-start;
+    .full-width {
+        grid-column: auto;
     }
 
+    .form-actions {
+        grid-column: auto;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .right-actions {
+        width: 100%;
+    }
+
+    .right-actions button {
+        flex: 1;
+    }
+
+    .secondary-btn {
+        width: 100%;
+    }
 }
-
 
 /* =========================================================
    SMALL MOBILE
@@ -745,38 +781,50 @@ footer {
         display: none;
     }
 
+    .page-header {
+        align-items: flex-start;
+    }
+
     .header-user {
         display: none;
     }
 
+    .main-content {
+        padding: 15px 12px 22px;
+    }
+
     .page-header {
-        min-height: 82px;
-        padding: 17px;
+        padding: 15px;
     }
 
     .page-header h1 {
         font-size: 20px;
     }
 
+    .page-header p {
+        font-size: 10px;
+    }
+
+    .form-card-header {
+        padding: 14px 15px;
+        align-items: flex-start;
+        gap: 10px;
+        flex-direction: column;
+    }
+
     .patient-form {
-        padding: 18px 15px;
+        padding: 16px;
     }
 
-    .form-actions {
-        flex-wrap: wrap;
-        justify-content: stretch;
+    .required-note {
+        align-self: flex-end;
     }
 
-    .form-actions button,
-    .form-actions a {
-        flex: 1;
-    }
-
-    .clinic-card {
+    .info-card {
         align-items: flex-start;
     }
 
-    .clinic-status {
+    .info-badge {
         display: none;
     }
 
@@ -784,6 +832,4 @@ footer {
         flex-direction: column;
         gap: 5px;
     }
-
 }
-

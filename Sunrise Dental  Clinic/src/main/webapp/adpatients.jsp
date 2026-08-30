@@ -1,68 +1,99 @@
+
 <%@ page language="java"
-contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+    contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.patient" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 
 <%
-// Check admin login
-if (session.getAttribute("loggedInAdmin") == null) {
-response.sendRedirect(
-request.getContextPath() + "/adlogin.jsp"
-);
-return;
-}
+    /* =========================================================
+       ADMIN LOGIN CHECK
+       ========================================================= */
 
+    if (session.getAttribute("loggedInAdmin") == null) {
+        response.sendRedirect(request.getContextPath() + "/adlogin.jsp");
+        return;
+    }
 
-ArrayList<patient> patientList =
-    (ArrayList<patient>) request.getAttribute("patientList");
+    /* =========================================================
+       GET DATA FROM managePatients SERVLET
+       ========================================================= */
 
-String keyword =
-    (String) request.getAttribute("keyword");
+    ArrayList<patient> patientList =
+        (ArrayList<patient>) request.getAttribute("patientList");
 
-Integer totalPatients =
-    (Integer) request.getAttribute("totalPatients");
+    String keyword =
+        (String) request.getAttribute("keyword");
 
-if (patientList == null) {
-    patientList = new ArrayList<patient>();
-}
+    Integer totalPatients =
+        (Integer) request.getAttribute("totalPatients");
 
-if (keyword == null) {
-    keyword = "";
-}
+    if (patientList == null) {
+        patientList = new ArrayList<patient>();
+    }
 
-if (totalPatients == null) {
-    totalPatients = patientList.size();
-}
+    if (keyword == null) {
+        keyword = "";
+    }
 
+    if (totalPatients == null) {
+        totalPatients = patientList.size();
+    }
 
+    SimpleDateFormat dateFormat =
+        new SimpleDateFormat("dd MMM yyyy, hh:mm a");
+
+    String contextPath = request.getContextPath();
+
+    /* =========================================================
+       COUNT ACTIVE / INACTIVE
+       ========================================================= */
+
+    int activePatients = 0;
+    int inactivePatients = 0;
+
+    for (patient p : patientList) {
+
+        if (p.getStatus() != null &&
+            p.getStatus().equalsIgnoreCase("Active")) {
+
+            activePatients++;
+
+        } else {
+
+            inactivePatients++;
+
+        }
+    }
 %>
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
+    <meta charset="UTF-8">
 
-<meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+    <title>Patients | Sunrise Dental Clinic</title>
 
-<title>Patients | Sunrise Dental Clinic</title>
+    <!-- SAME DESIGN FAMILY AS ADMIN HOME -->
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/CSS/admpatients.css">
 
-<link rel="stylesheet"
-      href="${pageContext.request.contextPath}/CSS/adpatients.css">
-
-<!-- Font Awesome -->
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
+
 <body>
+
 
 <!-- =========================================================
      TOP NAVBAR
@@ -70,110 +101,115 @@ if (totalPatients == null) {
 
 <header class="top-navbar">
 
-```
-<!-- BRAND -->
 
-<div class="brand">
+    <!-- BRAND -->
 
-    <div class="brand-icon">
-        <i class="fa-solid fa-tooth"></i>
-    </div>
+    <div class="brand">
 
-    <div class="brand-text">
+        <div class="brand-icon">
 
-        <h2>Sunrise Dental</h2>
+            <i class="fa-solid fa-tooth"></i>
 
-        <span>Clinic Management</span>
+        </div>
 
-    </div>
+        <div class="brand-text">
 
-</div>
+            <h2>Sunrise Dental</h2>
 
+            <span>Clinic Management</span>
 
-<!-- NAVIGATION -->
-
-<nav class="navigation">
-
-    <a href="${pageContext.request.contextPath}/adminhomes.jsp">
-
-        <i class="fa-solid fa-chart-line"></i>
-
-        Dashboard
-
-    </a>
-
-
-    <a href="${pageContext.request.contextPath}/managePatients"
-       class="active">
-
-        <i class="fa-solid fa-user-group"></i>
-
-        Patients
-
-    </a>
-
-
-    <a href="#">
-
-        <i class="fa-solid fa-calendar-check"></i>
-
-        Appointments
-
-    </a>
-
-
-    <a href="#">
-
-        <i class="fa-solid fa-user-doctor"></i>
-
-        Doctors
-
-    </a>
-
-
-    <a href="#">
-
-        <i class="fa-solid fa-file-invoice-dollar"></i>
-
-        Billing
-
-    </a>
-
-</nav>
-
-
-<!-- ADMIN -->
-
-<div class="admin-area">
-
-    <div class="admin-icon">
-
-        <i class="fa-solid fa-user-shield"></i>
+        </div>
 
     </div>
 
-    <div class="admin-details">
 
-        <strong>
-            <%= session.getAttribute("loggedInAdmin") %>
-        </strong>
+    <!-- NAVIGATION -->
 
-        <span>Administrator</span>
+    <nav class="navigation">
+
+        <a href="${pageContext.request.contextPath}/adminhomes.jsp">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            Dashboard
+
+        </a>
+
+
+        <a href="${pageContext.request.contextPath}/managePatients"
+           class="active">
+
+            <i class="fa-solid fa-user-group"></i>
+
+            Patients
+
+        </a>
+
+
+        <a href="#">
+
+            <i class="fa-solid fa-calendar-check"></i>
+
+            Appointments
+
+        </a>
+
+
+        <a href="#">
+
+            <i class="fa-solid fa-user-doctor"></i>
+
+            Doctors
+
+        </a>
+
+
+        <a href="#">
+
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+
+            Billing
+
+        </a>
+
+    </nav>
+
+
+    <!-- ADMIN AREA -->
+
+    <div class="admin-area">
+
+        <div class="admin-icon">
+
+            <i class="fa-solid fa-user-shield"></i>
+
+        </div>
+
+
+        <div class="admin-details">
+
+            <strong>
+                <%= session.getAttribute("loggedInAdmin") %>
+            </strong>
+
+            <span>Administrator</span>
+
+        </div>
+
+
+        <a href="${pageContext.request.contextPath}/logout"
+           class="logout-btn"
+           title="Logout">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+        </a>
 
     </div>
-
-    <a href="${pageContext.request.contextPath}/logout"
-       class="logout-btn"
-       title="Logout">
-
-        <i class="fa-solid fa-right-from-bracket"></i>
-
-    </a>
-
-</div>
-```
 
 </header>
+
+
 
 <!-- =========================================================
      MAIN CONTENT
@@ -181,564 +217,805 @@ if (totalPatients == null) {
 
 <main class="main-content">
 
-```
-<!-- PAGE HEADER -->
 
-<section class="page-header">
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
 
-    <div>
+    <section class="page-header">
 
-        <span class="page-label">
-            PATIENT MANAGEMENT
-        </span>
-
-        <h1>
-            Patients
-        </h1>
-
-        <p>
-            View, search and manage registered patient records.
-        </p>
-
-    </div>
-
-
-    <a href="${pageContext.request.contextPath}/ad_addpatients.jsp"
-       class="add-patient-btn">
-
-        <i class="fa-solid fa-user-plus"></i>
-
-        Add Patient
-
-    </a>
-
-</section>
-
-
-
-<!-- =====================================================
-     SUMMARY
-====================================================== -->
-
-<section class="summary-grid">
-
-    <div class="summary-card">
-
-        <div class="summary-icon">
-
-            <i class="fa-solid fa-users"></i>
-
-        </div>
-
-        <div class="summary-content">
-
-            <span>Total Patients</span>
-
-            <strong>
-                <%= totalPatients %>
-            </strong>
-
-            <small>
-                Registered patients
-            </small>
-
-        </div>
-
-    </div>
-
-
-    <div class="summary-card">
-
-        <div class="summary-icon">
-
-            <i class="fa-solid fa-user-check"></i>
-
-        </div>
-
-        <div class="summary-content">
-
-            <span>Displayed Records</span>
-
-            <strong>
-                <%= patientList.size() %>
-            </strong>
-
-            <small>
-                Current results
-            </small>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     SEARCH
-====================================================== -->
-
-<section class="content-card search-card">
-
-    <div class="section-heading">
 
         <div>
 
-            <h2>
-                Search Patients
-            </h2>
+            <span class="page-label">
+                PATIENT MANAGEMENT
+            </span>
+
+            <h1>Patients</h1>
 
             <p>
-                Search using patient ID, name or contact number.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <form method="get"
-          action="${pageContext.request.contextPath}/managePatients"
-          class="search-form">
-
-
-        <div class="search-input">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <input
-                type="text"
-                name="keyword"
-                value="<%= keyword %>"
-                placeholder="Search patient ID, name or contact number...">
-
-        </div>
-
-
-        <button type="submit"
-                class="search-btn">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            Search
-
-        </button>
-
-
-        <a href="${pageContext.request.contextPath}/managePatients"
-           class="clear-btn">
-
-            Clear
-
-        </a>
-
-    </form>
-
-</section>
-
-
-
-<!-- =====================================================
-     PATIENT RECORDS
-====================================================== -->
-
-<section class="content-card patient-card">
-
-
-    <div class="card-header">
-
-        <div>
-
-            <h2>
-                Patient Records
-            </h2>
-
-            <p>
-                Registered patient information
+                View, search and manage registered patient records.
             </p>
 
         </div>
 
 
-        <span class="record-count">
+        <!-- ADMIN INFO -->
 
-            <%= patientList.size() %> Records
+        <div class="header-user">
 
-        </span>
+            <div class="header-user-icon">
 
-    </div>
+                <i class="fa-solid fa-users"></i>
 
+            </div>
 
+            <div>
 
-    <!-- TABLE -->
+                <span>Total Patients</span>
 
-    <div class="table-container">
+                <strong>
+                    <%= totalPatients %>
+                </strong>
 
-        <table class="patient-table">
+            </div>
 
+        </div>
 
-            <thead>
-
-                <tr>
-
-                    <th>ID</th>
-
-                    <th>Patient</th>
-
-                    <th>Address</th>
-
-                    <th>Contact</th>
-
-                    <th>Gender</th>
-
-                    <th>Registered</th>
-
-                    <th>Status</th>
-
-                    <th>Actions</th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-
-            <%
-                if (patientList.isEmpty()) {
-            %>
-
-
-                <tr>
-
-                    <td colspan="8"
-                        class="no-data">
-
-                        <div class="no-data-icon">
-
-                            <i class="fa-solid fa-user-group"></i>
-
-                        </div>
-
-                        <strong>
-                            No patients found
-                        </strong>
-
-                        <span>
-                            No patient records match your search.
-                        </span>
-
-                    </td>
-
-                </tr>
-
-
-            <%
-                } else {
-
-                    for (patient pat : patientList) {
-
-                        String patientName = pat.getP_name();
-
-                        String firstLetter = "?";
-
-                        if (patientName != null &&
-                            !patientName.trim().isEmpty()) {
-
-                            firstLetter =
-                                patientName.trim()
-                                          .substring(0, 1)
-                                          .toUpperCase();
-                        }
-
-                        String status = pat.getStatus();
-
-                        if (status == null ||
-                            status.trim().isEmpty()) {
-
-                            status = "Active";
-                        }
-
-                        String statusClass =
-                            status.equalsIgnoreCase("Active")
-                            ? "status-active"
-                            : "status-inactive";
-            %>
-
-
-                <tr>
-
-
-                    <!-- ID -->
-
-                    <td>
-
-                        <span class="patient-id">
-
-                            #<%= pat.getP_id() %>
-
-                        </span>
-
-                    </td>
+    </section>
 
 
 
-                    <!-- NAME -->
+    <!-- =====================================================
+         PATIENT SUMMARY
+    ====================================================== -->
 
-                    <td>
+    <section class="stats-grid">
 
-                        <div class="patient-name">
 
-                            <div class="patient-avatar">
+        <!-- TOTAL -->
 
-                                <%= firstLetter %>
+        <div class="stat-card">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-user-group"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span>Total Patients</span>
+
+                <strong>
+                    <%= totalPatients %>
+                </strong>
+
+                <small>
+                    Registered patients
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACTIVE -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-user-check"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span>Active Patients</span>
+
+                <strong>
+                    <%= activePatients %>
+                </strong>
+
+                <small>
+                    Currently active
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- INACTIVE -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-user-clock"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span>Inactive Patients</span>
+
+                <strong>
+                    <%= inactivePatients %>
+                </strong>
+
+                <small>
+                    Inactive records
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="content-card">
+
+
+        <!-- CARD HEADER -->
+
+        <div class="section-heading patient-heading">
+
+
+            <div>
+
+                <h2>Patient Records</h2>
+
+                <p>
+                    Registered patients in Sunrise Dental Clinic
+                </p>
+
+            </div>
+
+
+            <!-- ADD PATIENT -->
+
+            <a href="<%= contextPath %>/adaddpatients.jsp"
+               class="primary-btn">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Add Patient
+
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SEARCH AREA
+        ================================================== -->
+
+        <form action="<%= contextPath %>/managePatients"
+              method="get"
+              class="search-area">
+
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    name="keyword"
+                    value="<%= keyword %>"
+                    placeholder="Search by patient ID, name or contact number..."
+                    autocomplete="off">
+
+            </div>
+
+
+            <button type="submit"
+                    class="search-btn">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Search
+
+            </button>
+
+
+            <% if (!keyword.isEmpty()) { %>
+
+                <a href="<%= contextPath %>/managePatients"
+                   class="clear-btn">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                    Clear
+
+                </a>
+
+            <% } %>
+
+        </form>
+
+
+
+        <!-- SEARCH RESULT -->
+
+        <% if (!keyword.isEmpty()) { %>
+
+            <div class="search-message">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                Search results for
+
+                <strong>
+                    "<%= keyword %>"
+                </strong>
+
+                <span>
+                    — <%= patientList.size() %> result(s)
+                </span>
+
+            </div>
+
+        <% } %>
+
+
+
+        <!-- =================================================
+             PATIENT TABLE
+        ================================================== -->
+
+        <div class="table-wrapper">
+
+            <table class="patient-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Patient</th>
+
+                        <th>Contact</th>
+
+                        <th>Address</th>
+
+                        <th>Gender</th>
+
+                        <th>Registered</th>
+
+                        <th>Status</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                <% if (patientList.isEmpty()) { %>
+
+
+                    <!-- EMPTY -->
+
+                    <tr>
+
+                        <td colspan="8">
+
+                            <div class="empty-state">
+
+                                <div class="empty-icon">
+
+                                    <i class="fa-solid fa-user-slash"></i>
+
+                                </div>
+
+                                <h3>No Patient Records Found</h3>
+
+                                <p>
+
+                                    <% if (!keyword.isEmpty()) { %>
+
+                                        No patients matched your search.
+
+                                    <% } else { %>
+
+                                        No patients have been registered yet.
+
+                                    <% } %>
+
+                                </p>
+
+
+                                <% if (!keyword.isEmpty()) { %>
+
+                                    <a href="<%= contextPath %>/managePatients"
+                                       class="empty-btn">
+
+                                        View All Patients
+
+                                    </a>
+
+                                <% } else { %>
+
+                                    <a href="<%= contextPath %>/addpatient.jsp"
+                                       class="empty-btn">
+
+                                        <i class="fa-solid fa-user-plus"></i>
+
+                                        Register Patient
+
+                                    </a>
+
+                                <% } %>
 
                             </div>
 
-                            <strong>
+                        </td>
 
-                                <%= pat.getP_name() %>
+                    </tr>
 
-                            </strong>
 
-                        </div>
+                <% } else { %>
 
-                    </td>
 
+                    <% for (patient p : patientList) { %>
 
 
-                    <!-- ADDRESS -->
+                        <tr>
 
-                    <td>
 
-                        <span class="address-text">
+                            <!-- ID -->
 
-                            <%= pat.getAddress() %>
+                            <td>
 
-                        </span>
+                                <span class="patient-id">
 
-                    </td>
+                                    #<%= p.getP_id() %>
 
+                                </span>
 
+                            </td>
 
-                    <!-- CONTACT -->
 
-                    <td>
 
-                        <span class="contact-text">
+                            <!-- NAME -->
 
-                            <i class="fa-solid fa-phone"></i>
+                            <td>
 
-                            <%= pat.getC_number() %>
+                                <div class="patient-info">
 
-                        </span>
+                                    <div class="patient-avatar">
 
-                    </td>
+                                        <%= p.getP_name() != null &&
+                                            !p.getP_name().isEmpty()
+                                            ? p.getP_name()
+                                                .substring(0,1)
+                                                .toUpperCase()
+                                            : "P" %>
 
+                                    </div>
 
 
-                    <!-- GENDER -->
+                                    <div>
 
-                    <td>
+                                        <strong>
 
-                        <span class="gender-badge">
+                                            <%= p.getP_name() != null
+                                                ? p.getP_name()
+                                                : "-" %>
 
-                            <%= pat.getGender() %>
+                                        </strong>
 
-                        </span>
+                                        <span>
+                                            Patient
+                                        </span>
 
-                    </td>
+                                    </div>
 
+                                </div>
 
+                            </td>
 
-                    <!-- DATE -->
 
-                    <td>
 
-                        <span class="date-text">
+                            <!-- CONTACT -->
 
-                            <%
-                                if (pat.getRegister_datetime() != null) {
-                            %>
+                            <td>
 
-                                <%= pat.getRegister_datetime() %>
+                                <div class="contact-info">
 
-                            <%
-                                } else {
-                            %>
+                                    <i class="fa-solid fa-phone"></i>
 
-                                -
+                                    <span>
 
-                            <%
-                                }
-                            %>
+                                        <%= p.getC_number() != null
+                                            ? p.getC_number()
+                                            : "-" %>
 
-                        </span>
+                                    </span>
 
-                    </td>
+                                </div>
 
+                            </td>
 
 
-                    <!-- STATUS -->
 
-                    <td>
+                            <!-- ADDRESS -->
 
-                        <span class="status-badge <%= statusClass %>">
+                            <td>
 
-                            <span class="status-dot"></span>
+                                <div class="address-info">
 
-                            <%= status %>
+                                    <i class="fa-solid fa-location-dot"></i>
 
-                        </span>
+                                    <span title="<%= p.getAddress() != null
+                                        ? p.getAddress()
+                                        : "-" %>">
 
-                    </td>
+                                        <%= p.getAddress() != null
+                                            ? p.getAddress()
+                                            : "-" %>
 
+                                    </span>
 
+                                </div>
 
-                    <!-- ACTIONS -->
+                            </td>
 
-                    <td>
 
-                        <div class="action-buttons">
 
+                            <!-- GENDER -->
 
-                            <a href="#"
-                               class="action-btn view-btn"
-                               title="View Patient">
+                            <td>
 
-                                <i class="fa-solid fa-eye"></i>
+                                <span class="gender">
 
-                            </a>
+                                    <% if ("Male".equalsIgnoreCase(
+                                            p.getGender())) { %>
 
+                                        <i class="fa-solid fa-mars"></i>
 
-                            <a href="#"
-                               class="action-btn edit-btn"
-                               title="Edit Patient">
+                                    <% } else if ("Female".equalsIgnoreCase(
+                                            p.getGender())) { %>
 
-                                <i class="fa-solid fa-pen"></i>
+                                        <i class="fa-solid fa-venus"></i>
 
-                            </a>
+                                    <% } else { %>
 
+                                        <i class="fa-solid fa-user"></i>
 
-                            <a href="#"
-                               class="action-btn delete-btn"
-                               title="Delete Patient">
+                                    <% } %>
 
-                                <i class="fa-solid fa-trash"></i>
 
-                            </a>
+                                    <%= p.getGender() != null
+                                        ? p.getGender()
+                                        : "-" %>
 
+                                </span>
 
-                        </div>
+                            </td>
 
-                    </td>
 
 
-                </tr>
+                            <!-- DATE -->
 
+                            <td>
 
-            <%
-                    }
-                }
-            %>
+                                <span class="register-date">
 
+                                    <i class="fa-regular fa-calendar"></i>
 
-            </tbody>
+                                    <%= p.getRegister_datetime() != null
+                                        ? dateFormat.format(
+                                            p.getRegister_datetime())
+                                        : "-" %>
 
-        </table>
+                                </span>
 
-    </div>
+                            </td>
 
-</section>
 
 
+                            <!-- STATUS -->
 
-<!-- =====================================================
-     CLINIC INFORMATION
-====================================================== -->
+                            <td>
 
-<section class="clinic-card">
+                                <%
+                                    String status = p.getStatus();
 
-    <div class="clinic-card-icon">
+                                    if (status == null ||
+                                        status.trim().isEmpty()) {
 
-        <i class="fa-solid fa-tooth"></i>
+                                        status = "Active";
+                                    }
 
-    </div>
+                                    if (status.equalsIgnoreCase("Active")) {
+                                %>
 
+                                    <span class="status active">
 
-    <div class="clinic-card-text">
+                                        <i class="fa-solid fa-circle"></i>
 
-        <h3>
-            Sunrise Dental Clinic
-        </h3>
+                                        Active
 
-        <p>
-            Professional dental care with modern treatments
-            and patient-focused service.
-        </p>
+                                    </span>
 
-    </div>
+                                <%
+                                    } else {
+                                %>
 
+                                    <span class="status inactive">
 
-    <span class="clinic-status">
+                                        <i class="fa-solid fa-circle"></i>
 
-        <i class="fa-solid fa-circle"></i>
+                                        <%= status %>
 
-        System Active
+                                    </span>
 
-    </span>
+                                <%
+                                    }
+                                %>
 
-</section>
+                            </td>
 
 
 
-<!-- FOOTER -->
+                            <!-- ACTIONS -->
 
-<footer>
+                            <td>
 
-    <span>
-        © 2026 Sunrise Dental Clinic. All Rights Reserved.
-    </span>
+                                <div class="actions">
 
-    <span>
-        Clinic Management System
-    </span>
 
-</footer>
-```
+                                    <!-- VIEW -->
+
+                                    <a href="<%= contextPath %>/viewPatient?id=<%= p.getP_id() %>"
+                                       class="action-btn view"
+                                       title="View Patient">
+
+                                        <i class="fa-solid fa-eye"></i>
+
+                                    </a>
+
+
+                                    <!-- EDIT -->
+
+                                    <a href="<%= contextPath %>/editPatient?id=<%= p.getP_id() %>"
+                                       class="action-btn edit"
+                                       title="Edit Patient">
+
+                                        <i class="fa-solid fa-pen"></i>
+
+                                    </a>
+
+
+                                    <!-- DELETE -->
+
+                                    <button type="button"
+                                            class="action-btn delete"
+                                            title="Delete Patient"
+                                            onclick="deletePatient(<%= p.getP_id() %>)">
+
+                                        <i class="fa-solid fa-trash"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+
+                        </tr>
+
+
+                    <% } %>
+
+
+                <% } %>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CARD FOOTER
+        ================================================== -->
+
+        <div class="table-footer">
+
+            <span>
+
+                Showing
+
+                <strong>
+                    <%= patientList.size() %>
+                </strong>
+
+                patient record(s)
+
+            </span>
+
+
+            <span>
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Patient information is securely managed
+
+            </span>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CLINIC INFORMATION
+    ====================================================== -->
+
+    <section class="clinic-card">
+
+
+        <div class="clinic-card-icon">
+
+            <i class="fa-solid fa-tooth"></i>
+
+        </div>
+
+
+        <div class="clinic-card-text">
+
+            <h3>
+                Patient Management System
+            </h3>
+
+            <p>
+                Maintain accurate patient records and provide
+                efficient dental clinic services.
+            </p>
+
+        </div>
+
+
+        <span class="clinic-status">
+
+            <i class="fa-solid fa-circle"></i>
+
+            System Active
+
+        </span>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <span>
+            © 2026 Sunrise Dental Clinic. All Rights Reserved.
+        </span>
+
+        <span>
+            Clinic Management System
+        </span>
+
+    </footer>
+
 
 </main>
 
+
+
+<!-- =========================================================
+     DELETE CONFIRMATION
+========================================================= -->
+
+<div id="deleteModal"
+     class="modal-overlay">
+
+
+    <div class="delete-modal">
+
+
+        <div class="delete-icon">
+
+            <i class="fa-solid fa-trash"></i>
+
+        </div>
+
+
+        <h2>
+            Delete Patient?
+        </h2>
+
+
+        <p>
+            Are you sure you want to delete this patient record?
+            This action cannot be undone.
+        </p>
+
+
+        <div class="modal-buttons">
+
+            <button type="button"
+                    onclick="closeModal()"
+                    class="cancel-btn">
+
+                Cancel
+
+            </button>
+
+
+            <a id="deleteLink"
+               href="#"
+               class="confirm-btn">
+
+                Delete
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
 <script>
 
-    // Delete confirmation
+    function deletePatient(id) {
 
-    const deleteButtons =
-        document.querySelectorAll(".delete-btn");
+        document.getElementById("deleteLink").href =
+            "<%= contextPath %>/deletePatient?id=" + id;
 
-    deleteButtons.forEach(function(button) {
+        document.getElementById("deleteModal")
+                .classList.add("show");
 
-        button.addEventListener("click", function(event) {
+    }
 
-            const confirmDelete =
-                confirm(
-                    "Are you sure you want to delete this patient?"
-                );
 
-            if (!confirmDelete) {
+    function closeModal() {
 
-                event.preventDefault();
+        document.getElementById("deleteModal")
+                .classList.remove("show");
+
+    }
+
+
+    document.getElementById("deleteModal")
+        .addEventListener("click", function(event) {
+
+            if (event.target === this) {
+
+                closeModal();
 
             }
 
         });
 
-    });
-
 </script>
 
 </body>
-
 </html>
+
