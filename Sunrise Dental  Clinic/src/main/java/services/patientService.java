@@ -1,3 +1,4 @@
+
 package services;
 
 import controller.DBConnect;
@@ -10,7 +11,10 @@ import java.util.ArrayList;
 
 public class patientService {
 
-    // Get all patients
+    // =========================================================
+    // GET ALL PATIENTS
+    // =========================================================
+
     public ArrayList<patient> getAllPatients() {
 
         ArrayList<patient> patientList = new ArrayList<>();
@@ -44,16 +48,10 @@ public class patientService {
                 patientList.add(pat);
             }
 
-            System.out.println(
-                    "Patients loaded from database: "
-                    + patientList.size()
-            );
-
         } catch (Exception e) {
 
-            System.out.println(
-                    "ERROR loading patients: " + e.getMessage()
-            );
+            System.out.println("ERROR loading patients: "
+                    + e.getMessage());
 
             e.printStackTrace();
         }
@@ -62,7 +60,10 @@ public class patientService {
     }
 
 
-    // Search patients
+    // =========================================================
+    // SEARCH PATIENTS
+    // =========================================================
+
     public ArrayList<patient> searchPatients(String keyword) {
 
         ArrayList<patient> patientList = new ArrayList<>();
@@ -109,9 +110,8 @@ public class patientService {
 
         } catch (Exception e) {
 
-            System.out.println(
-                    "ERROR searching patients: " + e.getMessage()
-            );
+            System.out.println("ERROR searching patients: "
+                    + e.getMessage());
 
             e.printStackTrace();
         }
@@ -120,7 +120,11 @@ public class patientService {
     }
 
 
-    // Get patient by ID
+    // =========================================================
+    // GET SINGLE PATIENT BY ID
+    // Used by View Patient
+    // =========================================================
+
     public patient getPatientById(int patientId) {
 
         patient pat = null;
@@ -149,9 +153,11 @@ public class patientService {
                     pat.setAddress(rs.getString("address"));
                     pat.setC_number(rs.getString("c_number"));
                     pat.setGender(rs.getString("gender"));
+
                     pat.setRegister_datetime(
                             rs.getTimestamp("register_datetime")
                     );
+
                     pat.setStatus(rs.getString("status"));
                 }
             }
@@ -159,7 +165,8 @@ public class patientService {
         } catch (Exception e) {
 
             System.out.println(
-                    "ERROR getting patient: " + e.getMessage()
+                    "ERROR getting patient by ID: "
+                    + e.getMessage()
             );
 
             e.printStackTrace();
@@ -169,7 +176,10 @@ public class patientService {
     }
 
 
-    // Get patient by contact number
+    // =========================================================
+    // GET PATIENT BY CONTACT NUMBER
+    // =========================================================
+
     public patient getPatientByContactNumber(String contactNumber) {
 
         patient pat = null;
@@ -205,9 +215,11 @@ public class patientService {
                     pat.setAddress(rs.getString("address"));
                     pat.setC_number(rs.getString("c_number"));
                     pat.setGender(rs.getString("gender"));
+
                     pat.setRegister_datetime(
                             rs.getTimestamp("register_datetime")
                     );
+
                     pat.setStatus(rs.getString("status"));
                 }
             }
@@ -226,7 +238,10 @@ public class patientService {
     }
 
 
-    // Add patient
+    // =========================================================
+    // ADD PATIENT
+    // =========================================================
+
     public boolean addPatient(patient pat) {
 
         String sql =
@@ -254,14 +269,13 @@ public class patientService {
 
             stmt.setString(5, status);
 
-            int rows = stmt.executeUpdate();
-
-            return rows > 0;
+            return stmt.executeUpdate() > 0;
 
         } catch (Exception e) {
 
             System.out.println(
-                    "ERROR adding patient: " + e.getMessage()
+                    "ERROR adding patient: "
+                    + e.getMessage()
             );
 
             e.printStackTrace();
@@ -271,7 +285,10 @@ public class patientService {
     }
 
 
-    // Update patient
+    // =========================================================
+    // UPDATE PATIENT
+    // =========================================================
+
     public boolean updatePatient(patient pat) {
 
         String sql =
@@ -304,14 +321,13 @@ public class patientService {
             stmt.setString(5, status);
             stmt.setInt(6, pat.getP_id());
 
-            int rows = stmt.executeUpdate();
-
-            return rows > 0;
+            return stmt.executeUpdate() > 0;
 
         } catch (Exception e) {
 
             System.out.println(
-                    "ERROR updating patient: " + e.getMessage()
+                    "ERROR updating patient: "
+                    + e.getMessage()
             );
 
             e.printStackTrace();
@@ -321,7 +337,10 @@ public class patientService {
     }
 
 
-    // Delete patient
+    // =========================================================
+    // DELETE PATIENT
+    // =========================================================
+
     public boolean deletePatient(int patientId) {
 
         String sql =
@@ -335,14 +354,13 @@ public class patientService {
 
             stmt.setInt(1, patientId);
 
-            int rows = stmt.executeUpdate();
-
-            return rows > 0;
+            return stmt.executeUpdate() > 0;
 
         } catch (Exception e) {
 
             System.out.println(
-                    "ERROR deleting patient: " + e.getMessage()
+                    "ERROR deleting patient: "
+                    + e.getMessage()
             );
 
             e.printStackTrace();
@@ -351,3 +369,4 @@ public class patientService {
         }
     }
 }
+
