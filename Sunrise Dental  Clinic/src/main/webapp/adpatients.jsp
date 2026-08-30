@@ -789,24 +789,21 @@
 
                                     <!-- EDIT -->
 
-                                    <a href="<%= contextPath %>/editPatient?id=<%= p.getP_id() %>"
-                                       class="action-btn edit"
-                                       title="Edit Patient">
-
+                                    <a href="<%= contextPath %>/updatePatients?id=<%= p.getP_id() %>"
+                                        class="action-btn edit"
+                                        title="Edit Patient">
                                         <i class="fa-solid fa-pen"></i>
-
                                     </a>
 
 
                                     <!-- DELETE -->
 
                                     <button type="button"
-                                            class="action-btn delete"
-                                            title="Delete Patient"
-                                            onclick="deletePatient(<%= p.getP_id() %>)">
+                                        class="action-btn delete"
+                                        title="Delete Patient"
+                                        onclick="deletePatient(<%= p.getP_id() %>)">
 
                                         <i class="fa-solid fa-trash"></i>
-
                                     </button>
 
                                 </div>
