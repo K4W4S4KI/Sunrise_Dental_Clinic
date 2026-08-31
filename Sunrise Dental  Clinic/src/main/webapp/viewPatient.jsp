@@ -1,14 +1,11 @@
-<%@ page language="java"
-    contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ page import="model.patient" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 
 <%
-    /* =========================================================
-       ADMIN LOGIN CHECK
-    ========================================================= */
+    // =========================================================
+    // ADMIN LOGIN CHECK
+    // =========================================================
 
     if (session.getAttribute("loggedInAdmin") == null) {
 
@@ -19,12 +16,12 @@
         return;
     }
 
-    /* =========================================================
-       GET PATIENT DATA
-    ========================================================= */
 
-    patient pat =
-        (patient) request.getAttribute("patient");
+    // =========================================================
+    // GET PATIENT OBJECT
+    // =========================================================
+
+    patient pat = (patient) request.getAttribute("patient");
 
     if (pat == null) {
 
@@ -35,57 +32,24 @@
         return;
     }
 
-    String contextPath = request.getContextPath();
 
-    SimpleDateFormat dateFormat =
-        new SimpleDateFormat("dd MMM yyyy, hh:mm a");
+    // =========================================================
+    // ALERT MESSAGES
+    // =========================================================
 
-    /* =========================================================
-       PATIENT DATA
-    ========================================================= */
+    String error =
+        (String) session.getAttribute("error");
 
-    String patientName =
-        pat.getP_name() != null &&
-        !pat.getP_name().trim().isEmpty()
-        ? pat.getP_name()
-        : "Unknown Patient";
+    String success =
+        (String) session.getAttribute("success");
 
-    String address =
-        pat.getAddress() != null &&
-        !pat.getAddress().trim().isEmpty()
-        ? pat.getAddress()
-        : "Not provided";
-
-    String contact =
-        pat.getC_number() != null &&
-        !pat.getC_number().trim().isEmpty()
-        ? pat.getC_number()
-        : "Not provided";
-
-    String gender =
-        pat.getGender() != null &&
-        !pat.getGender().trim().isEmpty()
-        ? pat.getGender()
-        : "Not specified";
-
-    String status =
-        pat.getStatus() != null &&
-        !pat.getStatus().trim().isEmpty()
-        ? pat.getStatus()
-        : "Active";
-
-    String registeredDate =
-        pat.getRegister_datetime() != null
-        ? dateFormat.format(
-            pat.getRegister_datetime()
-          )
-        : "Not available";
-
-    String initial =
-        patientName.substring(0, 1).toUpperCase();
+    session.removeAttribute("error");
+    session.removeAttribute("success");
 %>
 
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -99,25 +63,34 @@
         View Patient | Sunrise Dental Clinic
     </title>
 
-    <!-- PAGE CSS -->
+
+    <!-- =====================================================
+         VIEW PATIENT CSS
+    ====================================================== -->
 
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/CSS/viewPatient.css">
+          href="${pageContext.request.contextPath}/CSS/adviewpatient.css">
 
-    <!-- FONT AWESOME -->
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
+
 <body>
+
 
 <!-- =========================================================
      TOP NAVBAR
 ========================================================= -->
 
 <header class="top-navbar">
+
 
     <!-- BRAND -->
 
@@ -128,6 +101,7 @@
             <i class="fa-solid fa-tooth"></i>
 
         </div>
+
 
         <div class="brand-text">
 
@@ -140,9 +114,11 @@
     </div>
 
 
+
     <!-- NAVIGATION -->
 
     <nav class="navigation">
+
 
         <a href="${pageContext.request.contextPath}/adminhomes.jsp">
 
@@ -192,9 +168,11 @@
     </nav>
 
 
+
     <!-- ADMIN AREA -->
 
     <div class="admin-area">
+
 
         <div class="admin-icon">
 
@@ -206,9 +184,7 @@
         <div class="admin-details">
 
             <strong>
-
                 <%= session.getAttribute("loggedInAdmin") %>
-
             </strong>
 
             <span>Administrator</span>
@@ -229,6 +205,7 @@
 </header>
 
 
+
 <!-- =========================================================
      MAIN CONTENT
 ========================================================= -->
@@ -242,48 +219,45 @@
 
     <section class="page-header">
 
+
         <div>
 
             <span class="page-label">
-
                 PATIENT MANAGEMENT
-
             </span>
 
+
             <h1>
-
                 Patient Details
-
             </h1>
 
+
             <p>
-
-                View complete information about the
-                selected patient.
-
+                View complete information about the selected patient.
             </p>
 
         </div>
+
 
 
         <!-- HEADER USER -->
 
         <div class="header-user">
 
+
             <div class="header-user-icon">
 
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-user-doctor"></i>
 
             </div>
 
+
             <div>
 
-                <span>Patient ID</span>
+                <span>Welcome back</span>
 
                 <strong>
-
-                    #<%= pat.getP_id() %>
-
+                    <%= session.getAttribute("loggedInAdmin") %>
                 </strong>
 
             </div>
@@ -293,150 +267,129 @@
     </section>
 
 
+
     <!-- =====================================================
-         BREADCRUMB
+         ERROR ALERT
     ====================================================== -->
 
-    <div class="breadcrumb">
+    <% if (error != null) { %>
 
-        <a href="${pageContext.request.contextPath}/managePatients">
+        <div class="alert alert-error">
 
-            <i class="fa-solid fa-users"></i>
 
-            Patients
+            <div class="alert-icon">
 
-        </a>
+                <i class="fa-solid fa-circle-exclamation"></i>
 
-        <i class="fa-solid fa-chevron-right"></i>
+            </div>
 
-        <span>
 
-            View Patient
+            <div>
 
-        </span>
+                <strong>
+                    Unable to complete request
+                </strong>
 
-    </div>
+                <span>
+                    <%= error %>
+                </span>
+
+            </div>
+
+
+            <button type="button"
+                    class="alert-close"
+                    onclick="this.parentElement.remove();">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+    <% } %>
+
+
+
+    <!-- =====================================================
+         SUCCESS ALERT
+    ====================================================== -->
+
+    <% if (success != null) { %>
+
+        <div class="alert alert-success">
+
+
+            <div class="alert-icon">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Success
+                </strong>
+
+                <span>
+                    <%= success %>
+                </span>
+
+            </div>
+
+
+            <button type="button"
+                    class="alert-close"
+                    onclick="this.parentElement.remove();">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+    <% } %>
+
 
 
     <!-- =====================================================
          PATIENT PROFILE CARD
     ====================================================== -->
 
-    <section class="patient-profile-card">
-
-
-        <!-- PROFILE TOP -->
-
-        <div class="profile-top">
-
-
-            <div class="profile-avatar">
-
-                <%= initial %>
-
-            </div>
-
-
-            <div class="profile-main">
-
-                <span class="profile-label">
-
-                    PATIENT PROFILE
-
-                </span>
-
-                <h2>
-
-                    <%= patientName %>
-
-                </h2>
-
-                <p>
-
-                    <i class="fa-solid fa-id-card"></i>
-
-                    Patient ID:
-
-                    <strong>
-
-                        #<%= pat.getP_id() %>
-
-                    </strong>
-
-                </p>
-
-            </div>
-
-
-            <!-- STATUS -->
-
-            <div class="profile-status">
-
-                <%
-                    if ("Active".equalsIgnoreCase(status)) {
-                %>
-
-                    <span class="status-badge active">
-
-                        <i class="fa-solid fa-circle"></i>
-
-                        Active
-
-                    </span>
-
-                <%
-                    } else {
-                %>
-
-                    <span class="status-badge inactive">
-
-                        <i class="fa-solid fa-circle"></i>
-
-                        <%= status %>
-
-                    </span>
-
-                <%
-                    }
-                %>
-
-            </div>
-
-        </div>
-
-
-        <!-- DIVIDER -->
-
-        <div class="profile-divider"></div>
+    <section class="patient-card">
 
 
         <!-- =================================================
-             PATIENT INFORMATION
+             CARD HEADER
         ================================================== -->
 
-        <div class="information-section">
+        <div class="patient-card-header">
 
 
-            <div class="section-title">
+            <div class="patient-title-area">
 
-                <div class="section-title-icon">
 
-                    <i class="fa-solid fa-address-card"></i>
+                <div class="patient-main-icon">
+
+                    <i class="fa-solid fa-user"></i>
 
                 </div>
 
+
                 <div>
 
-                    <h3>
+                    <span class="section-label">
+                        PATIENT PROFILE
+                    </span>
 
-                        Personal Information
-
-                    </h3>
+                    <h2>
+                        Patient Information
+                    </h2>
 
                     <p>
-
-                        Basic details of the registered patient
-
+                        Personal and registration details
                     </p>
 
                 </div>
@@ -444,14 +397,118 @@
             </div>
 
 
-            <!-- INFORMATION GRID -->
 
-            <div class="details-grid">
+            <!-- PATIENT ID -->
+
+            <div class="patient-id">
+
+                <span>Patient ID</span>
+
+                <strong>
+                    #<%= pat.getP_id() %>
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PATIENT BODY
+        ================================================== -->
+
+        <div class="patient-body">
+
+
+            <!-- =================================================
+                 PROFILE SUMMARY
+            ================================================== -->
+
+            <div class="profile-summary">
+
+
+                <div class="profile-avatar">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+
+                <div class="profile-name">
+
+                    <h2>
+                        <%= pat.getP_name() != null
+                            ? pat.getP_name()
+                            : "N/A" %>
+                    </h2>
+
+
+                    <span>
+                        Patient
+                    </span>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="status-area">
+
+                    <span class="status-label">
+                        Current Status
+                    </span>
+
+
+                    <%
+                        String patientStatus = pat.getStatus();
+
+                        if ("Active".equalsIgnoreCase(patientStatus)) {
+                    %>
+
+                        <span class="status-badge active">
+
+                            <i class="fa-solid fa-circle"></i>
+
+                            Active
+
+                        </span>
+
+                    <%
+                        } else {
+                    %>
+
+                        <span class="status-badge inactive">
+
+                            <i class="fa-solid fa-circle"></i>
+
+                            <%= patientStatus != null
+                                ? patientStatus
+                                : "Inactive" %>
+
+                        </span>
+
+                    <%
+                        }
+                    %>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 INFORMATION GRID
+            ================================================== -->
+
+            <div class="information-grid">
 
 
                 <!-- PATIENT NAME -->
 
                 <div class="detail-item">
+
 
                     <div class="detail-icon">
 
@@ -459,13 +516,18 @@
 
                     </div>
 
+
                     <div class="detail-content">
 
-                        <span>Full Name</span>
+                        <span>
+                            Patient Name
+                        </span>
 
                         <strong>
 
-                            <%= patientName %>
+                            <%= pat.getP_name() != null
+                                ? pat.getP_name()
+                                : "Not available" %>
 
                         </strong>
 
@@ -474,34 +536,11 @@
                 </div>
 
 
-                <!-- PATIENT ID -->
+
+                <!-- CONTACT NUMBER -->
 
                 <div class="detail-item">
 
-                    <div class="detail-icon">
-
-                        <i class="fa-solid fa-hashtag"></i>
-
-                    </div>
-
-                    <div class="detail-content">
-
-                        <span>Patient ID</span>
-
-                        <strong>
-
-                            #<%= pat.getP_id() %>
-
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <!-- CONTACT -->
-
-                <div class="detail-item">
 
                     <div class="detail-icon">
 
@@ -509,58 +548,50 @@
 
                     </div>
 
+
                     <div class="detail-content">
 
-                        <span>Contact Number</span>
+                        <span>
+                            Contact Number
+                        </span>
 
                         <strong>
 
-                            <%= contact %>
+                            <%= pat.getC_number() != null
+                                ? pat.getC_number()
+                                : "Not available" %>
 
                         </strong>
 
                     </div>
 
                 </div>
+
 
 
                 <!-- GENDER -->
 
                 <div class="detail-item">
 
+
                     <div class="detail-icon">
 
-                        <%
-                            if ("Male".equalsIgnoreCase(gender)) {
-                        %>
-
-                            <i class="fa-solid fa-mars"></i>
-
-                        <%
-                            } else if ("Female".equalsIgnoreCase(gender)) {
-                        %>
-
-                            <i class="fa-solid fa-venus"></i>
-
-                        <%
-                            } else {
-                        %>
-
-                            <i class="fa-solid fa-user"></i>
-
-                        <%
-                            }
-                        %>
+                        <i class="fa-solid fa-venus-mars"></i>
 
                     </div>
 
+
                     <div class="detail-content">
 
-                        <span>Gender</span>
+                        <span>
+                            Gender
+                        </span>
 
                         <strong>
 
-                            <%= gender %>
+                            <%= pat.getGender() != null
+                                ? pat.getGender()
+                                : "Not available" %>
 
                         </strong>
 
@@ -569,9 +600,43 @@
                 </div>
 
 
+
+                <!-- REGISTERED DATE -->
+
+                <div class="detail-item">
+
+
+                    <div class="detail-icon">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                    </div>
+
+
+                    <div class="detail-content">
+
+                        <span>
+                            Registered Date
+                        </span>
+
+                        <strong>
+
+                            <%= pat.getRegister_datetime() != null
+                                ? pat.getRegister_datetime()
+                                : "Not available" %>
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
                 <!-- ADDRESS -->
 
-                <div class="detail-item full-width">
+                <div class="detail-item address-item">
+
 
                     <div class="detail-icon">
 
@@ -579,13 +644,18 @@
 
                     </div>
 
+
                     <div class="detail-content">
 
-                        <span>Address</span>
+                        <span>
+                            Residential Address
+                        </span>
 
                         <strong>
 
-                            <%= address %>
+                            <%= pat.getAddress() != null
+                                ? pat.getAddress()
+                                : "Not available" %>
 
                         </strong>
 
@@ -593,101 +663,22 @@
 
                 </div>
 
-
-                <!-- REGISTERED DATE -->
-
-                <div class="detail-item">
-
-                    <div class="detail-icon">
-
-                        <i class="fa-regular fa-calendar"></i>
-
-                    </div>
-
-                    <div class="detail-content">
-
-                        <span>Registered Date</span>
-
-                        <strong>
-
-                            <%= registeredDate %>
-
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ACCOUNT STATUS -->
-
-                <div class="detail-item">
-
-                    <div class="detail-icon">
-
-                        <i class="fa-solid fa-circle-check"></i>
-
-                    </div>
-
-                    <div class="detail-content">
-
-                        <span>Account Status</span>
-
-                        <strong class="status-text">
-
-                            <%= status %>
-
-                        </strong>
-
-                    </div>
-
-                </div>
 
             </div>
 
         </div>
 
 
-        <!-- =================================================
-             SECURITY INFORMATION
-        ================================================== -->
-
-        <div class="security-box">
-
-            <div class="security-icon">
-
-                <i class="fa-solid fa-shield-halved"></i>
-
-            </div>
-
-            <div class="security-text">
-
-                <strong>
-
-                    Patient Information Secure
-
-                </strong>
-
-                <span>
-
-                    This patient information is securely
-                    managed by Sunrise Dental Clinic.
-
-                </span>
-
-            </div>
-
-        </div>
-
 
         <!-- =================================================
-             ACTION BUTTONS
+             CARD ACTIONS
         ================================================== -->
 
-        <div class="profile-actions">
+        <div class="patient-actions">
 
-            <a href="${contextPath}/managePatients"
-               class="back-btn">
+
+            <a href="${pageContext.request.contextPath}/managePatients"
+               class="secondary-btn">
 
                 <i class="fa-solid fa-arrow-left"></i>
 
@@ -696,10 +687,10 @@
             </a>
 
 
-            <a href="${contextPath}/updatePatients?id=<%= pat.getP_id() %>"
-               class="edit-btn">
+            <a href="${pageContext.request.contextPath}/updatePatients?p_id=<%= pat.getP_id() %>"
+               class="primary-btn">
 
-                <i class="fa-solid fa-pen"></i>
+                <i class="fa-solid fa-user-pen"></i>
 
                 Edit Patient
 
@@ -710,44 +701,176 @@
     </section>
 
 
+
     <!-- =====================================================
-         CLINIC INFORMATION
+         QUICK INFORMATION CARDS
     ====================================================== -->
 
-    <section class="clinic-card">
+    <section class="quick-info-grid">
 
-        <div class="clinic-card-icon">
 
-            <i class="fa-solid fa-tooth"></i>
+        <!-- RECORD STATUS -->
+
+        <div class="quick-card">
+
+
+            <div class="quick-icon">
+
+                <i class="fa-solid fa-file-circle-check"></i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Record Status
+                </span>
+
+                <strong>
+                    <%= pat.getStatus() != null
+                        ? pat.getStatus()
+                        : "N/A" %>
+                </strong>
+
+            </div>
 
         </div>
 
-        <div class="clinic-card-text">
+
+
+        <!-- CONTACT -->
+
+        <div class="quick-card">
+
+
+            <div class="quick-icon">
+
+                <i class="fa-solid fa-phone-volume"></i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Contact
+                </span>
+
+                <strong>
+                    <%= pat.getC_number() != null
+                        ? pat.getC_number()
+                        : "N/A" %>
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- GENDER -->
+
+        <div class="quick-card">
+
+
+            <div class="quick-icon">
+
+                <i class="fa-solid fa-person"></i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Gender
+                </span>
+
+                <strong>
+                    <%= pat.getGender() != null
+                        ? pat.getGender()
+                        : "N/A" %>
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PATIENT ID -->
+
+        <div class="quick-card">
+
+
+            <div class="quick-icon">
+
+                <i class="fa-solid fa-id-card"></i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Patient ID
+                </span>
+
+                <strong>
+                    #<%= pat.getP_id() %>
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PRIVACY INFORMATION
+    ====================================================== -->
+
+    <section class="info-card">
+
+
+        <div class="info-icon">
+
+            <i class="fa-solid fa-shield-heart"></i>
+
+        </div>
+
+
+        <div class="info-content">
 
             <h3>
-
-                Patient Management System
-
+                Patient Information & Privacy
             </h3>
 
             <p>
 
-                Maintain accurate patient records and
-                provide efficient dental clinic services.
+                Patient information is confidential and should
+                only be accessed by authorized clinic staff.
+                Please ensure that all patient records are
+                handled securely and responsibly.
 
             </p>
 
         </div>
 
-        <span class="clinic-status">
 
-            <i class="fa-solid fa-circle"></i>
+        <div class="info-badge">
 
-            System Active
+            <i class="fa-solid fa-lock"></i>
 
-        </span>
+            Secure Record
+
+        </div>
 
     </section>
+
 
 
     <!-- =====================================================
@@ -757,19 +880,16 @@
     <footer>
 
         <span>
-
-            © 2026 Sunrise Dental Clinic.
-            All Rights Reserved.
-
+            © 2026 Sunrise Dental Clinic. All Rights Reserved.
         </span>
 
+
         <span>
-
             Clinic Management System
-
         </span>
 
     </footer>
+
 
 </main>
 
