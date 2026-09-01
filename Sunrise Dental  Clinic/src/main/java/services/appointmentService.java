@@ -19,72 +19,91 @@ public class appointmentService {
             new BigDecimal("500.00");
 
 
-    // =========================================================
-    // GET ACTIVE DENTISTS
-    // =========================================================
+ // =========================================================
+ // GET ACTIVE DENTISTS
+ // =========================================================
+ public ArrayList<dentist> getActiveDentists() {
 
-    public ArrayList<dentist> getActiveDentists() {
+     ArrayList<dentist> dentistList = new ArrayList<>();
 
-        ArrayList<dentist> dentistList = new ArrayList<>();
+     String sql =
+             "SELECT dentist_id, dentist_name, specialization, " +
+             "contact_number, status " +
+             "FROM dentist_tb " +
+             "WHERE TRIM(status) = 'Active' " +
+             "ORDER BY dentist_name ASC";
 
-        String sql =
-                "SELECT dentist_id, dentist_name, specialization, " +
-                "contact_number, status " +
-                "FROM dentist_tb " +
-                "WHERE status = 'Active' " +
-                "ORDER BY dentist_id ASC";
+     try (
+             Connection conn = DBConnect.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()
+     ) {
 
-        try (
-                Connection conn = DBConnect.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()
-        ) {
+         while (rs.next()) {
 
-            while (rs.next()) {
+             dentist d = new dentist();
 
-                dentist d = new dentist();
+             d.setDentist_id(
+                     rs.getInt("dentist_id")
+             );
 
-                d.setDentist_id(
-                        rs.getInt("dentist_id")
-                );
+             d.setDentist_name(
+                     rs.getString("dentist_name")
+             );
 
-                d.setDentist_name(
-                        rs.getString("dentist_name")
-                );
+             d.setSpecialization(
+                     rs.getString("specialization")
+             );
 
-                d.setSpecialization(
-                        rs.getString("specialization")
-                );
+             d.setContact_number(
+                     rs.getString("contact_number")
+             );
 
-                d.setContact_number(
-                        rs.getString("contact_number")
-                );
+             d.setStatus(
+                     rs.getString("status")
+             );
 
-                d.setStatus(
-                        rs.getString("status")
-                );
+             dentistList.add(d);
+         }
 
-                dentistList.add(d);
-            }
+         System.out.println(
+                 "================================="
+         );
 
-            System.out.println(
-                    "Active dentists loaded: "
-                    + dentistList.size()
-            );
+         System.out.println(
+                 "ACTIVE DENTISTS = "
+                 + dentistList.size()
+         );
 
-        } catch (Exception e) {
+         for (dentist d : dentistList) {
 
-            System.out.println(
-                    "ERROR loading active dentists: "
-                    + e.getMessage()
-            );
+             System.out.println(
+                     d.getDentist_id()
+                     + " | "
+                     + d.getDentist_name()
+                     + " | "
+                     + d.getSpecialization()
+                     + " | "
+                     + d.getStatus()
+             );
+         }
 
-            e.printStackTrace();
-        }
+         System.out.println(
+                 "================================="
+         );
 
-        return dentistList;
-    }
+     } catch (Exception e) {
 
+         System.out.println(
+                 "ERROR loading dentists: "
+                 + e.getMessage()
+         );
+
+         e.printStackTrace();
+     }
+
+     return dentistList;
+ }
 
     // =========================================================
     // GET ACTIVE TREATMENTS
@@ -1033,5 +1052,291 @@ public class appointmentService {
 
         return false;
     }
+    
+ // =========================================================
+ // CREATE APPOINTMENT WITH MULTIPLE TREATMENTS
+ // =========================================================
+
+ public boolean createAppointmentWithTreatments(
+         appointment appt,
+         String[] treatmentIds) {
+
+     Connection conn = null;
+
+     String appointmentSql =
+             "INSERT INTO appointment_tb " +
+             "(appointment_number, p_id, p_name, address, " +
+             "c_number, gender, d_id, appointment_datetime, status) " +
+             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+
+     String treatmentSql =
+             "INSERT INTO appointment_treatment_tb " +
+             "(appointment_id, treatment_id, treatment_price) " +
+             "VALUES (?, ?, ?)";
+
+
+     try {
+
+         conn = DBConnect.getConnection();
+
+         conn.setAutoCommit(false);
+
+
+         // -------------------------------------------------
+         // GENERATE APPOINTMENT NUMBER
+         // -------------------------------------------------
+
+         String appointmentNumber =
+                 "APT-" + System.currentTimeMillis();
+
+
+         int appointmentId;
+
+
+         // -------------------------------------------------
+         // INSERT APPOINTMENT
+         // -------------------------------------------------
+
+         try (
+                 PreparedStatement stmt =
+                         conn.prepareStatement(
+                                 appointmentSql,
+                                 java.sql.Statement.RETURN_GENERATED_KEYS
+                         )
+         ) {
+
+             stmt.setString(
+                     1,
+                     appointmentNumber
+             );
+
+
+             if (appt.getP_id() != null) {
+
+                 stmt.setInt(
+                         2,
+                         appt.getP_id()
+                 );
+
+             } else {
+
+                 stmt.setNull(
+                         2,
+                         java.sql.Types.INTEGER
+                 );
+             }
+
+
+             stmt.setString(
+                     3,
+                     appt.getP_name()
+             );
+
+             stmt.setString(
+                     4,
+                     appt.getAddress()
+             );
+
+             stmt.setString(
+                     5,
+                     appt.getC_number()
+             );
+
+             stmt.setString(
+                     6,
+                     appt.getGender()
+             );
+
+             stmt.setInt(
+                     7,
+                     appt.getD_id()
+             );
+
+             stmt.setTimestamp(
+                     8,
+                     appt.getAppointment_datetime()
+             );
+
+             stmt.setString(
+                     9,
+                     "Pending"
+             );
+
+
+             int rows =
+                     stmt.executeUpdate();
+
+
+             if (rows == 0) {
+
+                 conn.rollback();
+
+                 return false;
+             }
+
+
+             try (
+                     ResultSet keys =
+                             stmt.getGeneratedKeys()
+             ) {
+
+                 if (keys.next()) {
+
+                     appointmentId =
+                             keys.getInt(1);
+
+                 } else {
+
+                     conn.rollback();
+
+                     return false;
+                 }
+             }
+         }
+
+
+         // -------------------------------------------------
+         // INSERT SELECTED TREATMENTS
+         // -------------------------------------------------
+
+         try (
+                 PreparedStatement treatmentStmt =
+                         conn.prepareStatement(
+                                 treatmentSql
+                         )
+         ) {
+
+             for (String treatmentIdStr :
+                     treatmentIds) {
+
+                 int treatmentId =
+                         Integer.parseInt(
+                                 treatmentIdStr
+                         );
+
+
+                 // Get current treatment price
+
+                 BigDecimal price = null;
+
+
+                 String priceSql =
+                         "SELECT treatment_priceLkr " +
+                         "FROM treatment_tb " +
+                         "WHERE treatment_id = ? " +
+                         "AND status = 'Active'";
+
+
+                 try (
+                         PreparedStatement priceStmt =
+                                 conn.prepareStatement(
+                                         priceSql
+                                 )
+                 ) {
+
+                     priceStmt.setInt(
+                             1,
+                             treatmentId
+                     );
+
+
+                     try (
+                             ResultSet rs =
+                                     priceStmt.executeQuery()
+                     ) {
+
+                         if (rs.next()) {
+
+                             price =
+                                     rs.getBigDecimal(
+                                             "treatment_priceLkr"
+                                     );
+                         }
+                     }
+                 }
+
+
+                 if (price == null) {
+
+                     conn.rollback();
+
+                     return false;
+                 }
+
+
+                 treatmentStmt.setInt(
+                         1,
+                         appointmentId
+                 );
+
+                 treatmentStmt.setInt(
+                         2,
+                         treatmentId
+                 );
+
+                 treatmentStmt.setBigDecimal(
+                         3,
+                         price
+                 );
+
+                 treatmentStmt.addBatch();
+             }
+
+
+             treatmentStmt.executeBatch();
+         }
+
+
+         // -------------------------------------------------
+         // COMMIT
+         // -------------------------------------------------
+
+         conn.commit();
+
+
+         System.out.println(
+                 "Appointment created: "
+                 + appointmentNumber
+         );
+
+
+         return true;
+
+
+     } catch (Exception e) {
+
+         e.printStackTrace();
+
+
+         if (conn != null) {
+
+             try {
+                 conn.rollback();
+             } catch (Exception ex) {
+                 ex.printStackTrace();
+             }
+         }
+
+
+         return false;
+
+
+     } finally {
+
+         if (conn != null) {
+
+             try {
+
+                 conn.setAutoCommit(true);
+                 conn.close();
+
+             } catch (Exception e) {
+
+                 e.printStackTrace();
+             }
+         }
+     }
+ }
 }
 
