@@ -4,20 +4,18 @@
     box-sizing: border-box;
 }
 
-
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background: #f6f7fb;
-    color: #2d3436;
+    background: #f4f1ff;
+    color: #333333;
+    min-height: 100vh;
 }
-
 
 .page-wrapper {
     width: 92%;
     max-width: 1200px;
     margin: 35px auto 60px;
 }
-
 
 /* =========================================================
    HEADER
@@ -30,38 +28,34 @@ body {
     margin-bottom: 25px;
 }
 
-
 .page-title {
     font-size: 30px;
     font-weight: 700;
-    color: #2c3e50;
+    color: #4b3ca7;
 }
-
 
 .page-subtitle {
     margin-top: 7px;
-    color: #7f8c8d;
+    color: #777777;
     font-size: 14px;
 }
-
 
 .back-btn {
     text-decoration: none;
     background: #ffffff;
-    color: #8e44ad;
-    border: 1px solid #e0d7e8;
+    color: #6a5acd;
+    border: 1px solid #e9e5ff;
     padding: 11px 18px;
     border-radius: 9px;
     font-weight: 600;
-    transition: 0.2s;
+    transition: 0.2s ease;
 }
-
 
 .back-btn:hover {
-    background: #8e44ad;
-    color: white;
+    background: #6a5acd;
+    color: #ffffff;
+    border-color: #6a5acd;
 }
-
 
 /* =========================================================
    ALERTS
@@ -74,20 +68,17 @@ body {
     font-weight: 600;
 }
 
-
 .alert.success {
-    background: #eaf8f0;
-    color: #218c54;
-    border: 1px solid #bde8cf;
+    background: #edf9f1;
+    color: #2e8b57;
+    border: 1px solid #c8ead4;
 }
-
 
 .alert.error {
     background: #fff0f0;
     color: #d63031;
     border: 1px solid #f2c4c4;
 }
-
 
 /* =========================================================
    CARD
@@ -98,10 +89,13 @@ body {
     border-radius: 15px;
     padding: 28px;
     margin-bottom: 22px;
-    box-shadow: 0 5px 22px rgba(44, 62, 80, 0.07);
-    border: 1px solid #eeeeee;
+    box-shadow: 0 5px 22px rgba(75, 60, 167, 0.07);
+    border: 1px solid #e9e5ff;
 }
 
+/* =========================================================
+   SECTION TITLE
+   ========================================================= */
 
 .section-title {
     display: flex;
@@ -110,7 +104,6 @@ body {
     margin-bottom: 25px;
 }
 
-
 .section-number {
     width: 45px;
     height: 45px;
@@ -118,28 +111,25 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(
-        135deg,
-        #8e44ad,
-        #e67e22
-    );
-    color: white;
+
+    /* SAME PURPLE THEME */
+    background: #6a5acd;
+
+    color: #ffffff;
     font-weight: 700;
+    box-shadow: 0 4px 10px rgba(106, 90, 205, 0.20);
 }
 
-
 .section-title h2 {
-    color: #2c3e50;
+    color: #4b3ca7;
     font-size: 19px;
 }
 
-
 .section-title p {
-    color: #95a5a6;
+    color: #777777;
     font-size: 13px;
     margin-top: 4px;
 }
-
 
 /* =========================================================
    FORM
@@ -151,65 +141,88 @@ body {
     gap: 20px;
 }
 
-
 .input-group {
     display: flex;
     flex-direction: column;
 }
 
-
 .full-width {
     grid-column: 1 / -1;
 }
-
 
 .input-group label {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 8px;
-    color: #34495e;
+    color: #4b3ca7;
 }
-
 
 .input-group label span {
-    color: #e74c3c;
+    color: #d63031;
 }
-
 
 .input-group input,
 .input-group select,
 .input-group textarea {
     width: 100%;
     padding: 13px 14px;
-    border: 1px solid #dfe4ea;
+
+    border: 1px solid #ddd8f2;
     border-radius: 9px;
+
     outline: none;
     font-size: 14px;
-    background: #fff;
-    transition: 0.2s;
+
+    background: #ffffff;
+    color: #333333;
+
+    transition: 0.2s ease;
     font-family: inherit;
 }
 
+.input-group input:hover,
+.input-group select:hover,
+.input-group textarea:hover {
+    border-color: #b8ace8;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    border-color: #6a5acd;
+
+    box-shadow:
+        0 0 0 3px rgba(106, 90, 205, 0.10);
+}
 
 .input-group textarea {
     resize: vertical;
 }
 
-
-.input-group input:focus,
-.input-group select:focus,
-.input-group textarea:focus {
-    border-color: #8e44ad;
-    box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.08);
-}
-
-
 .input-group input[readonly],
 .input-group textarea[readonly] {
-    background: #f5f6f8;
-    color: #555;
+    background: #f4f1ff;
+    color: #555555;
+    border-color: #e9e5ff;
 }
 
+/* =========================================================
+   SELECT / DROPDOWN
+   ========================================================= */
+
+.input-group select {
+    cursor: pointer;
+}
+
+.input-group select option {
+    color: #333333;
+    background: #ffffff;
+}
+
+.input-group select option:checked {
+    background: #e9e5ff;
+    color: #4b3ca7;
+}
 
 /* =========================================================
    PHONE SEARCH
@@ -222,29 +235,30 @@ body {
     margin-bottom: 10px;
 }
 
-
 .phone-search .input-group {
     flex: 1;
 }
 
-
 .check-btn {
     height: 45px;
     padding: 0 20px;
+
     border: none;
     border-radius: 9px;
-    background: #8e44ad;
-    color: white;
+
+    background: #6a5acd;
+    color: #ffffff;
+
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
-}
 
+    transition: 0.2s ease;
+}
 
 .check-btn:hover {
-    background: #732d91;
+    background: #4b3ca7;
+    transform: translateY(-1px);
 }
-
 
 .patient-message {
     min-height: 20px;
@@ -253,26 +267,21 @@ body {
     font-weight: 600;
 }
 
-
 .success-message {
-    color: #219653;
+    color: #2e8b57;
 }
-
 
 .new-patient-message {
-    color: #e67e22;
+    color: #6a5acd;
 }
-
 
 .error-message {
     color: #d63031;
 }
 
-
 .loading-message {
-    color: #7f8c8d;
+    color: #777777;
 }
-
 
 /* =========================================================
    TREATMENTS
@@ -284,58 +293,76 @@ body {
     gap: 14px;
 }
 
-
 .treatment-item {
     display: flex;
     align-items: center;
     gap: 13px;
-    border: 1px solid #e2e5e8;
-    border-radius: 11px;
-    padding: 16px;
-    cursor: pointer;
-    transition: 0.2s;
-}
 
+    border: 1px solid #e3def2;
+    border-radius: 11px;
+
+    padding: 16px;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    background: #ffffff;
+}
 
 .treatment-item:hover {
-    border-color: #8e44ad;
-    background: #fbf8fd;
+    border-color: #6a5acd;
+    background: #f4f1ff;
+    transform: translateY(-1px);
 }
 
+/* Selected treatment */
+
+.treatment-item:has(input:checked) {
+    border-color: #6a5acd;
+    background: #f4f1ff;
+    box-shadow: 0 3px 10px rgba(106, 90, 205, 0.10);
+}
 
 .treatment-item input {
     width: 18px;
     height: 18px;
-    accent-color: #8e44ad;
-}
 
+    accent-color: #6a5acd;
+
+    cursor: pointer;
+}
 
 .treatment-info {
     width: 100%;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-
 .treatment-info strong {
-    color: #34495e;
+    color: #4b3ca7;
+    font-size: 14px;
 }
 
-
 .treatment-info span {
-    color: #8e44ad;
+    color: #6a5acd;
     font-weight: 700;
 }
 
-
 .no-data {
     grid-column: 1 / -1;
-    text-align: center;
-    padding: 30px;
-    color: #999;
-}
 
+    text-align: center;
+
+    padding: 30px;
+
+    color: #777777;
+
+    background: #f4f1ff;
+    border: 1px dashed #d8d0f0;
+    border-radius: 10px;
+}
 
 /* =========================================================
    BILL SUMMARY
@@ -345,31 +372,32 @@ body {
     margin-top: 25px;
     margin-left: auto;
     max-width: 450px;
-    background: #faf9fc;
+
+    background: #f4f1ff;
+
     border-radius: 12px;
     padding: 20px;
-    border: 1px solid #ece7f0;
-}
 
+    border: 1px solid #e9e5ff;
+}
 
 .bill-row {
     display: flex;
     justify-content: space-between;
-    padding: 9px 0;
-    color: #636e72;
-}
 
+    padding: 9px 0;
+
+    color: #777777;
+}
 
 .bill-row strong {
-    color: #34495e;
+    color: #4b3ca7;
 }
-
 
 .bill-divider {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #ddd8f2;
     margin: 10px 0;
 }
-
 
 .bill-total {
     display: flex;
@@ -377,19 +405,16 @@ body {
     padding-top: 5px;
 }
 
-
 .bill-total span {
     font-weight: 700;
     font-size: 16px;
-    color: #2c3e50;
+    color: #4b3ca7;
 }
-
 
 .bill-total strong {
     font-size: 20px;
-    color: #8e44ad;
+    color: #6a5acd;
 }
-
 
 /* =========================================================
    ACTION BUTTONS
@@ -402,45 +427,66 @@ body {
     margin-top: 10px;
 }
 
-
 .cancel-btn,
 .submit-btn {
     border: none;
+
     padding: 13px 24px;
+
     border-radius: 9px;
+
     font-size: 14px;
     font-weight: 700;
-    cursor: pointer;
-}
 
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
 
 .cancel-btn {
     background: #ffffff;
-    border: 1px solid #dfe4ea;
-    color: #636e72;
-}
 
+    border: 1px solid #ddd8f2;
+
+    color: #777777;
+}
 
 .cancel-btn:hover {
-    background: #f1f2f6;
+    background: #f4f1ff;
+    color: #4b3ca7;
+    border-color: #cfc6ec;
 }
 
+/* Purple primary button */
 
 .submit-btn {
-    background: linear-gradient(
-        135deg,
-        #8e44ad,
-        #e67e22
-    );
-    color: white;
-    min-width: 190px;
-}
+    background: #6a5acd;
 
+    color: #ffffff;
+
+    min-width: 190px;
+
+    box-shadow: 0 4px 12px rgba(106, 90, 205, 0.18);
+}
 
 .submit-btn:hover {
-    opacity: 0.92;
+    background: #4b3ca7;
+    transform: translateY(-1px);
 }
 
+/* =========================================================
+   SMALL PURPLE DETAILS
+   ========================================================= */
+
+::selection {
+    background: #6a5acd;
+    color: #ffffff;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #aaa6b8;
+}
 
 /* =========================================================
    RESPONSIVE
@@ -452,47 +498,71 @@ body {
         width: 95%;
     }
 
-
     .page-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
     }
 
-
     .form-grid {
         grid-template-columns: 1fr;
     }
 
-
     .full-width {
         grid-column: auto;
     }
-
 
     .phone-search {
         flex-direction: column;
         align-items: stretch;
     }
 
-
     .check-btn {
         width: 100%;
     }
-
 
     .treatment-grid {
         grid-template-columns: 1fr;
     }
 
-
     .form-actions {
         flex-direction: column;
     }
 
-
     .cancel-btn,
     .submit-btn {
         width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .page-wrapper {
+        width: 94%;
+        margin-top: 20px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .page-title {
+        font-size: 25px;
+    }
+
+    .section-title h2 {
+        font-size: 17px;
+    }
+
+    .treatment-info {
+        gap: 10px;
+    }
+
+    .treatment-info strong {
+        font-size: 13px;
+    }
+
+    .treatment-info span {
+        font-size: 13px;
     }
 }
