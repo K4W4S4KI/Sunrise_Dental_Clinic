@@ -60,7 +60,7 @@
             Patients
         </a>
 
-        <a href="#">
+        <a href="${pageContext.request.contextPath}/manageAppointments">
             <i class="fa-solid fa-calendar-check"></i>
             Appointments
         </a>
