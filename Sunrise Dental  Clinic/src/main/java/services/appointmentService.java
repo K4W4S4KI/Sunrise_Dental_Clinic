@@ -1638,5 +1638,105 @@ private ArrayList<bill> loadBills(String keyword) {
 
  return billList;
 }
+
+//=========================================================
+//GET TOTAL APPOINTMENT COUNT
+//=========================================================
+public int getTotalAppointmentCount() {
+
+  String sql = "SELECT COUNT(*) FROM appointment_tb";
+
+  try (
+          Connection conn = DBConnect.getConnection();
+          PreparedStatement stmt = conn.prepareStatement(sql);
+          ResultSet rs = stmt.executeQuery()
+  ) {
+
+      if (rs.next()) {
+          return rs.getInt(1);
+      }
+
+  } catch (Exception e) {
+
+      System.out.println("ERROR counting appointments: " + e.getMessage());
+      e.printStackTrace();
+  }
+
+  return 0;
+}
+
+
+//=========================================================
+//GET TODAY'S APPOINTMENT COUNT
+//=========================================================
+public int getTodayAppointmentCount() {
+
+  String sql =
+          "SELECT COUNT(*) FROM appointment_tb " +
+          "WHERE DATE(appointment_datetime) = CURDATE()";
+
+  try (
+          Connection conn = DBConnect.getConnection();
+          PreparedStatement stmt = conn.prepareStatement(sql);
+          ResultSet rs = stmt.executeQuery()
+  ) {
+
+      if (rs.next()) {
+          return rs.getInt(1);
+      }
+
+  } catch (Exception e) {
+
+      System.out.println("ERROR counting today's appointments: " + e.getMessage());
+      e.printStackTrace();
+  }
+
+  return 0;
+}
+
+
+//=========================================================
+//GET TOTAL REVENUE (from Completed appointments only)
+//=========================================================
+public BigDecimal getTotalRevenue() {
+
+  String sql =
+          "SELECT COALESCE(SUM(at.treatment_price), 0) AS treatment_sum, " +
+          "COUNT(DISTINCT a.appointment_id) AS completed_count " +
+          "FROM appointment_tb a " +
+          "LEFT JOIN appointment_treatment_tb at " +
+          "ON at.appointment_id = a.appointment_id " +
+          "WHERE a.status = 'Completed'";
+
+  try (
+          Connection conn = DBConnect.getConnection();
+          PreparedStatement stmt = conn.prepareStatement(sql);
+          ResultSet rs = stmt.executeQuery()
+  ) {
+
+      if (rs.next()) {
+
+          BigDecimal treatmentSum = rs.getBigDecimal("treatment_sum");
+
+          if (treatmentSum == null) {
+              treatmentSum = BigDecimal.ZERO;
+          }
+
+          int completedCount = rs.getInt("completed_count");
+
+          BigDecimal consultationTotal =
+                  CONSULTATION_FEE.multiply(new BigDecimal(completedCount));
+
+          return treatmentSum.add(consultationTotal);
+      }
+
+  } catch (Exception e) {
+
+      System.out.println("ERROR calculating total revenue: " + e.getMessage());
+      e.printStackTrace();
+  }
+
+  return BigDecimal.ZERO;
+}
 }
 

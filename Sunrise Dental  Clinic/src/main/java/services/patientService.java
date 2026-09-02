@@ -394,4 +394,33 @@ public class patientService {
             return false;
         }
     }
+    
+ // =========================================================
+ // GET TOTAL PATIENT COUNT
+ // =========================================================
+
+ public int getTotalPatientCount() {
+
+     String sql = "SELECT COUNT(*) FROM patient_tb";
+
+     try (
+         Connection conn = DBConnect.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()
+     ) {
+
+         if (rs.next()) {
+             return rs.getInt(1);
+         }
+
+     } catch (Exception e) {
+
+         System.out.println("GET TOTAL PATIENT COUNT ERROR: "
+                 + e.getMessage());
+
+         e.printStackTrace();
+     }
+
+     return 0;
+ }
 }

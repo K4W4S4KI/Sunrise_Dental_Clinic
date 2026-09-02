@@ -2,9 +2,28 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ page import="java.math.BigDecimal" %>
+
 <%
     if (session.getAttribute("loggedInAdmin") == null) {
         response.sendRedirect(request.getContextPath() + "/adlogin.jsp");
+        return;
+    }
+
+    Integer totalPatients =
+            (Integer) request.getAttribute("totalPatients");
+
+    Integer totalAppointments =
+            (Integer) request.getAttribute("totalAppointments");
+
+    Integer todayAppointments =
+            (Integer) request.getAttribute("todayAppointments");
+
+    BigDecimal totalRevenue =
+            (BigDecimal) request.getAttribute("totalRevenue");
+
+    if (totalPatients == null) {
+        response.sendRedirect(request.getContextPath() + "/dashboard");
         return;
     }
 %>
@@ -49,7 +68,7 @@
 
     <nav class="navigation">
 
-        <a href="${pageContext.request.contextPath}/adminhomes.jsp"
+        <a href="${pageContext.request.contextPath}/dashboard"
            class="active">
             <i class="fa-solid fa-chart-line"></i>
             Dashboard
@@ -60,17 +79,17 @@
             Patients
         </a>
 
-        <a href="${pageContext.request.contextPath}/adappointments.jsp">
+        <a href="${pageContext.request.contextPath}/manageAppointments">
             <i class="fa-solid fa-calendar-check"></i>
             Appointments
         </a>
 
-                <a href="${pageContext.request.contextPath}/adbilling.jsp">
+                <a href="${pageContext.request.contextPath}/manageBilling">
             <i class="fa-solid fa-file-invoice-dollar"></i>
             Billing
         </a>
 
-        <a href="${pageContext.request.contextPath}/helpsupport.jsp">
+        <a href="${pageContext.request.contextPath}/helpSupport">
             <i class="fa-solid fa-headphones"></i>
             Help & Support
         </a>
@@ -162,7 +181,7 @@
 
         </div>
 
-        <a href="#" class="primary-btn">
+        <a href="${pageContext.request.contextPath}/addappointment" class="primary-btn">
             <i class="fa-solid fa-calendar-plus"></i>
             New Appointment
         </a>
@@ -185,7 +204,7 @@
 
                 <span>Total Patients</span>
 
-                <strong>--</strong>
+                <strong><%= totalPatients %></strong>
 
                 <small>
                     Registered patients
@@ -206,7 +225,7 @@
 
                 <span>Total Appointments</span>
 
-                <strong>--</strong>
+                <strong><%= totalAppointments %></strong>
 
                 <small>
                     Scheduled appointments
@@ -227,7 +246,7 @@
 
                 <span>Today's Appointments</span>
 
-                <strong>--</strong>
+                <strong><%= todayAppointments %></strong>
 
                 <small>
                     Appointments today
@@ -248,7 +267,7 @@
 
                 <span>Total Revenue</span>
 
-                <strong>Rs. 0.00</strong>
+                <strong>Rs. <%= String.format("%,.2f", totalRevenue) %></strong>
 
                 <small>
                     Completed appointments
@@ -305,7 +324,7 @@
             </a>
 
 
-            <a href="#"
+            <a href="${pageContext.request.contextPath}/addappointment"
                class="quick-item">
 
                 <div class="quick-icon">
@@ -327,7 +346,7 @@
             </a>
 
 
-            <a href="#"
+            <a href="${pageContext.request.contextPath}/manageAppointments"
                class="quick-item">
 
                 <div class="quick-icon">
@@ -349,7 +368,7 @@
             </a>
 
 
-            <a href="#"
+            <a href="${pageContext.request.contextPath}/manageBilling"
                class="quick-item">
 
                 <div class="quick-icon">
