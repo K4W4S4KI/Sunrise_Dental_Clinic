@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import model.bill;
 
 public class appointmentService {
 
@@ -1529,6 +1530,113 @@ public boolean updateAppointmentStatus(int appointmentId, String status) {
       e.printStackTrace();
       return false;
   }
+}
+
+//=========================================================
+//GET ALL BILLS
+//=========================================================
+public ArrayList<bill> getAllBills() {
+ return loadBills(null);
+}
+
+
+//=========================================================
+//SEARCH BILLS
+//=========================================================
+public ArrayList<bill> searchBills(String keyword) {
+ return loadBills(keyword);
+}
+
+
+//=========================================================
+//LOAD BILLS (shared by getAllBills / searchBills)
+//One row per appointment, with treatment total aggregated
+//from appointment_treatment_tb
+//=========================================================
+private ArrayList<bill> loadBills(String keyword) {
+
+ ArrayList<bill> billList = new ArrayList<>();
+
+ boolean hasKeyword =
+         keyword != null && !keyword.trim().isEmpty();
+
+ StringBuilder sql = new StringBuilder();
+
+ sql.append("SELECT a.appointment_id, a.appointment_number, ");
+ sql.append("a.p_id, a.p_name, a.address, a.c_number, a.gender, ");
+ sql.append("a.d_id, d.dentist_name, a.appointment_datetime, a.status, ");
+ sql.append("COALESCE(SUM(at.treatment_price), 0) AS treatment_total ");
+ sql.append("FROM appointment_tb a ");
+ sql.append("JOIN dentist_tb d ON a.d_id = d.dentist_id ");
+ sql.append("LEFT JOIN appointment_treatment_tb at ");
+ sql.append("ON at.appointment_id = a.appointment_id ");
+
+ if (hasKeyword) {
+     sql.append("WHERE a.appointment_number LIKE ? ");
+     sql.append("OR a.p_name LIKE ? ");
+     sql.append("OR a.c_number LIKE ? ");
+ }
+
+ sql.append("GROUP BY a.appointment_id ");
+ sql.append("ORDER BY a.appointment_datetime DESC");
+
+ try (
+         Connection conn = DBConnect.getConnection();
+         PreparedStatement stmt =
+                 conn.prepareStatement(sql.toString())
+ ) {
+
+     if (hasKeyword) {
+
+         String search = "%" + keyword.trim() + "%";
+
+         stmt.setString(1, search);
+         stmt.setString(2, search);
+         stmt.setString(3, search);
+     }
+
+     try (ResultSet rs = stmt.executeQuery()) {
+
+         while (rs.next()) {
+
+             bill b = new bill();
+
+             b.setAppointment_id(rs.getInt("appointment_id"));
+             b.setAppointment_number(rs.getString("appointment_number"));
+             b.setP_id(rs.getInt("p_id"));
+             b.setP_name(rs.getString("p_name"));
+             b.setAddress(rs.getString("address"));
+             b.setC_number(rs.getString("c_number"));
+             b.setGender(rs.getString("gender"));
+             b.setD_id(rs.getInt("d_id"));
+             b.setDentist_name(rs.getString("dentist_name"));
+             b.setAppointment_datetime(
+                     rs.getTimestamp("appointment_datetime")
+             );
+             b.setStatus(rs.getString("status"));
+
+             BigDecimal treatmentTotal =
+                     rs.getBigDecimal("treatment_total");
+
+             if (treatmentTotal == null) {
+                 treatmentTotal = BigDecimal.ZERO;
+             }
+
+             b.setTreatment_total(treatmentTotal);
+             b.setConsultation_fee(CONSULTATION_FEE);
+             b.setGrand_total(treatmentTotal.add(CONSULTATION_FEE));
+
+             billList.add(b);
+         }
+     }
+
+ } catch (Exception e) {
+
+     System.out.println("ERROR loading bills: " + e.getMessage());
+     e.printStackTrace();
+ }
+
+ return billList;
 }
 }
 
