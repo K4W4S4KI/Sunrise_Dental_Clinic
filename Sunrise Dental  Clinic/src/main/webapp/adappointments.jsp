@@ -434,7 +434,7 @@
 
                 <!-- NEW APPOINTMENT -->
 
-                <a href="${pageContext.request.contextPath}/addappointment.jsp"
+                <a href="${pageContext.request.contextPath}/addappointment"
                    class="add-btn">
 
                     <i class="fa-solid fa-calendar-plus"></i>

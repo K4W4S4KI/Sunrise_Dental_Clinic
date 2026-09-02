@@ -836,60 +836,134 @@ public class appointmentService {
     }
 
 
-    // =========================================================
-    // DELETE APPOINTMENT
-    // =========================================================
+ // =========================================================
+ // DELETE APPOINTMENT
+ // (also deletes linked treatment rows to satisfy the
+ // foreign key on appointment_treatment_tb)
+ // =========================================================
 
-    public boolean deleteAppointment(
-            int appointmentId) {
+ public boolean deleteAppointment(
+         int appointmentId) {
 
-        String sql =
-                "DELETE FROM appointment_tb " +
-                "WHERE appointment_id = ?";
+     Connection conn = null;
 
-        Connection conn = null;
+     String deleteTreatmentsSql =
+             "DELETE FROM appointment_treatment_tb " +
+             "WHERE appointment_id = ?";
 
-        try {
+     String deleteAppointmentSql =
+             "DELETE FROM appointment_tb " +
+             "WHERE appointment_id = ?";
 
-            conn = DBConnect.getConnection();
+     try {
 
-            try (
-                    PreparedStatement stmt =
-                            conn.prepareStatement(sql)
-            ) {
+         conn = DBConnect.getConnection();
 
-                stmt.setInt(
-                        1,
-                        appointmentId
-                );
+         conn.setAutoCommit(false);
 
-                int rows =
-                        stmt.executeUpdate();
 
-                if (rows > 0) {
+         // -------------------------------------------------
+         // DELETE CHILD TREATMENT ROWS FIRST
+         // -------------------------------------------------
 
-                    System.out.println(
-                            "Appointment deleted successfully. "
-                            + "ID: "
-                            + appointmentId
-                    );
+         try (
+                 PreparedStatement treatmentStmt =
+                         conn.prepareStatement(
+                                 deleteTreatmentsSql
+                         )
+         ) {
 
-                    return true;
-                }
-            }
+             treatmentStmt.setInt(
+                     1,
+                     appointmentId
+             );
 
-        } catch (Exception e) {
+             treatmentStmt.executeUpdate();
+         }
 
-            System.out.println(
-                    "ERROR deleting appointment: "
-                    + e.getMessage()
-            );
 
-            e.printStackTrace();
-        }
+         // -------------------------------------------------
+         // DELETE THE APPOINTMENT ITSELF
+         // -------------------------------------------------
 
-        return false;
-    }
+         int rows;
+
+         try (
+                 PreparedStatement appointmentStmt =
+                         conn.prepareStatement(
+                                 deleteAppointmentSql
+                         )
+         ) {
+
+             appointmentStmt.setInt(
+                     1,
+                     appointmentId
+             );
+
+             rows = appointmentStmt.executeUpdate();
+         }
+
+
+         if (rows > 0) {
+
+             conn.commit();
+
+             System.out.println(
+                     "Appointment deleted successfully. "
+                     + "ID: "
+                     + appointmentId
+             );
+
+             return true;
+
+         } else {
+
+             conn.rollback();
+
+             System.out.println(
+                     "Appointment not found for deletion. "
+                     + "ID: "
+                     + appointmentId
+             );
+
+             return false;
+         }
+
+     } catch (Exception e) {
+
+         System.out.println(
+                 "ERROR deleting appointment: "
+                 + e.getMessage()
+         );
+
+         e.printStackTrace();
+
+         if (conn != null) {
+
+             try {
+                 conn.rollback();
+             } catch (Exception ex) {
+                 ex.printStackTrace();
+             }
+         }
+
+         return false;
+
+     } finally {
+
+         if (conn != null) {
+
+             try {
+
+                 conn.setAutoCommit(true);
+                 conn.close();
+
+             } catch (Exception ex) {
+                 ex.printStackTrace();
+             }
+         }
+     }
+ }
 
 
     // =========================================================
