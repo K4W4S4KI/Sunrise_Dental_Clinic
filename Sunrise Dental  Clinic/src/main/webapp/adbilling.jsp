@@ -94,15 +94,15 @@
             Appointments
         </a>
 
-        <a href="#">
-            <i class="fa-solid fa-user-doctor"></i>
-            Doctors
-        </a>
-
-        <a href="${pageContext.request.contextPath}/manageBilling"
-           class="active">
+        <a href="${pageContext.request.contextPath}/adbilling.jsp"
+        class="active">
             <i class="fa-solid fa-file-invoice-dollar"></i>
             Billing
+        </a>
+
+        <a href="#">
+            <i class="fa-solid fa-headphones"></i>
+            Help & Support
         </a>
 
     </nav>
@@ -389,6 +389,7 @@
                                    title="View Appointment">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
+                                
 
                                 <a href="${pageContext.request.contextPath}/printBill?id=<%= b.getAppointment_id() %>"
                                    class="action-btn edit-btn"

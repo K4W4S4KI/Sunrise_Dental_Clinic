@@ -12,27 +12,41 @@
     ========================================================= */
 
     if (session.getAttribute("loggedInAdmin") == null) {
+
         response.sendRedirect(
             request.getContextPath() + "/adminlogin.jsp"
         );
+
         return;
     }
+
+
+    /* =========================================================
+       GET APPOINTMENT DATA
+    ========================================================= */
 
     List<appointment> appointments =
         (List<appointment>) request.getAttribute("appointments");
 
+
     /* =========================================================
-       GUARD: if this page was opened directly (not forwarded
-       by the manageAppointments servlet), "appointments" will
-       be null. Redirect to the servlet so the data loads.
+       GUARD
+       If page is opened directly, redirect to servlet
     ========================================================= */
 
     if (appointments == null) {
+
         response.sendRedirect(
             request.getContextPath() + "/manageAppointments"
         );
+
         return;
     }
+
+
+    /* =========================================================
+       DATE AND TIME FORMAT
+    ========================================================= */
 
     SimpleDateFormat dateFormat =
         new SimpleDateFormat("dd MMM yyyy");
@@ -40,11 +54,19 @@
     SimpleDateFormat timeFormat =
         new SimpleDateFormat("hh:mm a");
 
+
+    /* =========================================================
+       TOTAL APPOINTMENTS
+    ========================================================= */
+
     int totalAppointments =
         appointments != null ? appointments.size() : 0;
+
 %>
 
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -54,16 +76,28 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Appointments | Sunrise Dental Clinic</title>
+    <title>
+        Appointments | Sunrise Dental Clinic
+    </title>
+
+
+    <!-- =====================================================
+         CSS
+    ====================================================== -->
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/CSS/adappointments.css">
 
-    <!-- Font Awesome -->
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
+
 
 <body>
 
@@ -74,28 +108,42 @@
 
 <header class="top-navbar">
 
+
     <!-- BRAND -->
 
     <div class="brand">
 
         <div class="brand-icon">
+
             <i class="fa-solid fa-tooth"></i>
+
         </div>
+
 
         <div class="brand-text">
 
-            <h2>Sunrise Dental</h2>
+            <h2>
+                Sunrise Dental
+            </h2>
 
-            <span>Clinic Management</span>
+            <span>
+                Clinic Management
+            </span>
 
         </div>
 
     </div>
 
 
-    <!-- NAVIGATION -->
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
 
     <nav class="navigation">
+
+
+        <!-- DASHBOARD -->
 
         <a href="${pageContext.request.contextPath}/adminhomes.jsp">
 
@@ -106,6 +154,9 @@
         </a>
 
 
+
+        <!-- PATIENTS -->
+
         <a href="${pageContext.request.contextPath}/managePatients">
 
             <i class="fa-solid fa-user-group"></i>
@@ -114,6 +165,9 @@
 
         </a>
 
+
+
+        <!-- APPOINTMENTS -->
 
         <a href="${pageContext.request.contextPath}/manageAppointments"
            class="active">
@@ -125,16 +179,10 @@
         </a>
 
 
-        <a href="#">
 
-            <i class="fa-solid fa-user-doctor"></i>
+        <!-- BILLING -->
 
-            Doctors
-
-        </a>
-
-
-        <a href="#">
+        <a href="${pageContext.request.contextPath}/adbilling.jsp">
 
             <i class="fa-solid fa-file-invoice-dollar"></i>
 
@@ -142,12 +190,28 @@
 
         </a>
 
+
+
+        <!-- HELP -->
+
+        <a href="#">
+
+            <i class="fa-solid fa-headphones"></i>
+
+            Help & Support
+
+        </a>
+
     </nav>
 
 
-    <!-- ADMIN AREA -->
+
+    <!-- =====================================================
+         ADMIN AREA
+    ====================================================== -->
 
     <div class="admin-area">
+
 
         <div class="admin-icon">
 
@@ -159,10 +223,14 @@
         <div class="admin-details">
 
             <strong>
+
                 <%= session.getAttribute("loggedInAdmin") %>
+
             </strong>
 
-            <span>Administrator</span>
+            <span>
+                Administrator
+            </span>
 
         </div>
 
@@ -194,22 +262,37 @@
 
     <section class="page-header">
 
+
         <div>
 
             <span class="page-label">
+
                 APPOINTMENT MANAGEMENT
+
             </span>
 
-            <h1>Appointments</h1>
+
+            <h1>
+
+                Appointments
+
+            </h1>
+
 
             <p>
+
                 View, manage and monitor all patient appointments.
+
             </p>
 
         </div>
 
 
+
+        <!-- ADMIN INFORMATION -->
+
         <div class="header-user">
+
 
             <div class="header-user-icon">
 
@@ -220,10 +303,14 @@
 
             <div>
 
-                <span>Welcome back</span>
+                <span>
+                    Welcome back
+                </span>
 
                 <strong>
+
                     <%= session.getAttribute("loggedInAdmin") %>
+
                 </strong>
 
             </div>
@@ -235,7 +322,7 @@
 
 
     <!-- =====================================================
-         SUCCESS / ERROR MESSAGES
+         SUCCESS MESSAGE
     ====================================================== -->
 
     <% if (request.getAttribute("successMessage") != null) { %>
@@ -244,9 +331,13 @@
 
             <i class="fa-solid fa-circle-check"></i>
 
+
             <span>
+
                 <%= request.getAttribute("successMessage") %>
+
             </span>
+
 
             <button type="button"
                     onclick="this.parentElement.remove()">
@@ -260,15 +351,24 @@
     <% } %>
 
 
+
+    <!-- =====================================================
+         ERROR MESSAGE
+    ====================================================== -->
+
     <% if (request.getAttribute("errorMessage") != null) { %>
 
         <div class="alert error-alert">
 
             <i class="fa-solid fa-circle-exclamation"></i>
 
+
             <span>
+
                 <%= request.getAttribute("errorMessage") %>
+
             </span>
+
 
             <button type="button"
                     onclick="this.parentElement.remove()">
@@ -290,7 +390,10 @@
     <section class="summary-grid">
 
 
+        <!-- TOTAL APPOINTMENTS -->
+
         <div class="summary-card">
+
 
             <div class="summary-icon">
 
@@ -298,16 +401,25 @@
 
             </div>
 
+
             <div class="summary-content">
 
-                <span>Total Appointments</span>
+                <span>
+                    Total Appointments
+                </span>
+
 
                 <strong>
+
                     <%= totalAppointments %>
+
                 </strong>
 
+
                 <small>
+
                     Registered appointments
+
                 </small>
 
             </div>
@@ -315,7 +427,11 @@
         </div>
 
 
+
+        <!-- APPOINTMENT STATUS -->
+
         <div class="summary-card">
+
 
             <div class="summary-icon">
 
@@ -323,14 +439,23 @@
 
             </div>
 
+
             <div class="summary-content">
 
-                <span>Appointment Status</span>
+                <span>
+                    Appointment Status
+                </span>
 
-                <strong>Active</strong>
+
+                <strong>
+                    Active
+                </strong>
+
 
                 <small>
+
                     Clinic scheduling system
+
                 </small>
 
             </div>
@@ -338,7 +463,11 @@
         </div>
 
 
+
+        <!-- DENTAL SERVICES -->
+
         <div class="summary-card">
+
 
             <div class="summary-icon">
 
@@ -346,14 +475,23 @@
 
             </div>
 
+
             <div class="summary-content">
 
-                <span>Dental Services</span>
+                <span>
+                    Dental Services
+                </span>
 
-                <strong>Available</strong>
+
+                <strong>
+                    Available
+                </strong>
+
 
                 <small>
+
                     Dentist appointment management
+
                 </small>
 
             </div>
@@ -361,7 +499,11 @@
         </div>
 
 
+
+        <!-- SYSTEM STATUS -->
+
         <div class="summary-card">
+
 
             <div class="summary-icon">
 
@@ -369,14 +511,23 @@
 
             </div>
 
+
             <div class="summary-content">
 
-                <span>System Status</span>
+                <span>
+                    System Status
+                </span>
 
-                <strong>Active</strong>
+
+                <strong>
+                    Active
+                </strong>
+
 
                 <small>
+
                     Secure clinic management
+
                 </small>
 
             </div>
@@ -394,29 +545,45 @@
     <section class="content-card">
 
 
-        <!-- TABLE HEADER -->
+        <!-- =================================================
+             TABLE HEADER
+        ================================================== -->
 
         <div class="table-header">
 
+
             <div class="section-heading">
 
+
                 <span class="section-label">
+
                     APPOINTMENT RECORDS
+
                 </span>
 
+
                 <h2>
+
                     Manage Appointments
+
                 </h2>
 
+
                 <p>
+
                     Review patient appointment details and
                     perform management actions.
+
                 </p>
 
             </div>
 
 
+
+            <!-- HEADER ACTIONS -->
+
             <div class="header-actions">
+
 
                 <!-- SEARCH -->
 
@@ -424,12 +591,14 @@
 
                     <i class="fa-solid fa-magnifying-glass"></i>
 
+
                     <input type="text"
                            id="appointmentSearch"
                            placeholder="Search appointments..."
                            onkeyup="searchAppointments()">
 
                 </div>
+
 
 
                 <!-- NEW APPOINTMENT -->
@@ -450,37 +619,56 @@
 
 
         <!-- =================================================
-             TABLE
+             APPOINTMENT TABLE
         ================================================== -->
 
         <div class="table-container">
 
+
             <table class="appointment-table"
                    id="appointmentTable">
+
 
                 <thead>
 
                     <tr>
 
-                        <th>#</th>
+                        <th>
+                            #
+                        </th>
 
-                        <th>Appointment</th>
+                        <th>
+                            Appointment
+                        </th>
 
-                        <th>Patient</th>
+                        <th>
+                            Patient
+                        </th>
 
-                        <th>Contact</th>
+                        <th>
+                            Contact
+                        </th>
 
-                        <th>Dentist</th>
+                        <th>
+                            Dentist
+                        </th>
 
-                        <th>Date & Time</th>
+                        <th>
+                            Date & Time
+                        </th>
 
-                        <th>Status</th>
+                        <th>
+                            Status
+                        </th>
 
-                        <th>Actions</th>
+                        <th>
+                            Actions
+                        </th>
 
                     </tr>
 
                 </thead>
+
 
 
                 <tbody>
@@ -491,31 +679,41 @@
 
 
                     <%
+
                         int rowNumber = 1;
 
                         for (appointment appt : appointments) {
+
                     %>
 
 
                     <tr>
 
 
-                        <!-- NUMBER -->
+                        <!-- =================================================
+                             ROW NUMBER
+                        ================================================== -->
 
                         <td>
 
                             <span class="row-number">
+
                                 <%= rowNumber++ %>
+
                             </span>
 
                         </td>
 
 
-                        <!-- APPOINTMENT NUMBER -->
+
+                        <!-- =================================================
+                             APPOINTMENT NUMBER
+                        ================================================== -->
 
                         <td>
 
                             <div class="appointment-number">
+
 
                                 <div class="appointment-icon">
 
@@ -523,14 +721,21 @@
 
                                 </div>
 
+
                                 <div>
 
                                     <strong>
+
                                         <%= appt.getAppointment_number() %>
+
                                     </strong>
 
+
                                     <small>
-                                        ID: <%= appt.getAppointment_id() %>
+
+                                        ID:
+                                        <%= appt.getAppointment_id() %>
+
                                     </small>
 
                                 </div>
@@ -540,11 +745,15 @@
                         </td>
 
 
-                        <!-- PATIENT -->
+
+                        <!-- =================================================
+                             PATIENT
+                        ================================================== -->
 
                         <td>
 
                             <div class="patient-info">
+
 
                                 <div class="patient-avatar">
 
@@ -552,14 +761,21 @@
 
                                 </div>
 
+
                                 <div>
 
                                     <strong>
+
                                         <%= appt.getP_name() %>
+
                                     </strong>
 
+
                                     <small>
-                                        Patient #<%= appt.getP_id() %>
+
+                                        Patient #
+                                        <%= appt.getP_id() %>
+
                                     </small>
 
                                 </div>
@@ -569,16 +785,23 @@
                         </td>
 
 
-                        <!-- CONTACT -->
+
+                        <!-- =================================================
+                             CONTACT
+                        ================================================== -->
 
                         <td>
 
                             <div class="contact-info">
 
+
                                 <i class="fa-solid fa-phone"></i>
 
+
                                 <span>
+
                                     <%= appt.getC_number() %>
+
                                 </span>
 
                             </div>
@@ -586,11 +809,15 @@
                         </td>
 
 
-                        <!-- DENTIST -->
+
+                        <!-- =================================================
+                             DENTIST
+                        ================================================== -->
 
                         <td>
 
                             <div class="dentist-info">
+
 
                                 <div class="dentist-icon">
 
@@ -598,8 +825,12 @@
 
                                 </div>
 
+
                                 <span>
-                                    Dentist #<%= appt.getD_id() %>
+
+                                    Dentist #
+                                    <%= appt.getD_id() %>
+
                                 </span>
 
                             </div>
@@ -607,17 +838,23 @@
                         </td>
 
 
-                        <!-- DATE & TIME -->
+
+                        <!-- =================================================
+                             DATE & TIME
+                        ================================================== -->
 
                         <td>
 
                             <div class="datetime-info">
 
+
                                 <strong>
 
                                     <%
+
                                         if (appt.getAppointment_datetime()
                                                 != null) {
+
                                     %>
 
                                         <%= dateFormat.format(
@@ -625,7 +862,9 @@
                                         ) %>
 
                                     <%
+
                                         }
+
                                     %>
 
                                 </strong>
@@ -633,19 +872,27 @@
 
                                 <span>
 
+
                                     <%
+
                                         if (appt.getAppointment_datetime()
                                                 != null) {
+
                                     %>
 
+
                                         <i class="fa-regular fa-clock"></i>
+
 
                                         <%= timeFormat.format(
                                             appt.getAppointment_datetime()
                                         ) %>
 
+
                                     <%
+
                                         }
+
                                     %>
 
                                 </span>
@@ -655,46 +902,64 @@
                         </td>
 
 
-                        <!-- STATUS -->
+
+                        <!-- =================================================
+                             STATUS
+                        ================================================== -->
 
                         <td>
 
+
                             <%
+
                                 String status = appt.getStatus();
 
                                 String statusClass = "pending";
+
 
                                 if ("Completed".equalsIgnoreCase(status)) {
 
                                     statusClass = "completed";
 
-                                } else if ("Cancelled"
+                                }
+
+                                else if ("Cancelled"
                                             .equalsIgnoreCase(status)) {
 
                                     statusClass = "cancelled";
 
-                                } else if ("Confirmed"
+                                }
+
+                                else if ("Confirmed"
                                             .equalsIgnoreCase(status)) {
 
                                     statusClass = "confirmed";
+
                                 }
+
                             %>
 
 
                             <span class="status-badge <%= statusClass %>">
 
+
                                 <i class="fa-solid fa-circle"></i>
+
 
                                 <%= status != null
                                     ? status
                                     : "Pending" %>
+
 
                             </span>
 
                         </td>
 
 
-                        <!-- ACTIONS -->
+
+                        <!-- =================================================
+                             ACTIONS
+                        ================================================== -->
 
                         <td>
 
@@ -712,6 +977,7 @@
                                 </a>
 
 
+
                                 <!-- EDIT -->
 
                                 <a href="${pageContext.request.contextPath}/editAppointment?id=<%= appt.getAppointment_id() %>"
@@ -723,16 +989,23 @@
                                 </a>
 
 
-                                <!-- DELETE -->
 
-                                <a href="${pageContext.request.contextPath}/manageAppointments?action=delete&id=<%= appt.getAppointment_id() %>"
-                                   class="action-btn delete-btn"
-                                   title="Delete Appointment"
-                                   onclick="return confirmDelete('<%= appt.getAppointment_number() %>');">
+                                <!-- =================================================
+                                     DELETE
+                                ================================================== -->
+
+                                <button type="button"
+                                        class="action-btn delete-btn"
+                                        title="Delete Appointment"
+                                        onclick="deleteAppointment(
+                                            <%= appt.getAppointment_id() %>,
+                                            '<%= appt.getAppointment_number() %>'
+                                        )">
 
                                     <i class="fa-solid fa-trash"></i>
 
-                                </a>
+                                </button>
+
 
                             </div>
 
@@ -743,20 +1016,26 @@
 
 
                     <%
+
                         }
+
                     %>
 
 
                 <% } else { %>
 
 
-                    <!-- EMPTY STATE -->
+                    <!-- =================================================
+                         EMPTY STATE
+                    ================================================== -->
 
                     <tr>
 
                         <td colspan="8">
 
+
                             <div class="empty-state">
+
 
                                 <div class="empty-icon">
 
@@ -764,14 +1043,21 @@
 
                                 </div>
 
+
                                 <h3>
+
                                     No Appointments Found
+
                                 </h3>
 
+
                                 <p>
+
                                     There are currently no appointment
                                     records in the system.
+
                                 </p>
+
 
                                 <a href="${pageContext.request.contextPath}/addappointment"
                                    class="empty-btn">
@@ -782,7 +1068,9 @@
 
                                 </a>
 
+
                             </div>
+
 
                         </td>
 
@@ -799,16 +1087,24 @@
         </div>
 
 
-        <!-- TABLE FOOTER -->
+
+        <!-- =================================================
+             TABLE FOOTER
+        ================================================== -->
 
         <div class="table-footer">
+
 
             <span>
 
                 Showing
+
                 <strong id="visibleCount">
+
                     <%= totalAppointments %>
+
                 </strong>
+
                 appointment(s)
 
             </span>
@@ -834,6 +1130,7 @@
 
     <section class="clinic-card">
 
+
         <div class="clinic-card-icon">
 
             <i class="fa-solid fa-tooth"></i>
@@ -843,13 +1140,19 @@
 
         <div class="clinic-card-text">
 
+
             <h3>
+
                 Sunrise Dental Clinic
+
             </h3>
 
+
             <p>
+
                 Efficient appointment scheduling and
                 patient-focused dental care management.
+
             </p>
 
         </div>
@@ -873,13 +1176,21 @@
 
     <footer>
 
-        <span>
-            © 2026 Sunrise Dental Clinic. All Rights Reserved.
-        </span>
 
         <span>
-            Clinic Management System
+
+            © 2026 Sunrise Dental Clinic.
+            All Rights Reserved.
+
         </span>
+
+
+        <span>
+
+            Clinic Management System
+
+        </span>
+
 
     </footer>
 
@@ -889,10 +1200,97 @@
 
 
 <!-- =========================================================
+     DELETE APPOINTMENT CONFIRMATION MODAL
+========================================================= -->
+
+<div id="deleteModal"
+     class="modal-overlay">
+
+
+    <div class="delete-modal">
+
+
+        <!-- DELETE ICON -->
+
+        <div class="delete-icon">
+
+            <i class="fa-solid fa-trash"></i>
+
+        </div>
+
+
+
+        <!-- TITLE -->
+
+        <h2>
+
+            Delete Appointment?
+
+        </h2>
+
+
+
+        <!-- MESSAGE -->
+
+        <p>
+
+            Are you sure you want to delete appointment
+
+            <strong id="appointmentNumber"></strong>?
+
+            This action cannot be undone.
+
+        </p>
+
+
+
+        <!-- MODAL BUTTONS -->
+
+        <div class="modal-buttons">
+
+
+            <!-- CANCEL -->
+
+            <button type="button"
+                    onclick="closeModal()"
+                    class="cancel-btn">
+
+                Cancel
+
+            </button>
+
+
+
+            <!-- DELETE -->
+
+            <a id="deleteLink"
+               href="#"
+               class="confirm-btn">
+
+                Delete
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
      JAVASCRIPT
 ========================================================= -->
 
 <script>
+
+
+/* =========================================================
+   SEARCH APPOINTMENTS
+========================================================= */
 
 function searchAppointments() {
 
@@ -905,20 +1303,32 @@ function searchAppointments() {
     const table =
         document.getElementById("appointmentTable");
 
+    const tbody =
+        table.getElementsByTagName("tbody")[0];
+
     const rows =
-        table.getElementsByTagName("tbody")[0]
-             .getElementsByTagName("tr");
+        tbody.getElementsByTagName("tr");
+
 
     let visible = 0;
 
 
     for (let i = 0; i < rows.length; i++) {
 
+
         const row = rows[i];
 
+
+        /*
+         * Ignore empty-state row
+         */
+
         if (row.cells.length < 8) {
+
             continue;
+
         }
+
 
         const text =
             row.textContent.toLowerCase();
@@ -930,7 +1340,9 @@ function searchAppointments() {
 
             visible++;
 
-        } else {
+        }
+
+        else {
 
             row.style.display = "none";
 
@@ -945,18 +1357,94 @@ function searchAppointments() {
 }
 
 
-function confirmDelete(appointmentNumber) {
 
-    return confirm(
-        "Are you sure you want to delete appointment "
-        + appointmentNumber
-        + "?"
-    );
+/* =========================================================
+   OPEN DELETE APPOINTMENT MODAL
+========================================================= */
+
+function deleteAppointment(id, appointmentNumber) {
+
+
+    /*
+     * Display appointment number
+     */
+
+    document.getElementById("appointmentNumber")
+            .textContent = appointmentNumber;
+
+
+
+    /*
+     * Create delete URL
+     */
+
+    document.getElementById("deleteLink").href =
+        "<%= request.getContextPath() %>/manageAppointments?action=delete&id="
+        + id;
+
+
+
+    /*
+     * Show modal
+     */
+
+    document.getElementById("deleteModal")
+            .classList.add("show");
 
 }
+
+
+
+/* =========================================================
+   CLOSE DELETE MODAL
+========================================================= */
+
+function closeModal() {
+
+    document.getElementById("deleteModal")
+            .classList.remove("show");
+
+}
+
+
+
+/* =========================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+========================================================= */
+
+document.getElementById("deleteModal")
+        .addEventListener("click", function(event) {
+
+
+    if (event.target === this) {
+
+        closeModal();
+
+    }
+
+});
+
+
+
+/* =========================================================
+   CLOSE MODAL USING ESC KEY
+========================================================= */
+
+document.addEventListener("keydown", function(event) {
+
+
+    if (event.key === "Escape") {
+
+        closeModal();
+
+    }
+
+});
+
 
 </script>
 
 
 </body>
+
 </html>

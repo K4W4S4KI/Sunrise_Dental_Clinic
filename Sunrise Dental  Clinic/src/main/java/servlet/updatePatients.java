@@ -24,8 +24,9 @@ public class updatePatients extends HttpServlet {
         service = new patientService();
     }
 
+
     // =========================================================
-    // GET - LOAD PATIENT FOR EDIT
+    // GET - LOAD PATIENT
     // =========================================================
 
     @Override
@@ -36,7 +37,6 @@ public class updatePatients extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
-        // ADMIN LOGIN CHECK
         if (session == null ||
             session.getAttribute("loggedInAdmin") == null) {
 
@@ -46,7 +46,6 @@ public class updatePatients extends HttpServlet {
             return;
         }
 
-        // GET PATIENT ID
         String idParam = request.getParameter("id");
 
         if (idParam == null || idParam.trim().isEmpty()) {
@@ -81,7 +80,6 @@ public class updatePatients extends HttpServlet {
             return;
         }
 
-        // GET PATIENT
         patient pat = service.getPatientById(patientId);
 
         if (pat == null) {
@@ -97,11 +95,10 @@ public class updatePatients extends HttpServlet {
             return;
         }
 
-        // SEND PATIENT TO JSP
         request.setAttribute("patient", pat);
 
         request.getRequestDispatcher(
-            "ad_updatepatients.jsp"
+            "/ad_updatepatients.jsp"
         ).forward(request, response);
     }
 
@@ -120,7 +117,6 @@ public class updatePatients extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
-        // ADMIN LOGIN CHECK
         if (session == null ||
             session.getAttribute("loggedInAdmin") == null) {
 
@@ -130,10 +126,6 @@ public class updatePatients extends HttpServlet {
             return;
         }
 
-        // =====================================================
-        // GET FORM DATA
-        // =====================================================
-
         String idParam = request.getParameter("p_id");
         String patientName = request.getParameter("patient_name");
         String address = request.getParameter("address");
@@ -141,8 +133,9 @@ public class updatePatients extends HttpServlet {
         String gender = request.getParameter("gender");
         String status = request.getParameter("status");
 
+
         // =====================================================
-        // VALIDATE PATIENT ID
+        // PATIENT ID
         // =====================================================
 
         int patientId;
@@ -164,36 +157,32 @@ public class updatePatients extends HttpServlet {
             return;
         }
 
-        // =====================================================
-        // TRIM DATA
-        // =====================================================
-
-        if (patientName != null) {
-            patientName = patientName.trim();
-        }
-
-        if (address != null) {
-            address = address.trim();
-        }
-
-        if (contactNumber != null) {
-            contactNumber = contactNumber.trim();
-        }
-
-        if (gender != null) {
-            gender = gender.trim();
-        }
-
-        if (status != null) {
-            status = status.trim();
-        }
 
         // =====================================================
-        // PATIENT NAME VALIDATION
+        // TRIM
         // =====================================================
 
-        if (patientName == null ||
-            patientName.isEmpty()) {
+        patientName = patientName != null
+                ? patientName.trim() : "";
+
+        address = address != null
+                ? address.trim() : "";
+
+        contactNumber = contactNumber != null
+                ? contactNumber.trim() : "";
+
+        gender = gender != null
+                ? gender.trim() : "";
+
+        status = status != null
+                ? status.trim() : "Active";
+
+
+        // =====================================================
+        // VALIDATION
+        // =====================================================
+
+        if (patientName.isEmpty()) {
 
             session.setAttribute(
                 "error",
@@ -208,12 +197,8 @@ public class updatePatients extends HttpServlet {
             return;
         }
 
-        // =====================================================
-        // ADDRESS VALIDATION
-        // =====================================================
 
-        if (address == null ||
-            address.isEmpty()) {
+        if (address.isEmpty()) {
 
             session.setAttribute(
                 "error",
@@ -228,27 +213,7 @@ public class updatePatients extends HttpServlet {
             return;
         }
 
-        // =====================================================
-        // CONTACT NUMBER VALIDATION
-        // =====================================================
 
-        if (contactNumber == null ||
-            contactNumber.isEmpty()) {
-
-            session.setAttribute(
-                "error",
-                "Please enter the contact number."
-            );
-
-            response.sendRedirect(
-                request.getContextPath()
-                + "/updatePatients?id="
-                + patientId
-            );
-            return;
-        }
-
-        // SRI LANKAN PHONE NUMBER
         if (!contactNumber.matches("0[0-9]{9}")) {
 
             session.setAttribute(
@@ -264,12 +229,8 @@ public class updatePatients extends HttpServlet {
             return;
         }
 
-        // =====================================================
-        // GENDER VALIDATION
-        // =====================================================
 
-        if (gender == null ||
-            gender.isEmpty()) {
+        if (gender.isEmpty()) {
 
             session.setAttribute(
                 "error",
@@ -284,25 +245,16 @@ public class updatePatients extends HttpServlet {
             return;
         }
 
-        // =====================================================
-        // STATUS
-        // =====================================================
-
-        if (status == null ||
-            status.isEmpty()) {
-
-            status = "Active";
-        }
 
         // =====================================================
-        // CHECK DUPLICATE CONTACT NUMBER
+        // CHECK DUPLICATE CONTACT
         // =====================================================
 
-        patient existingPatient =
-                service.getPatientByContactNumber(contactNumber);
+        patient existing =
+            service.getPatientByContactNumber(contactNumber);
 
-        if (existingPatient != null &&
-            existingPatient.getP_id() != patientId) {
+        if (existing != null &&
+            existing.getP_id() != patientId) {
 
             session.setAttribute(
                 "error",
@@ -317,8 +269,9 @@ public class updatePatients extends HttpServlet {
             return;
         }
 
+
         // =====================================================
-        // CREATE PATIENT OBJECT
+        // CREATE PATIENT
         // =====================================================
 
         patient pat = new patient();
@@ -330,11 +283,14 @@ public class updatePatients extends HttpServlet {
         pat.setGender(gender);
         pat.setStatus(status);
 
+
         // =====================================================
-        // UPDATE DATABASE
+        // UPDATE
         // =====================================================
 
-        boolean success = service.updatePatient(pat);
+        boolean success =
+            service.updatePatient(pat);
+
 
         // =====================================================
         // RESULT

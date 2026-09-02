@@ -1,4 +1,3 @@
-
 package servlet;
 
 import java.io.IOException;
@@ -25,14 +24,15 @@ public class deletePatient extends HttpServlet {
     }
 
     @Override
-    protected void doGet(
-            HttpServletRequest request,
-            HttpServletResponse response)
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
 
-        // Admin login check
+        // ==========================================
+        // ADMIN LOGIN CHECK
+        // ==========================================
         if (session == null ||
             session.getAttribute("loggedInAdmin") == null) {
 
@@ -42,7 +42,9 @@ public class deletePatient extends HttpServlet {
             return;
         }
 
-        // Get patient ID
+        // ==========================================
+        // GET PATIENT ID
+        // ==========================================
         String id = request.getParameter("id");
 
         if (id == null || id.trim().isEmpty()) {
@@ -62,7 +64,7 @@ public class deletePatient extends HttpServlet {
 
         try {
 
-            patientId = Integer.parseInt(id);
+            patientId = Integer.parseInt(id.trim());
 
         } catch (NumberFormatException e) {
 
@@ -77,7 +79,25 @@ public class deletePatient extends HttpServlet {
             return;
         }
 
-        // Delete patient
+        // ==========================================
+        // CHECK WHETHER PATIENT EXISTS
+        // ==========================================
+        if (service.getPatientById(patientId) == null) {
+
+            session.setAttribute(
+                "error",
+                "Patient record not found."
+            );
+
+            response.sendRedirect(
+                request.getContextPath() + "/managePatients"
+            );
+            return;
+        }
+
+        // ==========================================
+        // DELETE PATIENT
+        // ==========================================
         boolean success = service.deletePatient(patientId);
 
         if (success) {
@@ -91,14 +111,15 @@ public class deletePatient extends HttpServlet {
 
             session.setAttribute(
                 "error",
-                "Unable to delete patient record."
+                "Unable to delete patient record. The patient may be linked to other records."
             );
         }
 
-        // Back to patient management
+        // ==========================================
+        // REDIRECT TO PATIENT LIST
+        // ==========================================
         response.sendRedirect(
             request.getContextPath() + "/managePatients"
         );
     }
 }
-

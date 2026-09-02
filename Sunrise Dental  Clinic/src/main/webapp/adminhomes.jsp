@@ -65,14 +65,14 @@
             Appointments
         </a>
 
-        <a href="#">
-            <i class="fa-solid fa-user-doctor"></i>
-            Doctors
+                <a href="${pageContext.request.contextPath}/adbilling.jsp">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            Billing
         </a>
 
         <a href="#">
-            <i class="fa-solid fa-file-invoice-dollar"></i>
-            Billing
+            <i class="fa-solid fa-headphones"></i>
+            Help & Support
         </a>
 
     </nav>

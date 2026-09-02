@@ -1,4 +1,3 @@
-
 package services;
 
 import controller.DBConnect;
@@ -20,15 +19,15 @@ public class patientService {
         ArrayList<patient> patientList = new ArrayList<>();
 
         String sql =
-                "SELECT p_id, p_name, address, " +
-                "c_number, gender, register_datetime, status " +
-                "FROM patient_tb " +
-                "ORDER BY p_id DESC";
+            "SELECT p_id, p_name, address, c_number, gender, " +
+            "register_datetime, status " +
+            "FROM patient_tb " +
+            "ORDER BY p_id DESC";
 
         try (
-                Connection conn = DBConnect.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()
+            Connection conn = DBConnect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()
         ) {
 
             while (rs.next()) {
@@ -41,7 +40,7 @@ public class patientService {
                 pat.setC_number(rs.getString("c_number"));
                 pat.setGender(rs.getString("gender"));
                 pat.setRegister_datetime(
-                        rs.getTimestamp("register_datetime")
+                    rs.getTimestamp("register_datetime")
                 );
                 pat.setStatus(rs.getString("status"));
 
@@ -50,7 +49,7 @@ public class patientService {
 
         } catch (Exception e) {
 
-            System.out.println("ERROR loading patients: "
+            System.out.println("GET ALL PATIENTS ERROR: "
                     + e.getMessage());
 
             e.printStackTrace();
@@ -69,17 +68,17 @@ public class patientService {
         ArrayList<patient> patientList = new ArrayList<>();
 
         String sql =
-                "SELECT p_id, p_name, address, " +
-                "c_number, gender, register_datetime, status " +
-                "FROM patient_tb " +
-                "WHERE CAST(p_id AS CHAR) LIKE ? " +
-                "OR p_name LIKE ? " +
-                "OR c_number LIKE ? " +
-                "ORDER BY p_id DESC";
+            "SELECT p_id, p_name, address, c_number, gender, " +
+            "register_datetime, status " +
+            "FROM patient_tb " +
+            "WHERE CAST(p_id AS CHAR) LIKE ? " +
+            "OR p_name LIKE ? " +
+            "OR c_number LIKE ? " +
+            "ORDER BY p_id DESC";
 
         try (
-                Connection conn = DBConnect.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)
+            Connection conn = DBConnect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
             String search = "%" + keyword.trim() + "%";
@@ -100,7 +99,7 @@ public class patientService {
                     pat.setC_number(rs.getString("c_number"));
                     pat.setGender(rs.getString("gender"));
                     pat.setRegister_datetime(
-                            rs.getTimestamp("register_datetime")
+                        rs.getTimestamp("register_datetime")
                     );
                     pat.setStatus(rs.getString("status"));
 
@@ -110,7 +109,7 @@ public class patientService {
 
         } catch (Exception e) {
 
-            System.out.println("ERROR searching patients: "
+            System.out.println("SEARCH PATIENT ERROR: "
                     + e.getMessage());
 
             e.printStackTrace();
@@ -121,8 +120,7 @@ public class patientService {
 
 
     // =========================================================
-    // GET SINGLE PATIENT BY ID
-    // Used by View Patient
+    // GET PATIENT BY ID
     // =========================================================
 
     public patient getPatientById(int patientId) {
@@ -130,14 +128,14 @@ public class patientService {
         patient pat = null;
 
         String sql =
-                "SELECT p_id, p_name, address, " +
-                "c_number, gender, register_datetime, status " +
-                "FROM patient_tb " +
-                "WHERE p_id = ?";
+            "SELECT p_id, p_name, address, c_number, gender, " +
+            "register_datetime, status " +
+            "FROM patient_tb " +
+            "WHERE p_id = ?";
 
         try (
-                Connection conn = DBConnect.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)
+            Connection conn = DBConnect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
             stmt.setInt(1, patientId);
@@ -153,21 +151,17 @@ public class patientService {
                     pat.setAddress(rs.getString("address"));
                     pat.setC_number(rs.getString("c_number"));
                     pat.setGender(rs.getString("gender"));
-
                     pat.setRegister_datetime(
-                            rs.getTimestamp("register_datetime")
+                        rs.getTimestamp("register_datetime")
                     );
-
                     pat.setStatus(rs.getString("status"));
                 }
             }
 
         } catch (Exception e) {
 
-            System.out.println(
-                    "ERROR getting patient by ID: "
-                    + e.getMessage()
-            );
+            System.out.println("GET PATIENT BY ID ERROR: "
+                    + e.getMessage());
 
             e.printStackTrace();
         }
@@ -182,24 +176,24 @@ public class patientService {
 
     public patient getPatientByContactNumber(String contactNumber) {
 
-        patient pat = null;
-
         if (contactNumber == null ||
-                contactNumber.trim().isEmpty()) {
+            contactNumber.trim().isEmpty()) {
 
             return null;
         }
 
+        patient pat = null;
+
         String sql =
-                "SELECT p_id, p_name, address, " +
-                "c_number, gender, register_datetime, status " +
-                "FROM patient_tb " +
-                "WHERE c_number = ? " +
-                "LIMIT 1";
+            "SELECT p_id, p_name, address, c_number, gender, " +
+            "register_datetime, status " +
+            "FROM patient_tb " +
+            "WHERE c_number = ? " +
+            "LIMIT 1";
 
         try (
-                Connection conn = DBConnect.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)
+            Connection conn = DBConnect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
             stmt.setString(1, contactNumber.trim());
@@ -215,11 +209,9 @@ public class patientService {
                     pat.setAddress(rs.getString("address"));
                     pat.setC_number(rs.getString("c_number"));
                     pat.setGender(rs.getString("gender"));
-
                     pat.setRegister_datetime(
-                            rs.getTimestamp("register_datetime")
+                        rs.getTimestamp("register_datetime")
                     );
-
                     pat.setStatus(rs.getString("status"));
                 }
             }
@@ -227,8 +219,8 @@ public class patientService {
         } catch (Exception e) {
 
             System.out.println(
-                    "ERROR looking up patient by contact number: "
-                    + e.getMessage()
+                "GET PATIENT BY CONTACT ERROR: "
+                + e.getMessage()
             );
 
             e.printStackTrace();
@@ -245,13 +237,13 @@ public class patientService {
     public boolean addPatient(patient pat) {
 
         String sql =
-                "INSERT INTO patient_tb " +
-                "(p_name, address, c_number, gender, status) " +
-                "VALUES (?, ?, ?, ?, ?)";
+            "INSERT INTO patient_tb " +
+            "(p_name, address, c_number, gender, status) " +
+            "VALUES (?, ?, ?, ?, ?)";
 
         try (
-                Connection conn = DBConnect.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)
+            Connection conn = DBConnect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
             stmt.setString(1, pat.getP_name());
@@ -262,7 +254,7 @@ public class patientService {
             String status = pat.getStatus();
 
             if (status == null ||
-                    status.trim().isEmpty()) {
+                status.trim().isEmpty()) {
 
                 status = "Active";
             }
@@ -274,8 +266,8 @@ public class patientService {
         } catch (Exception e) {
 
             System.out.println(
-                    "ERROR adding patient: "
-                    + e.getMessage()
+                "ADD PATIENT ERROR: "
+                + e.getMessage()
             );
 
             e.printStackTrace();
@@ -292,17 +284,17 @@ public class patientService {
     public boolean updatePatient(patient pat) {
 
         String sql =
-                "UPDATE patient_tb SET " +
-                "p_name = ?, " +
-                "address = ?, " +
-                "c_number = ?, " +
-                "gender = ?, " +
-                "status = ? " +
-                "WHERE p_id = ?";
+            "UPDATE patient_tb SET " +
+            "p_name = ?, " +
+            "address = ?, " +
+            "c_number = ?, " +
+            "gender = ?, " +
+            "status = ? " +
+            "WHERE p_id = ?";
 
         try (
-                Connection conn = DBConnect.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)
+            Connection conn = DBConnect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
             stmt.setString(1, pat.getP_name());
@@ -313,7 +305,7 @@ public class patientService {
             String status = pat.getStatus();
 
             if (status == null ||
-                    status.trim().isEmpty()) {
+                status.trim().isEmpty()) {
 
                 status = "Active";
             }
@@ -321,13 +313,23 @@ public class patientService {
             stmt.setString(5, status);
             stmt.setInt(6, pat.getP_id());
 
-            return stmt.executeUpdate() > 0;
+            int rows = stmt.executeUpdate();
+
+            System.out.println(
+                "UPDATE PATIENT ID: " + pat.getP_id()
+            );
+
+            System.out.println(
+                "ROWS UPDATED: " + rows
+            );
+
+            return rows > 0;
 
         } catch (Exception e) {
 
             System.out.println(
-                    "ERROR updating patient: "
-                    + e.getMessage()
+                "UPDATE PATIENT ERROR: "
+                + e.getMessage()
             );
 
             e.printStackTrace();
@@ -344,23 +346,47 @@ public class patientService {
     public boolean deletePatient(int patientId) {
 
         String sql =
-                "DELETE FROM patient_tb " +
-                "WHERE p_id = ?";
+            "DELETE FROM patient_tb WHERE p_id = ?";
 
         try (
-                Connection conn = DBConnect.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)
+            Connection conn = DBConnect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
             stmt.setInt(1, patientId);
 
-            return stmt.executeUpdate() > 0;
+            int rows = stmt.executeUpdate();
+
+            System.out.println(
+                "DELETE PATIENT ID: " + patientId
+            );
+
+            System.out.println(
+                "ROWS DELETED: " + rows
+            );
+
+            return rows > 0;
 
         } catch (Exception e) {
 
             System.out.println(
-                    "ERROR deleting patient: "
-                    + e.getMessage()
+                "===================================="
+            );
+
+            System.out.println(
+                "DELETE PATIENT ERROR"
+            );
+
+            System.out.println(
+                "PATIENT ID: " + patientId
+            );
+
+            System.out.println(
+                "ERROR MESSAGE: " + e.getMessage()
+            );
+
+            System.out.println(
+                "===================================="
             );
 
             e.printStackTrace();
@@ -369,4 +395,3 @@ public class patientService {
         }
     }
 }
-

@@ -186,7 +186,7 @@ body {
 
 
 .admin-details strong {
-    font-size: 11px;
+    font-size: 14px;
     color: #333333;
 
     max-width: 85px;
@@ -198,7 +198,7 @@ body {
 
 
 .admin-details span {
-    font-size: 9px;
+    font-size: 12px;
     color: #777777;
 }
 
@@ -384,12 +384,12 @@ body {
 
 
 .alert strong {
-    font-size: 11px;
+    font-size: 14px;
 }
 
 
 .alert span {
-    font-size: 9px;
+    font-size: 12px;
 }
 
 
@@ -548,14 +548,14 @@ body {
 .patient-id span {
     color: #777777;
 
-    font-size: 9px;
+    font-size: 12px;
 }
 
 
 .patient-id strong {
     color: #6a5acd;
 
-    font-size: 11px;
+    font-size: 12px;
 }
 
 
@@ -627,7 +627,7 @@ body {
 .profile-name span {
     color: #88838f;
 
-    font-size: 10px;
+    font-size: 14px;
 }
 
 
@@ -648,7 +648,7 @@ body {
 
 
 .status-label {
-    font-size: 8px;
+    font-size: 14px;
 
     color: #9993a7;
 
@@ -672,14 +672,14 @@ body {
 
     gap: 5px;
 
-    font-size: 9px;
+    font-size: 12px;
 
     font-weight: 600;
 }
 
 
 .status-badge i {
-    font-size: 6px;
+    font-size: 10px;
 }
 
 
@@ -780,7 +780,7 @@ body {
 .detail-content span {
     color: #9993a7;
 
-    font-size: 8px;
+    font-size: 10px;
 
     text-transform: uppercase;
 
@@ -791,7 +791,7 @@ body {
 .detail-content strong {
     color: #333333;
 
-    font-size: 11px;
+    font-size: 12px;
 
     font-weight: 600;
 
@@ -862,7 +862,7 @@ body {
 
     font-family: "Segoe UI", Arial, sans-serif;
 
-    font-size: 10px;
+    font-size: 12px;
 
     font-weight: 600;
 
@@ -988,7 +988,7 @@ body {
 .quick-card span {
     color: #9993a7;
 
-    font-size: 8px;
+    font-size: 12px;
 
     text-transform: uppercase;
 
@@ -999,7 +999,7 @@ body {
 .quick-card strong {
     color: #333333;
 
-    font-size: 10px;
+    font-size: 12px;
 
     overflow: hidden;
 
@@ -1068,7 +1068,7 @@ body {
 
 
 .info-content p {
-    font-size: 9px;
+    font-size: 12px;
 
     color: #777777;
 

@@ -289,11 +289,11 @@ ALERTS
 }
 
 .alert strong {
-  font-size: 11px;
+  font-size: 15px;
 }
 
 .alert span {
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .alert-error {
@@ -376,7 +376,7 @@ FORM CARD HEADER
 
 .form-title-area p {
   color: #777777;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .required-note {
@@ -412,7 +412,7 @@ FORM
 
 .form-group label {
   color: #4b3ca7;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -436,7 +436,7 @@ INPUT WRAPPER
   top: 50%;
   transform: translateY(-50%);
   color: #8b80c9;
-  font-size: 12px;
+  font-size: 14px;
   pointer-events: none;
   z-index: 2;
 }
@@ -451,7 +451,7 @@ INPUT WRAPPER
   outline: none;
   color: #333333;
   font-family: "Segoe UI", Arial, sans-serif;
-  font-size: 11px;
+  font-size: 14px;
   transition: 0.2s ease;
 }
 
@@ -515,7 +515,7 @@ FIELD HELP
 
 .field-help {
   color: #9993a7;
-  font-size: 8px;
+  font-size: 10px;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -523,7 +523,7 @@ FIELD HELP
 
 .field-help i {
   color: #8b80c9;
-  font-size: 8px;
+  font-size: 10px;
 }
 
 /* =========================================================
@@ -561,7 +561,7 @@ BUTTONS
   justify-content: center;
   gap: 7px;
   font-family: "Segoe UI", Arial, sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;

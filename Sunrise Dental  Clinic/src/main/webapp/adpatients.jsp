@@ -152,21 +152,14 @@
     </a>
 
 
-        <a href="#">
-
-            <i class="fa-solid fa-user-doctor"></i>
-
-            Doctors
-
+                <a href="${pageContext.request.contextPath}/adbilling.jsp">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            Billing
         </a>
 
-
         <a href="#">
-
-            <i class="fa-solid fa-file-invoice-dollar"></i>
-
-            Billing
-
+            <i class="fa-solid fa-headphones"></i>
+            Help & Support
         </a>
 
     </nav>
@@ -796,12 +789,11 @@
                                     <!-- DELETE -->
 
                                     <button type="button"
-                                        class="action-btn delete"
-                                        title="Delete Patient"
-                                        onclick="deletePatient(<%= p.getP_id() %>)">
-
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
+        class="action-btn delete"
+        title="Delete Patient"
+        onclick="deletePatient(<%= p.getP_id() %>)">
+    <i class="fa-solid fa-trash"></i>
+</button>
 
                                 </div>
 
@@ -978,35 +970,31 @@
 
 <script>
 
-    function deletePatient(id) {
+function deletePatient(id) {
 
-        document.getElementById("deleteLink").href =
-            "<%= contextPath %>/deletePatient?id=" + id;
-
-        document.getElementById("deleteModal")
-                .classList.add("show");
-
-    }
-
-
-    function closeModal() {
-
-        document.getElementById("deleteModal")
-                .classList.remove("show");
-
-    }
-
+    document.getElementById("deleteLink").href =
+        "<%= contextPath %>/deletePatient?id=" + id;
 
     document.getElementById("deleteModal")
+            .classList.add("show");
+}
+
+
+function closeModal() {
+
+    document.getElementById("deleteModal")
+            .classList.remove("show");
+}
+
+
+document.getElementById("deleteModal")
         .addEventListener("click", function(event) {
 
-            if (event.target === this) {
+    if (event.target === this) {
+        closeModal();
+    }
 
-                closeModal();
-
-            }
-
-        });
+});
 
 </script>
 
