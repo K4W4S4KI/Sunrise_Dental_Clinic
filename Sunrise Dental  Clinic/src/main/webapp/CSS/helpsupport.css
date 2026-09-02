@@ -1,11 +1,176 @@
 /* =========================================================
-   HELP & SUPPORT PAGE
+   GLOBAL
 ========================================================= */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f4f1ff;
+    color: #333333;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   TOP NAVBAR
+========================================================= */
+
+.top-navbar {
+    height: 72px;
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0 42px;
+    border-bottom: 1px solid #e9e5ff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 235px;
+}
+
+.brand-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 9px;
+    background: #e9e5ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6a5acd;
+    font-size: 19px;
+}
+
+.brand-text h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #4b3ca7;
+    line-height: 19px;
+}
+
+.brand-text span {
+    font-size: 9px;
+    color: #777777;
+    letter-spacing: 0.4px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.navigation {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.navigation a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 13px;
+    border-radius: 6px;
+    color: #777777;
+    font-size: 12px;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.navigation a i {
+    font-size: 12px;
+}
+
+.navigation a:hover {
+    color: #6a5acd;
+    background: #f4f1ff;
+}
+
+.navigation a.active {
+    background: #6a5acd;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   ADMIN AREA
+========================================================= */
+
+.admin-area {
+    min-width: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 9px;
+}
+
+.admin-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e9e5ff;
+    color: #6a5acd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.admin-details {
+    display: flex;
+    flex-direction: column;
+    line-height: 15px;
+}
+
+.admin-details strong {
+    font-size: 11px;
+    color: #333333;
+    max-width: 85px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.admin-details span {
+    font-size: 9px;
+    color: #777777;
+}
+
+.logout-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #e9e5ff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777777;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #f4f1ff;
+    color: #4b3ca7;
 }
 
 
@@ -15,8 +180,9 @@
 
 .main-content {
     width: 100%;
-    min-height: calc(100vh - 72px);
-    padding: 30px 38px 35px;
+    max-width: 1500px;
+    margin: auto;
+    padding: 27px 32px 35px;
 }
 
 
@@ -25,211 +191,249 @@
 ========================================================= */
 
 .page-header {
-    width: 100%;
+    background: #ffffff;
+    min-height: 82px;
+    padding: 17px 22px;
+    border: 1px solid #e9e5ff;
+    border-radius: 9px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 25px;
-    margin-bottom: 24px;
-}
-
-.page-header-content {
-    flex: 1;
+    justify-content: space-between;
+    margin-bottom: 18px;
 }
 
 .page-label {
-    display: inline-block;
-    color: #4c3fd6;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    margin-bottom: 7px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #6a5acd;
+    letter-spacing: 1.2px;
 }
 
 .page-header h1 {
-    color: #24233a;
-    font-size: 30px;
-    font-weight: 750;
-    margin-bottom: 7px;
+    font-size: 22px;
+    color: #4b3ca7;
+    margin-top: 3px;
+    margin-bottom: 2px;
 }
 
 .page-header p {
-    color: #77758a;
-    font-size: 14px;
-    line-height: 1.6;
+    color: #777777;
+    font-size: 11px;
 }
 
 
 /* =========================================================
-   WELCOME ADMIN
+   HEADER USER
 ========================================================= */
 
 .header-user {
     display: flex;
     align-items: center;
-    gap: 12px;
-
-    background: #ffffff;
-
-    border: 1px solid #ebe9f5;
-    border-radius: 12px;
-
-    padding: 11px 16px;
-
-    min-width: 190px;
-
-    box-shadow: 0 2px 8px rgba(55, 48, 120, 0.03);
+    gap: 9px;
 }
 
 .header-user-icon {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
-
-    border-radius: 10px;
-
-    background: #f0eeff;
-    color: #4c3fd6;
-
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    font-size: 18px;
 }
 
 .header-user-text {
     display: flex;
     flex-direction: column;
-    gap: 3px;
 }
 
 .header-user-text span {
-    color: #9290a0;
-    font-size: 11px;
+    color: #777777;
+    font-size: 9px;
 }
 
 .header-user-text strong {
-    color: #303044;
-    font-size: 13px;
-    font-weight: 700;
+    color: #333333;
+    font-size: 11px;
 }
 
 
 /* =========================================================
-   HELP SEARCH
+   SEARCH CARD
 ========================================================= */
 
-.help-search-card {
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-
-    gap: 18px;
-
+.search-card {
     background: #ffffff;
-
-    border: 1px solid #ebe9f5;
-    border-radius: 14px;
-
-    padding: 23px 26px;
-
-    margin-bottom: 22px;
-
-    box-shadow: 0 2px 8px rgba(55, 48, 120, 0.03);
+    border: 1px solid #e9e5ff;
+    border-radius: 9px;
+    padding: 18px 22px 14px;
+    margin-bottom: 18px;
 }
 
-.help-search-icon {
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
+.search-heading {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 13px;
+}
 
+.search-icon {
+    width: 39px;
+    height: 39px;
+    border-radius: 8px;
+    background: #e9e5ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background: #f0eeff;
-
-    color: #4c3fd6;
-
-    border-radius: 11px;
-
-    font-size: 19px;
+    font-size: 15px;
 }
 
-.help-search-content {
-    flex: 1;
+.search-heading span {
+    display: block;
+    color: #6a5acd;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-.help-search-content h2 {
-    color: #302f43;
-
-    font-size: 18px;
-    font-weight: 750;
-
-    margin-bottom: 4px;
+.search-heading h2 {
+    color: #4b3ca7;
+    font-size: 17px;
+    margin-top: 2px;
 }
 
-.help-search-content p {
-    color: #858392;
 
-    font-size: 12px;
-
-    margin-bottom: 12px;
-}
+/* =========================================================
+   HELP SEARCH BOX
+========================================================= */
 
 .help-search-box {
     width: 100%;
-    max-width: 700px;
-
-    height: 44px;
-
+    height: 43px;
+    border: 1px solid #e3def7;
+    border-radius: 7px;
     display: flex;
     align-items: center;
-
-    background: #fafaff;
-
-    border: 1px solid #dfddec;
-
-    border-radius: 9px;
-
-    transition: all 0.2s ease;
+    padding: 0 12px;
+    background: #ffffff;
+    transition: 0.2s ease;
 }
 
 .help-search-box:focus-within {
-    border-color: #4c3fd6;
-
-    box-shadow:
-        0 0 0 3px rgba(76, 63, 214, 0.08);
+    border-color: #6a5acd;
+    box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.08);
 }
 
-.help-search-box i {
-    color: #9996aa;
-
-    font-size: 13px;
-
-    margin-left: 15px;
+.help-search-box > i {
+    color: #999999;
+    font-size: 14px;
+    margin-right: 9px;
 }
 
 .help-search-box input {
-    width: 100%;
+    flex: 1;
     height: 100%;
-
     border: none;
     outline: none;
-
     background: transparent;
-
-    padding: 0 14px;
-
-    color: #333244;
-
-    font-size: 13px;
+    color: #333333;
+    font-size: 12px;
 }
 
 .help-search-box input::placeholder {
-    color: #aaa7b5;
+    color: #aaaaaa;
+}
+
+.help-search-box button {
+    width: 27px;
+    height: 27px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: #999999;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.help-search-box button:hover {
+    background: #f4f1ff;
+    color: #6a5acd;
+}
+
+.search-result {
+    padding-top: 8px;
+}
+
+.search-result span {
+    color: #999999;
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   QUICK HELP GRID
+========================================================= */
+
+.quick-help-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.quick-help-card {
+    background: #ffffff;
+    border: 1px solid #e9e5ff;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    transition: 0.2s ease;
+}
+
+.quick-help-card:hover {
+    border-color: #6a5acd;
+    transform: translateY(-2px);
+}
+
+.quick-help-icon {
+    width: 41px;
+    height: 41px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #f0edff;
+    color: #6a5acd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+.quick-help-card h3 {
+    color: #4b3ca7;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.quick-help-card p {
+    color: #777777;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   HELP GRID
+========================================================= */
+
+.help-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(300px, 0.8fr);
+    gap: 18px;
+    align-items: start;
 }
 
 
@@ -238,34 +442,25 @@
 ========================================================= */
 
 .content-card {
-    width: 100%;
-
     background: #ffffff;
-
-    border: 1px solid #ebe9f5;
-
-    border-radius: 14px;
-
-    margin-bottom: 22px;
-
-    overflow: hidden;
-
-    box-shadow: 0 2px 8px rgba(55, 48, 120, 0.03);
+    border: 1px solid #e9e5ff;
+    border-radius: 9px;
+    padding: 20px 22px;
 }
 
 
 /* =========================================================
-   CARD HEADER
+   SECTION HEADER
 ========================================================= */
 
-.card-header {
-    padding: 22px 26px;
-
+.section-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    border-bottom: 1px solid #efedf6;
+    gap: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0eefb;
+    margin-bottom: 5px;
 }
 
 .section-heading {
@@ -273,209 +468,116 @@
 }
 
 .section-label {
-    display: block;
-
-    color: #4c3fd6;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.2px;
-
-    margin-bottom: 6px;
+    font-size: 8px;
+    font-weight: 700;
+    color: #6a5acd;
+    letter-spacing: 1px;
 }
 
 .section-heading h2 {
-    color: #302f43;
-
-    font-size: 20px;
-
-    font-weight: 750;
-
-    margin-bottom: 5px;
+    color: #4b3ca7;
+    font-size: 17px;
+    margin: 3px 0 2px;
 }
 
 .section-heading p {
-    color: #858392;
-
-    font-size: 13px;
-
-    line-height: 1.5;
+    color: #777777;
+    font-size: 10px;
 }
 
-.card-header-icon {
-    width: 44px;
-    height: 44px;
-
-    border-radius: 11px;
-
-    background: #f0eeff;
-
-    color: #4c3fd6;
-
+.section-header-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: #f4f1ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    font-size: 18px;
 }
 
 
 /* =========================================================
-   CONTACT GRID
+   FAQ LIST
 ========================================================= */
 
-.contact-grid {
-    padding: 24px 26px 27px;
-
-    display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 14px;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-
-    gap: 14px;
-
-    padding: 15px;
-
-    background: #fcfcfe;
-
-    border: 1px solid #eeecf5;
-
-    border-radius: 10px;
-
-    transition: 0.2s ease;
-}
-
-.contact-item:hover {
-    border-color: #dcd8f5;
-
-    background: #faf9ff;
-}
-
-.contact-item-icon {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 10px;
-
-    background: #f0eeff;
-
-    color: #4c3fd6;
-
-    font-size: 16px;
-}
-
-.contact-item > div:last-child {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 5px;
-}
-
-.contact-item span {
-    color: #9693a3;
-
-    font-size: 11px;
-
-    font-weight: 600;
-}
-
-.contact-item strong {
-    color: #353447;
-
-    font-size: 13px;
-
-    font-weight: 650;
-
-    line-height: 1.4;
-}
-
-
-/* =========================================================
-   FAQ
-========================================================= */
-
-.faq-container {
-    padding: 5px 26px 28px;
+.faq-list {
+    width: 100%;
 }
 
 .faq-item {
-    display: flex;
-
-    gap: 17px;
-
-    padding: 20px 0;
-
-    border-bottom: 1px solid #efedf5;
+    border-bottom: 1px solid #f0eefb;
 }
 
-.faq-item:last-of-type {
+.faq-item:last-child {
     border-bottom: none;
 }
 
-.faq-number {
-    width: 38px;
-    height: 38px;
-    min-width: 38px;
+.faq-question {
+    width: 100%;
+    min-height: 56px;
+    padding: 10px 2px;
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    text-align: left;
+    cursor: pointer;
+    color: #333333;
+    font-size: 12px;
+    font-weight: 600;
+}
 
-    border-radius: 9px;
+.faq-question span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-    background: #f0eeff;
-
-    color: #4c3fd6;
-
+.faq-question span i {
+    width: 29px;
+    height: 29px;
+    border-radius: 6px;
+    background: #f4f1ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 11px;
-
-    font-weight: 800;
 }
 
-.faq-content {
-    flex: 1;
+.faq-arrow {
+    color: #999999;
+    font-size: 10px;
+    transition: transform 0.2s ease;
 }
 
-.faq-content h3 {
-    color: #353447;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    line-height: 1.4;
-
-    margin-bottom: 7px;
+.faq-item.open .faq-arrow {
+    transform: rotate(180deg);
+    color: #6a5acd;
 }
 
-.faq-content p {
-    color: #747282;
-
-    font-size: 13px;
-
-    line-height: 1.65;
-
-    max-width: 1050px;
+.faq-item.open .faq-question {
+    color: #4b3ca7;
 }
 
-.faq-content p strong {
-    color: #4c3fd6;
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+}
 
-    font-weight: 700;
+.faq-answer p {
+    padding: 0 38px 16px 41px;
+    color: #666666;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.faq-answer strong {
+    color: #4b3ca7;
 }
 
 
@@ -485,102 +587,242 @@
 
 .no-results {
     display: none;
-
+    padding: 40px 20px;
     text-align: center;
-
-    padding: 32px 20px;
-
-    color: #858392;
-
-    font-size: 13px;
 }
 
-.no-results i {
-    display: block;
-
-    color: #c0bdd0;
-
-    font-size: 28px;
-
-    margin-bottom: 10px;
+.no-results-icon {
+    width: 50px;
+    height: 50px;
+    margin: auto auto 12px;
+    border-radius: 10px;
+    background: #f4f1ff;
+    color: #6a5acd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
 }
 
-.no-results strong {
-    display: block;
-
-    color: #4c3fd6;
-
-    font-size: 14px;
-
-    margin-bottom: 4px;
+.no-results h3 {
+    color: #4b3ca7;
+    font-size: 15px;
+    margin-bottom: 5px;
 }
 
-.no-results span {
-    color: #898696;
-
-    font-size: 12px;
+.no-results p {
+    color: #777777;
+    font-size: 10px;
 }
 
 
 /* =========================================================
-   SUPPORT NOTICE
+   CONTACT LIST
 ========================================================= */
 
-.support-notice {
-    width: 100%;
-
+.contact-list {
     display: flex;
-    align-items: center;
-
-    gap: 16px;
-
-    padding: 18px 22px;
-
-    background: #f6f4ff;
-
-    border: 1px solid #e6e2ff;
-
-    border-radius: 13px;
-
-    margin-bottom: 28px;
+    flex-direction: column;
 }
 
-.notice-icon {
-    width: 43px;
-    height: 43px;
-    min-width: 43px;
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 13px 0;
+    border-bottom: 1px solid #f0eefb;
+}
 
+.contact-item:last-child {
+    border-bottom: none;
+}
+
+.contact-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: #f4f1ff;
+    color: #6a5acd;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background: #ffffff;
-
-    color: #4c3fd6;
-
-    border-radius: 10px;
-
-    font-size: 17px;
+    font-size: 12px;
 }
 
-.notice-content {
+.contact-item div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.contact-item span {
+    color: #999999;
+    font-size: 9px;
+}
+
+.contact-item strong {
+    color: #333333;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SUPPORT STATUS CARD
+========================================================= */
+
+.support-status-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #e9e5ff;
+    border-radius: 9px;
+    padding: 17px;
+    margin-top: 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+}
+
+.support-status-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #edf8f1;
+    color: #31804b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.support-status-card span {
+    color: #6a5acd;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+.support-status-card h3 {
+    color: #333333;
+    font-size: 12px;
+    margin: 3px 0;
+}
+
+.support-status-card p {
+    color: #777777;
+    font-size: 9px;
+    line-height: 1.5;
+    max-width: 220px;
+}
+
+.online-status {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    padding: 5px 8px;
+    border-radius: 15px;
+    background: #edf8f1;
+    color: #31804b;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+.online-status i {
+    font-size: 5px;
+    margin-right: 3px;
+}
+
+
+/* =========================================================
+   QUICK TIPS
+========================================================= */
+
+.tips-card {
+    margin-top: 18px;
+}
+
+.tip-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    padding: 11px 0;
+    border-bottom: 1px solid #f0eefb;
+}
+
+.tip-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.tip-item i {
+    color: #6a5acd;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.tip-item span {
+    color: #666666;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   CLINIC CARD
+========================================================= */
+
+.clinic-card {
+    background: #ffffff;
+    border: 1px solid #e9e5ff;
+    border-radius: 9px;
+    padding: 15px 19px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.clinic-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: #e9e5ff;
+    color: #6a5acd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.clinic-card-text {
     flex: 1;
 }
 
-.notice-content h3 {
-    color: #37354a;
-
-    font-size: 14px;
-
-    margin-bottom: 4px;
+.clinic-card-text h3 {
+    font-size: 12px;
+    color: #333333;
+    margin-bottom: 2px;
 }
 
-.notice-content p {
-    color: #777487;
+.clinic-card-text p {
+    font-size: 9px;
+    color: #777777;
+}
 
-    font-size: 12px;
+.clinic-status {
+    font-size: 9px;
+    color: #4b3ca7;
+    background: #f4f1ff;
+    padding: 6px 9px;
+    border-radius: 15px;
+}
 
-    line-height: 1.5;
+.clinic-status i {
+    font-size: 5px;
+    vertical-align: middle;
+    margin-right: 4px;
 }
 
 
@@ -589,144 +831,187 @@
 ========================================================= */
 
 footer {
-    width: 100%;
-
-    padding: 18px 3px 5px;
-
     display: flex;
-
     justify-content: space-between;
-
-    align-items: center;
-
-    border-top: 1px solid #e9e7f0;
-
-    color: #9896a5;
-
-    font-size: 11px;
+    padding: 15px 4px 0;
+    color: #777777;
+    font-size: 9px;
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   TABLET
 ========================================================= */
 
 @media (max-width: 1100px) {
 
-    .main-content {
-        padding: 25px;
+    .top-navbar {
+        padding: 0 20px;
     }
 
-}
-
-
-@media (max-width: 850px) {
-
-    .page-header {
-        align-items: flex-start;
-
-        flex-direction: column;
+    .brand {
+        min-width: 190px;
     }
 
-    .header-user {
-        width: 100%;
+    .navigation a {
+        padding: 8px 9px;
+        font-size: 11px;
     }
 
-    .contact-grid {
+    .navigation a i {
+        display: none;
+    }
+
+    .admin-area {
+        min-width: 160px;
+    }
+
+    .quick-help-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .help-grid {
         grid-template-columns: 1fr;
     }
 
 }
 
 
-@media (max-width: 650px) {
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .top-navbar {
+        height: auto;
+        min-height: 72px;
+        padding: 10px 15px;
+        flex-wrap: wrap;
+    }
+
+    .brand {
+        min-width: auto;
+    }
+
+    .admin-area {
+        margin-left: auto;
+        min-width: auto;
+    }
+
+    .navigation {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 7px 0 2px;
+    }
+
+    .navigation a i {
+        display: inline-block;
+    }
 
     .main-content {
-        padding: 20px 15px;
+        padding: 18px 15px 25px;
     }
 
-    .page-header h1 {
-        font-size: 25px;
-    }
-
-    .help-search-card {
+    .page-header {
         align-items: flex-start;
-
-        padding: 20px;
+        gap: 15px;
     }
 
-    .help-search-icon {
-        width: 44px;
-        height: 44px;
-        min-width: 44px;
+    .quick-help-grid {
+        grid-template-columns: 1fr;
     }
 
-    .card-header {
-        padding: 20px;
+    .faq-card,
+    .contact-card {
+        width: 100%;
     }
 
-    .contact-grid {
-        padding: 20px;
+    .support-side {
+        width: 100%;
     }
 
-    .faq-container {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .faq-item {
-        gap: 12px;
-    }
-
-    .support-notice {
+    .clinic-card {
         align-items: flex-start;
-
-        padding: 17px;
-    }
-
-    footer {
-        flex-direction: column;
-
-        gap: 6px;
-
-        text-align: center;
     }
 
 }
 
 
-@media (max-width: 450px) {
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 550px) {
+
+    .brand-text {
+        display: none;
+    }
+
+    .admin-details {
+        display: none;
+    }
+
+    .header-user {
+        display: none;
+    }
+
+    .page-header {
+        min-height: auto;
+        padding: 15px;
+    }
 
     .page-header h1 {
-        font-size: 23px;
+        font-size: 20px;
     }
 
-    .help-search-card {
-        gap: 12px;
+    .content-card {
+        padding: 15px;
     }
 
-    .help-search-content h2 {
-        font-size: 16px;
+    .search-card {
+        padding: 15px;
     }
 
-    .contact-item {
+    .search-heading h2 {
+        font-size: 15px;
+    }
+
+    .help-search-box {
+        height: 40px;
+    }
+
+    .faq-question {
+        font-size: 11px;
+    }
+
+    .faq-answer p {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .support-status-card {
+        padding-right: 12px;
+    }
+
+    .online-status {
+        position: static;
+        margin-left: auto;
+    }
+
+    .clinic-card {
         align-items: flex-start;
     }
 
-    .faq-number {
-        width: 32px;
-        height: 32px;
-        min-width: 32px;
-
-        font-size: 10px;
+    .clinic-status {
+        display: none;
     }
 
-    .faq-content h3 {
-        font-size: 13px;
-    }
-
-    .faq-content p {
-        font-size: 12px;
+    footer {
+        flex-direction: column;
+        gap: 5px;
     }
 
 }

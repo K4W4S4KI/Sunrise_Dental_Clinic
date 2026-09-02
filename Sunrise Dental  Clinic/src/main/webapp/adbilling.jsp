@@ -119,9 +119,7 @@
             <span>Administrator</span>
         </div>
 
-        <a href="${pageContext.request.contextPath}/logout"
-           class="logout-btn"
-           title="Logout">
+        <a href="#" class="logout-btn" title="Logout" onclick="confirmLogout(event)">
             <i class="fa-solid fa-right-from-bracket"></i>
         </a>
 
@@ -458,7 +456,17 @@
         <span>Clinic Management System</span>
     </footer>
 
+    <script>
+function confirmLogout(event) {
+    event.preventDefault();
 
+    const confirmLogout = confirm("Are you sure you want to logout?");
+
+    if (confirmLogout) {
+        window.location.href = "<%= request.getContextPath() %>/logout";
+    }
+}
+</script>
 </main>
 
 </body>
