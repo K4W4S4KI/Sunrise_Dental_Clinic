@@ -43,6 +43,7 @@
 
 <body>
 
+
 <!-- =========================================================
      TOP NAVBAR
 ========================================================= -->
@@ -58,8 +59,13 @@
         </div>
 
         <div class="brand-text">
+
             <h2>Sunrise Dental</h2>
-            <span>Clinic Management</span>
+
+            <span>
+                Clinic Management
+            </span>
+
         </div>
 
     </div>
@@ -70,30 +76,69 @@
     <nav class="navigation">
 
         <a href="<%= contextPath %>/adminhomes.jsp">
+
             <i class="fa-solid fa-chart-line"></i>
-            <span>Dashboard</span>
+
+            <span>
+                Dashboard
+            </span>
+
         </a>
+
 
         <a href="<%= contextPath %>/managePatients">
+
             <i class="fa-solid fa-user-group"></i>
-            <span>Patients</span>
+
+            <span>
+                Patients
+            </span>
+
         </a>
 
+
         <a href="<%= contextPath %>/manageAppointments">
+
             <i class="fa-solid fa-calendar-check"></i>
-            <span>Appointments</span>
+
+            <span>
+                Appointments
+            </span>
+
+        </a>
+
+
+        <a href="<%= contextPath %>/manageDentists">
+
+            <i class="fa-solid fa-user-doctor"></i>
+
+            <span>
+                Doctors
+            </span>
+
         </a>
 
 
         <a href="<%= contextPath %>/manageBilling">
+
             <i class="fa-solid fa-file-invoice-dollar"></i>
-            <span>Billing</span>
+
+            <span>
+                Billing
+            </span>
+
         </a>
+
 
         <a href="<%= contextPath %>/helpSupport"
            class="active">
+
             <i class="fa-solid fa-circle-question"></i>
-            <span>Help</span>
+
+            <span>
+                Help
+            </span>
+
         </a>
 
     </nav>
@@ -104,8 +149,11 @@
     <div class="admin-area">
 
         <div class="admin-icon">
+
             <i class="fa-solid fa-user-shield"></i>
+
         </div>
+
 
         <div class="admin-details">
 
@@ -113,9 +161,12 @@
                 <%= loggedInAdmin %>
             </strong>
 
-            <span>Administrator</span>
+            <span>
+                Administrator
+            </span>
 
         </div>
+
 
         <a href="<%= contextPath %>/logout"
            class="logout-btn"
@@ -130,6 +181,7 @@
 </header>
 
 
+
 <!-- =========================================================
      MAIN CONTENT
 ========================================================= -->
@@ -137,9 +189,12 @@
 <main class="main-content">
 
 
-    <!-- PAGE HEADER -->
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
 
     <section class="page-header">
+
 
         <div class="page-header-content">
 
@@ -147,29 +202,37 @@
                 SUPPORT CENTER
             </span>
 
+
             <h1>
                 Help & Support
             </h1>
 
+
             <p>
-                Find answers and guidance for managing the
-                Sunrise Dental Clinic system.
+                Find answers to common questions about using
+                the Sunrise Dental Clinic Management System.
             </p>
 
         </div>
 
 
+        <!-- EARLIER DESIGN WELCOME ADMIN -->
+
         <div class="header-user">
 
             <div class="header-user-icon">
+
                 <i class="fa-solid fa-circle-question"></i>
+
             </div>
+
 
             <div class="header-user-text">
 
                 <span>
                     Welcome back
                 </span>
+
 
                 <strong>
                     <%= loggedInAdmin %>
@@ -182,90 +245,44 @@
     </section>
 
 
+
     <!-- =====================================================
-         QUICK SUPPORT CARDS
+         SEARCH HELP
     ====================================================== -->
 
-    <section class="support-cards">
+    <section class="help-search-card">
 
 
-        <!-- PHONE -->
+        <div class="help-search-icon">
 
-        <div class="support-card">
-
-            <div class="support-icon phone-icon">
-                <i class="fa-solid fa-phone"></i>
-            </div>
-
-            <div class="support-card-content">
-
-                <span class="support-label">
-                    CALL SUPPORT
-                </span>
-
-                <h3>
-                    +94 11 234 5678
-                </h3>
-
-                <p>
-                    Speak directly with the clinic
-                    administration team.
-                </p>
-
-            </div>
+            <i class="fa-solid fa-magnifying-glass"></i>
 
         </div>
 
 
-        <!-- EMAIL -->
+        <div class="help-search-content">
 
-        <div class="support-card">
-
-            <div class="support-icon email-icon">
-                <i class="fa-solid fa-envelope"></i>
-            </div>
-
-            <div class="support-card-content">
-
-                <span class="support-label">
-                    EMAIL SUPPORT
-                </span>
-
-                <h3>
-                    support@sunrisedental.lk
-                </h3>
-
-                <p>
-                    Send your questions and receive
-                    assistance from our team.
-                </p>
-
-            </div>
-
-        </div>
+            <h2>
+                How can we help you?
+            </h2>
 
 
-        <!-- SUPPORT HOURS -->
+            <p>
+                Search the frequently asked questions
+                to quickly find the information you need.
+            </p>
 
-        <div class="support-card">
 
-            <div class="support-icon time-icon">
-                <i class="fa-solid fa-clock"></i>
-            </div>
+            <div class="help-search-box">
 
-            <div class="support-card-content">
+                <i class="fa-solid fa-magnifying-glass"></i>
 
-                <span class="support-label">
-                    SUPPORT HOURS
-                </span>
 
-                <h3>
-                    8:00 AM – 6:00 PM
-                </h3>
-
-                <p>
-                    Monday to Saturday.
-                </p>
+                <input type="text"
+                       id="helpSearch"
+                       placeholder="Search help topics..."
+                       autocomplete="off"
+                       onkeyup="searchHelp()">
 
             </div>
 
@@ -274,13 +291,16 @@
     </section>
 
 
+
     <!-- =====================================================
          CONTACT INFORMATION
     ====================================================== -->
 
     <section class="content-card">
 
+
         <div class="card-header">
+
 
             <div class="section-heading">
 
@@ -288,22 +308,28 @@
                     CONTACT INFORMATION
                 </span>
 
+
                 <h2>
                     Get in Touch
                 </h2>
 
+
                 <p>
-                    Contact the clinic administration team
-                    whenever you need assistance.
+                    Reach out to the clinic administration
+                    team directly for further assistance.
                 </p>
 
             </div>
 
+
             <div class="card-header-icon">
+
                 <i class="fa-solid fa-headset"></i>
+
             </div>
 
         </div>
+
 
 
         <div class="contact-grid">
@@ -314,8 +340,11 @@
             <div class="contact-item">
 
                 <div class="contact-item-icon">
+
                     <i class="fa-solid fa-phone"></i>
+
                 </div>
+
 
                 <div>
 
@@ -332,13 +361,17 @@
             </div>
 
 
+
             <!-- EMAIL -->
 
             <div class="contact-item">
 
                 <div class="contact-item-icon">
+
                     <i class="fa-solid fa-envelope"></i>
+
                 </div>
+
 
                 <div>
 
@@ -355,13 +388,17 @@
             </div>
 
 
+
             <!-- ADDRESS -->
 
             <div class="contact-item">
 
                 <div class="contact-item-icon">
+
                     <i class="fa-solid fa-location-dot"></i>
+
                 </div>
+
 
                 <div>
 
@@ -379,13 +416,17 @@
             </div>
 
 
-            <!-- HOURS -->
+
+            <!-- SUPPORT HOURS -->
 
             <div class="contact-item">
 
                 <div class="contact-item-icon">
-                    <i class="fa-solid fa-business-time"></i>
+
+                    <i class="fa-solid fa-clock"></i>
+
                 </div>
+
 
                 <div>
 
@@ -407,13 +448,16 @@
     </section>
 
 
+
     <!-- =====================================================
-         FAQ
+         FREQUENTLY ASKED QUESTIONS
     ====================================================== -->
 
     <section class="content-card">
 
+
         <div class="card-header">
+
 
             <div class="section-heading">
 
@@ -421,9 +465,11 @@
                     FREQUENTLY ASKED QUESTIONS
                 </span>
 
+
                 <h2>
                     Common Questions
                 </h2>
+
 
                 <p>
                     Quick answers to common administrative
@@ -432,11 +478,15 @@
 
             </div>
 
+
             <div class="card-header-icon">
+
                 <i class="fa-solid fa-comments"></i>
+
             </div>
 
         </div>
+
 
 
         <div class="faq-container">
@@ -450,25 +500,29 @@
                     01
                 </div>
 
+
                 <div class="faq-content">
 
                     <h3>
                         How do I add a new appointment?
                     </h3>
 
+
                     <p>
-                        Go to the Appointments section and click
-                        <strong>New Appointment</strong>. Enter the
-                        patient's contact number to check whether
-                        the patient is already registered. Select
-                        the dentist, appointment date and time,
-                        and required treatments before submitting
-                        the appointment.
+                        Go to the <strong>Appointments</strong>
+                        section and click
+                        <strong>New Appointment</strong>.
+                        Enter the patient's contact number
+                        to check whether the patient is already
+                        registered. Select the dentist,
+                        appointment date and time, and required
+                        treatments before submitting the appointment.
                     </p>
 
                 </div>
 
             </div>
+
 
 
             <!-- FAQ 02 -->
@@ -479,24 +533,27 @@
                     02
                 </div>
 
+
                 <div class="faq-content">
 
                     <h3>
                         Why can't I see dentists or treatments?
                     </h3>
 
+
                     <p>
                         Make sure the appointment page has been
                         opened through the system's
                         <strong>New Appointment</strong> option.
                         The system loads active dentists and
-                        treatments when the appointment page is
-                        opened correctly.
+                        treatments when the appointment page
+                        is opened correctly.
                     </p>
 
                 </div>
 
             </div>
+
 
 
             <!-- FAQ 03 -->
@@ -507,23 +564,26 @@
                     03
                 </div>
 
+
                 <div class="faq-content">
 
                     <h3>
                         How do I print a patient's bill?
                     </h3>
 
+
                     <p>
                         Open the <strong>Billing</strong> section
                         and locate the required appointment.
                         Click the print icon in the Actions column.
-                        The system will open the bill in a new tab
-                        where it can be printed.
+                        The system will open the bill in a new
+                        tab where it can be printed.
                     </p>
 
                 </div>
 
             </div>
+
 
 
             <!-- FAQ 04 -->
@@ -534,15 +594,18 @@
                     04
                 </div>
 
+
                 <div class="faq-content">
 
                     <h3>
                         Can I edit an existing appointment?
                     </h3>
 
+
                     <p>
-                        Yes. Open the <strong>Appointments</strong>
-                        section and select the edit option for the
+                        Yes. Open the
+                        <strong>Appointments</strong> section
+                        and select the edit option for the
                         required appointment. Patient information,
                         dentist, appointment schedule and status
                         can be updated where permitted.
@@ -553,6 +616,7 @@
             </div>
 
 
+
             <!-- FAQ 05 -->
 
             <div class="faq-item">
@@ -561,23 +625,27 @@
                     05
                 </div>
 
+
                 <div class="faq-content">
 
                     <h3>
                         How do I delete a patient or appointment?
                     </h3>
 
+
                     <p>
-                        Find the required record in the Patients
-                        or Appointments section and click the
-                        delete icon. A confirmation message will
-                        appear before the record is permanently
-                        removed.
+                        Find the required record in the
+                        <strong>Patients</strong> or
+                        <strong>Appointments</strong> section
+                        and click the delete icon. A confirmation
+                        message will appear before the record
+                        is permanently removed.
                     </p>
 
                 </div>
 
             </div>
+
 
 
             <!-- FAQ 06 -->
@@ -588,11 +656,14 @@
                     06
                 </div>
 
+
                 <div class="faq-content">
 
                     <h3>
-                        I forgot my administrator password. What should I do?
+                        I forgot my administrator password.
+                        What should I do?
                     </h3>
+
 
                     <p>
                         Contact the clinic system administrator
@@ -605,6 +676,7 @@
             </div>
 
 
+
             <!-- FAQ 07 -->
 
             <div class="faq-item">
@@ -613,11 +685,13 @@
                     07
                 </div>
 
+
                 <div class="faq-content">
 
                     <h3>
                         How can I check whether a patient is registered?
                     </h3>
+
 
                     <p>
                         On the New Appointment page, enter the
@@ -632,6 +706,7 @@
             </div>
 
 
+
             <!-- FAQ 08 -->
 
             <div class="faq-item">
@@ -640,22 +715,44 @@
                     08
                 </div>
 
+
                 <div class="faq-content">
 
                     <h3>
                         What happens if a dentist is already booked?
                     </h3>
 
+
                     <p>
-                        The system checks the dentist's availability
-                        for the selected date and time. If another
-                        appointment already exists for that dentist
-                        and time, the system will prevent the
-                        conflicting booking and require another
-                        available time.
+                        The system checks the dentist's
+                        availability for the selected date and
+                        time. If another appointment already
+                        exists for that dentist and time, the
+                        system will prevent the conflicting
+                        booking and require another available
+                        time.
                     </p>
 
                 </div>
+
+            </div>
+
+
+
+            <!-- NO SEARCH RESULTS -->
+
+            <div id="noResults"
+                 class="no-results">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <strong>
+                    No results found
+                </strong>
+
+                <span>
+                    Try searching with a different keyword.
+                </span>
 
             </div>
 
@@ -664,15 +761,20 @@
     </section>
 
 
+
     <!-- =====================================================
          SUPPORT NOTICE
     ====================================================== -->
 
     <section class="support-notice">
 
+
         <div class="notice-icon">
+
             <i class="fa-solid fa-circle-info"></i>
+
         </div>
+
 
         <div class="notice-content">
 
@@ -680,15 +782,18 @@
                 Need further assistance?
             </h3>
 
+
             <p>
-                If your issue is not covered in the FAQ section,
-                please contact the clinic administration team
-                using the phone number or email address above.
+                If your question is not answered above,
+                please contact the clinic administration
+                team using the phone number or email address
+                provided in the Contact Information section.
             </p>
 
         </div>
 
     </section>
+
 
 
     <!-- =====================================================
@@ -702,6 +807,7 @@
             All Rights Reserved.
         </span>
 
+
         <span>
             Clinic Management System
         </span>
@@ -709,6 +815,73 @@
     </footer>
 
 </main>
+
+
+
+<!-- =========================================================
+     FAQ SEARCH JAVASCRIPT
+========================================================= -->
+
+<script>
+
+function searchHelp() {
+
+    const searchInput =
+        document.getElementById("helpSearch");
+
+    const searchValue =
+        searchInput.value.toLowerCase().trim();
+
+    const faqItems =
+        document.querySelectorAll(".faq-item");
+
+    const noResults =
+        document.getElementById("noResults");
+
+    let visibleCount = 0;
+
+
+    faqItems.forEach(function(item) {
+
+        const question =
+            item.querySelector("h3").textContent.toLowerCase();
+
+        const answer =
+            item.querySelector("p").textContent.toLowerCase();
+
+        const combinedText =
+            question + " " + answer;
+
+
+        if (combinedText.includes(searchValue)) {
+
+            item.style.display = "flex";
+
+            visibleCount++;
+
+        } else {
+
+            item.style.display = "none";
+
+        }
+
+    });
+
+
+    if (searchValue !== "" && visibleCount === 0) {
+
+        noResults.style.display = "block";
+
+    } else {
+
+        noResults.style.display = "none";
+
+    }
+
+}
+
+</script>
+
 
 </body>
 </html>
