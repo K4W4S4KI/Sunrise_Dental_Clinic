@@ -123,30 +123,20 @@
         </a>
 
 
-        <a href="#">
-
-            <i class="fa-solid fa-calendar-check"></i>
-
-            Appointments
-
-        </a>
+        <a href="${pageContext.request.contextPath}/adappointments.jsp">
+        <i class="fa-solid fa-calendar-check"></i>
+        Appointments
+    </a>
 
 
-        <a href="#">
-
-            <i class="fa-solid fa-user-doctor"></i>
-
-            Doctors
-
-        </a>
-
-
-        <a href="#">
-
+                <a href="${pageContext.request.contextPath}/adbilling.jsp">
             <i class="fa-solid fa-file-invoice-dollar"></i>
-
             Billing
+        </a>
 
+        <a href="${pageContext.request.contextPath}/helpsupport.jsp">
+            <i class="fa-solid fa-headphones"></i>
+            Help & Support
         </a>
 
     </nav>

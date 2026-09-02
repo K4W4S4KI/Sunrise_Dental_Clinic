@@ -70,50 +70,40 @@ session.removeAttribute("success");
 
 <nav class="navigation">
 
-    <a href="${pageContext.request.contextPath}/adminhomes.jsp">
+        <a href="${pageContext.request.contextPath}/adminhomes.jsp">
 
-        <i class="fa-solid fa-chart-line"></i>
+            <i class="fa-solid fa-chart-line"></i>
 
-        Dashboard
+            Dashboard
 
-    </a>
-
-
-    <a href="${pageContext.request.contextPath}/managePatients"
-       class="active">
-
-        <i class="fa-solid fa-user-group"></i>
-
-        Patients
-
-    </a>
+        </a>
 
 
-    <a href="#">
+        <a href="${pageContext.request.contextPath}/managePatients"
+           class="active">
 
+            <i class="fa-solid fa-user-group"></i>
+
+            Patients
+
+        </a>
+
+
+        <a href="${pageContext.request.contextPath}/adappointments.jsp">
         <i class="fa-solid fa-calendar-check"></i>
-
         Appointments
-
     </a>
 
 
-    <a href="#">
+                <a href="${pageContext.request.contextPath}/adbilling.jsp">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            Billing
+        </a>
 
-        <i class="fa-solid fa-user-doctor"></i>
-
-        Doctors
-
-    </a>
-
-
-    <a href="#">
-
-        <i class="fa-solid fa-file-invoice-dollar"></i>
-
-        Billing
-
-    </a>
+        <a href="${pageContext.request.contextPath}/helpsupport.jsp">
+            <i class="fa-solid fa-headphones"></i>
+            Help & Support
+        </a>
 
 </nav>
 

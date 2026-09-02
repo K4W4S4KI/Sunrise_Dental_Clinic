@@ -194,12 +194,9 @@
 
         <!-- HELP -->
 
-        <a href="#">
-
+        <a href="${pageContext.request.contextPath}/helpsupport.jsp">
             <i class="fa-solid fa-headphones"></i>
-
             Help & Support
-
         </a>
 
     </nav>
