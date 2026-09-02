@@ -1338,5 +1338,123 @@ public class appointmentService {
          }
      }
  }
+ 
+//=========================================================
+//GET DENTIST BY ID
+//=========================================================
+public dentist getDentistById(int dentistId) {
+
+  dentist d = null;
+
+  String sql =
+          "SELECT dentist_id, dentist_name, specialization, " +
+          "contact_number, status " +
+          "FROM dentist_tb " +
+          "WHERE dentist_id = ?";
+
+  try (
+          Connection conn = DBConnect.getConnection();
+          PreparedStatement stmt = conn.prepareStatement(sql)
+  ) {
+
+      stmt.setInt(1, dentistId);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+
+          if (rs.next()) {
+
+              d = new dentist();
+
+              d.setDentist_id(rs.getInt("dentist_id"));
+              d.setDentist_name(rs.getString("dentist_name"));
+              d.setSpecialization(rs.getString("specialization"));
+              d.setContact_number(rs.getString("contact_number"));
+              d.setStatus(rs.getString("status"));
+          }
+      }
+
+  } catch (Exception e) {
+
+      System.out.println("ERROR loading dentist: " + e.getMessage());
+      e.printStackTrace();
+  }
+
+  return d;
+}
+
+
+//=========================================================
+//GET TREATMENTS FOR AN APPOINTMENT
+//(uses the price snapshot stored at booking time)
+//=========================================================
+public ArrayList<treatment> getTreatmentsForAppointment(int appointmentId) {
+
+  ArrayList<treatment> list = new ArrayList<>();
+
+  String sql =
+          "SELECT t.treatment_id, t.treatment_name, " +
+          "at.treatment_price, t.status " +
+          "FROM appointment_treatment_tb at " +
+          "JOIN treatment_tb t " +
+          "ON at.treatment_id = t.treatment_id " +
+          "WHERE at.appointment_id = ?";
+
+  try (
+          Connection conn = DBConnect.getConnection();
+          PreparedStatement stmt = conn.prepareStatement(sql)
+  ) {
+
+      stmt.setInt(1, appointmentId);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+
+          while (rs.next()) {
+
+              treatment t = new treatment();
+
+              t.setTreatment_id(rs.getInt("treatment_id"));
+              t.setTreatment_name(rs.getString("treatment_name"));
+              t.setTreatment_priceLkr(rs.getBigDecimal("treatment_price"));
+              t.setStatus(rs.getString("status"));
+
+              list.add(t);
+          }
+      }
+
+  } catch (Exception e) {
+
+      System.out.println("ERROR loading appointment treatments: " + e.getMessage());
+      e.printStackTrace();
+  }
+
+  return list;
+}
+
+
+//=========================================================
+//UPDATE APPOINTMENT STATUS ONLY
+//=========================================================
+public boolean updateAppointmentStatus(int appointmentId, String status) {
+
+  String sql =
+          "UPDATE appointment_tb SET status = ? WHERE appointment_id = ?";
+
+  try (
+          Connection conn = DBConnect.getConnection();
+          PreparedStatement stmt = conn.prepareStatement(sql)
+  ) {
+
+      stmt.setString(1, status);
+      stmt.setInt(2, appointmentId);
+
+      return stmt.executeUpdate() > 0;
+
+  } catch (Exception e) {
+
+      System.out.println("ERROR updating appointment status: " + e.getMessage());
+      e.printStackTrace();
+      return false;
+  }
+}
 }
 
