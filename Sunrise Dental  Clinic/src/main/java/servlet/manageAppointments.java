@@ -136,8 +136,11 @@ public class manageAppointments extends HttpServlet {
                 }
             }
 
+            // FIXED: forward to the JSP that actually contains
+            // this page's markup (adappointments.jsp), not the
+            // old/unused manageappointments.jsp
             request.getRequestDispatcher(
-                    "/manageappointments.jsp"
+                    "/adappointments.jsp"
             ).forward(
                     request,
                     response

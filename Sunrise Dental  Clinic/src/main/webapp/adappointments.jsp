@@ -21,6 +21,19 @@
     List<appointment> appointments =
         (List<appointment>) request.getAttribute("appointments");
 
+    /* =========================================================
+       GUARD: if this page was opened directly (not forwarded
+       by the manageAppointments servlet), "appointments" will
+       be null. Redirect to the servlet so the data loads.
+    ========================================================= */
+
+    if (appointments == null) {
+        response.sendRedirect(
+            request.getContextPath() + "/manageAppointments"
+        );
+        return;
+    }
+
     SimpleDateFormat dateFormat =
         new SimpleDateFormat("dd MMM yyyy");
 
@@ -102,7 +115,7 @@
         </a>
 
 
-        <a href="${pageContext.request.contextPath}/adappointments.jsp"
+        <a href="${pageContext.request.contextPath}/manageAppointments"
            class="active">
 
             <i class="fa-solid fa-calendar-check"></i>
@@ -421,7 +434,7 @@
 
                 <!-- NEW APPOINTMENT -->
 
-                <a href="${pageContext.request.contextPath}/ad_addappointment.jsp"
+                <a href="${pageContext.request.contextPath}/addappointment.jsp"
                    class="add-btn">
 
                     <i class="fa-solid fa-calendar-plus"></i>
@@ -760,7 +773,7 @@
                                     records in the system.
                                 </p>
 
-                                <a href="${pageContext.request.contextPath}/addappointment.jsp"
+                                <a href="${pageContext.request.contextPath}/addappointment"
                                    class="empty-btn">
 
                                     <i class="fa-solid fa-calendar-plus"></i>

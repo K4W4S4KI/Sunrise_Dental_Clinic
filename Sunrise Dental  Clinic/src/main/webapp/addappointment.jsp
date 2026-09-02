@@ -8,29 +8,43 @@
 <%@ page import="model.treatment" %>
 
 <%
-    String contextPath = request.getContextPath();
 
-    ArrayList<dentist> dentistList =
-            (ArrayList<dentist>)
-            request.getAttribute("dentistList");
+String contextPath = request.getContextPath();
 
-    ArrayList<treatment> treatmentList =
-            (ArrayList<treatment>)
-            request.getAttribute("treatmentList");
+ArrayList<dentist> dentistList =
+        (ArrayList<dentist>)
+        request.getAttribute("dentistList");
 
-    String success =
-            request.getParameter("success");
+ArrayList<treatment> treatmentList =
+        (ArrayList<treatment>)
+        request.getAttribute("treatmentList");
 
-    String error =
-            request.getParameter("error");
+// -----------------------------------------------------
+// GUARD: if this page was opened directly (not forwarded
+// by the servlet), dentistList/treatmentList will be null.
+// Redirect to the servlet so the data actually loads.
+// -----------------------------------------------------
+if (dentistList == null && request.getParameter("success") == null
+        && request.getParameter("error") == null) {
 
-    if (dentistList == null) {
-        dentistList = new ArrayList<dentist>();
-    }
+    response.sendRedirect(contextPath + "/addappointment");
+    return;
+}
 
-    if (treatmentList == null) {
-        treatmentList = new ArrayList<treatment>();
-    }
+String success =
+        request.getParameter("success");
+
+String error =
+        request.getParameter("error");
+
+if (dentistList == null) {
+    dentistList = new ArrayList<dentist>();
+}
+
+if (treatmentList == null) {
+    treatmentList = new ArrayList<treatment>();
+}
+
 %>
 
 <!DOCTYPE html>
@@ -75,7 +89,7 @@
 
         </div>
 
-        <a href="<%= contextPath %>/appointments"
+        <a href="<%= contextPath %>/adappointments.jsp"
            class="back-btn">
 
             ← Back to Appointments
