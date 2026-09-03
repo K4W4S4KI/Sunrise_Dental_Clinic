@@ -27,10 +27,9 @@ public class viewPatient extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        // =====================================================
+        
         // ADMIN LOGIN CHECK
-        // =====================================================
-
+       
         HttpSession session = request.getSession(false);
 
         if (session == null ||
@@ -43,9 +42,9 @@ public class viewPatient extends HttpServlet {
             return;
         }
 
-        // =====================================================
+        
         // GET PATIENT ID
-        // =====================================================
+        
 
         String id = request.getParameter("id");
 
@@ -83,17 +82,17 @@ public class viewPatient extends HttpServlet {
             return;
         }
 
-        // =====================================================
+      
         // GET PATIENT FROM DATABASE
-        // =====================================================
+       
 
         patientService service = new patientService();
 
         patient pat = service.getPatientById(patientId);
 
-        // =====================================================
+       
         // PATIENT NOT FOUND
-        // =====================================================
+       
 
         if (pat == null) {
 
@@ -109,18 +108,18 @@ public class viewPatient extends HttpServlet {
             return;
         }
 
-        // =====================================================
+       
         // SEND PATIENT TO JSP
-        // =====================================================
+       
 
         request.setAttribute(
                 "patient",
                 pat
         );
 
-        // =====================================================
+        
         // OPEN VIEW PAGE
-        // =====================================================
+       
 
         request.getRequestDispatcher(
                 "/viewPatient.jsp"

@@ -25,9 +25,9 @@ public class updatePatients extends HttpServlet {
     }
 
 
-    // =========================================================
+    
     // GET - LOAD PATIENT
-    // =========================================================
+    
 
     @Override
     protected void doGet(
@@ -103,10 +103,9 @@ public class updatePatients extends HttpServlet {
     }
 
 
-    // =========================================================
+    
     // POST - UPDATE PATIENT
-    // =========================================================
-
+    
     @Override
     protected void doPost(
             HttpServletRequest request,
@@ -134,9 +133,9 @@ public class updatePatients extends HttpServlet {
         String status = request.getParameter("status");
 
 
-        // =====================================================
+       
         // PATIENT ID
-        // =====================================================
+        
 
         int patientId;
 
@@ -158,9 +157,9 @@ public class updatePatients extends HttpServlet {
         }
 
 
-        // =====================================================
+        
         // TRIM
-        // =====================================================
+        
 
         patientName = patientName != null
                 ? patientName.trim() : "";
@@ -178,9 +177,9 @@ public class updatePatients extends HttpServlet {
                 ? status.trim() : "Active";
 
 
-        // =====================================================
+        
         // VALIDATION
-        // =====================================================
+        
 
         if (patientName.isEmpty()) {
 
@@ -246,9 +245,9 @@ public class updatePatients extends HttpServlet {
         }
 
 
-        // =====================================================
+        
         // CHECK DUPLICATE CONTACT
-        // =====================================================
+        
 
         patient existing =
             service.getPatientByContactNumber(contactNumber);
@@ -270,9 +269,9 @@ public class updatePatients extends HttpServlet {
         }
 
 
-        // =====================================================
+        
         // CREATE PATIENT
-        // =====================================================
+        
 
         patient pat = new patient();
 
@@ -284,17 +283,17 @@ public class updatePatients extends HttpServlet {
         pat.setStatus(status);
 
 
-        // =====================================================
+        
         // UPDATE
-        // =====================================================
+        
 
         boolean success =
             service.updatePatient(pat);
 
 
-        // =====================================================
+       
         // RESULT
-        // =====================================================
+       
 
         if (success) {
 

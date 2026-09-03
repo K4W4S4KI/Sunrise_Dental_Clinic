@@ -30,9 +30,9 @@ public class deletePatient extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
-        // ==========================================
+        
         // ADMIN LOGIN CHECK
-        // ==========================================
+        
         if (session == null ||
             session.getAttribute("loggedInAdmin") == null) {
 
@@ -42,9 +42,8 @@ public class deletePatient extends HttpServlet {
             return;
         }
 
-        // ==========================================
+        
         // GET PATIENT ID
-        // ==========================================
         String id = request.getParameter("id");
 
         if (id == null || id.trim().isEmpty()) {
@@ -79,9 +78,9 @@ public class deletePatient extends HttpServlet {
             return;
         }
 
-        // ==========================================
+        
         // CHECK WHETHER PATIENT EXISTS
-        // ==========================================
+       
         if (service.getPatientById(patientId) == null) {
 
             session.setAttribute(
@@ -95,9 +94,9 @@ public class deletePatient extends HttpServlet {
             return;
         }
 
-        // ==========================================
+        
         // DELETE PATIENT
-        // ==========================================
+      
         boolean success = service.deletePatient(patientId);
 
         if (success) {
@@ -115,9 +114,9 @@ public class deletePatient extends HttpServlet {
             );
         }
 
-        // ==========================================
+        
         // REDIRECT TO PATIENT LIST
-        // ==========================================
+       
         response.sendRedirect(
             request.getContextPath() + "/managePatients"
         );

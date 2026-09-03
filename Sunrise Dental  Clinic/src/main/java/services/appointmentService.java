@@ -20,9 +20,8 @@ public class appointmentService {
             new BigDecimal("500.00");
 
 
- // =========================================================
  // GET ACTIVE DENTISTS
- // =========================================================
+ 
  public ArrayList<dentist> getActiveDentists() {
 
      ArrayList<dentist> dentistList = new ArrayList<>();
@@ -106,9 +105,9 @@ public class appointmentService {
      return dentistList;
  }
 
-    // =========================================================
+    
     // GET ACTIVE TREATMENTS
-    // =========================================================
+
 
     public ArrayList<treatment> getActiveTreatments() {
 
@@ -172,9 +171,9 @@ public class appointmentService {
     }
 
 
-    // =========================================================
+   
     // GET ALL APPOINTMENTS
-    // =========================================================
+    
 
     public ArrayList<appointment> getAllAppointments() {
 
@@ -278,9 +277,9 @@ public class appointmentService {
     }
 
 
-    // =========================================================
+    
     // GET APPOINTMENT BY ID
-    // =========================================================
+   
 
     public appointment getAppointmentById(
             int appointmentId) {
@@ -377,9 +376,9 @@ public class appointmentService {
     }
 
 
-    // =========================================================
+    
     // GET APPOINTMENT SUMMARY
-    // =========================================================
+   
 
     public appointment getAppointmentSummary(
             int appointmentId) {
@@ -480,10 +479,9 @@ public class appointmentService {
     }
 
 
-    // =========================================================
+    
     // GET TREATMENT BY ID
-    // =========================================================
-
+    
     public treatment getTreatmentById(
             int treatmentId) {
 
@@ -549,9 +547,9 @@ public class appointmentService {
     }
 
 
-    // =========================================================
+    
     // CALCULATE TREATMENT TOTAL
-    // =========================================================
+    
 
     public BigDecimal calculateTreatmentTotal(
             List<treatment> treatmentList) {
@@ -577,9 +575,9 @@ public class appointmentService {
     }
 
 
-    // =========================================================
+   
     // CALCULATE BILL TOTAL
-    // =========================================================
+  
 
     public BigDecimal calculateBillTotal(
             List<treatment> treatmentList) {
@@ -590,9 +588,9 @@ public class appointmentService {
     }
 
 
-    // =========================================================
+   
     // CREATE APPOINTMENT
-    // =========================================================
+    
 
     public boolean createAppointment(
             appointment appt) {
@@ -737,9 +735,9 @@ public class appointmentService {
     }
 
 
-    // =========================================================
+    
     // UPDATE APPOINTMENT
-    // =========================================================
+    
 
     public boolean updateAppointment(
             appointment appt) {
@@ -837,11 +835,9 @@ public class appointmentService {
     }
 
 
- // =========================================================
+ 
  // DELETE APPOINTMENT
- // (also deletes linked treatment rows to satisfy the
- // foreign key on appointment_treatment_tb)
- // =========================================================
+ 
 
  public boolean deleteAppointment(
          int appointmentId) {
@@ -863,9 +859,9 @@ public class appointmentService {
          conn.setAutoCommit(false);
 
 
-         // -------------------------------------------------
+         
          // DELETE CHILD TREATMENT ROWS FIRST
-         // -------------------------------------------------
+         
 
          try (
                  PreparedStatement treatmentStmt =
@@ -883,9 +879,9 @@ public class appointmentService {
          }
 
 
-         // -------------------------------------------------
+         
          // DELETE THE APPOINTMENT ITSELF
-         // -------------------------------------------------
+         
 
          int rows;
 
@@ -967,9 +963,9 @@ public class appointmentService {
  }
 
 
-    // =========================================================
+   
     // SEARCH APPOINTMENT BY APPOINTMENT NUMBER
-    // =========================================================
+    
 
     public appointment getAppointmentByNumber(
             String appointmentNumber) {
@@ -1069,9 +1065,9 @@ public class appointmentService {
     }
 
 
-    // =========================================================
+   
     // CHECK DENTIST AVAILABILITY
-    // =========================================================
+    
 
     public boolean isDentistAvailable(
             int dentistId,
@@ -1128,9 +1124,9 @@ public class appointmentService {
         return false;
     }
     
- // =========================================================
+
  // CREATE APPOINTMENT WITH MULTIPLE TREATMENTS
- // =========================================================
+ 
 
  public boolean createAppointmentWithTreatments(
          appointment appt,
@@ -1158,9 +1154,9 @@ public class appointmentService {
          conn.setAutoCommit(false);
 
 
-         // -------------------------------------------------
+        
          // GENERATE APPOINTMENT NUMBER
-         // -------------------------------------------------
+        
 
          String appointmentNumber =
                  "APT-" + System.currentTimeMillis();
@@ -1169,9 +1165,9 @@ public class appointmentService {
          int appointmentId;
 
 
-         // -------------------------------------------------
+        
          // INSERT APPOINTMENT
-         // -------------------------------------------------
+         
 
          try (
                  PreparedStatement stmt =
@@ -1271,9 +1267,9 @@ public class appointmentService {
          }
 
 
-         // -------------------------------------------------
+        
          // INSERT SELECTED TREATMENTS
-         // -------------------------------------------------
+         
 
          try (
                  PreparedStatement treatmentStmt =
@@ -1363,10 +1359,6 @@ public class appointmentService {
          }
 
 
-         // -------------------------------------------------
-         // COMMIT
-         // -------------------------------------------------
-
          conn.commit();
 
 
@@ -1414,9 +1406,9 @@ public class appointmentService {
      }
  }
  
-//=========================================================
+
 //GET DENTIST BY ID
-//=========================================================
+
 public dentist getDentistById(int dentistId) {
 
   dentist d = null;
@@ -1458,10 +1450,9 @@ public dentist getDentistById(int dentistId) {
 }
 
 
-//=========================================================
+
 //GET TREATMENTS FOR AN APPOINTMENT
-//(uses the price snapshot stored at booking time)
-//=========================================================
+
 public ArrayList<treatment> getTreatmentsForAppointment(int appointmentId) {
 
   ArrayList<treatment> list = new ArrayList<>();
@@ -1506,9 +1497,9 @@ public ArrayList<treatment> getTreatmentsForAppointment(int appointmentId) {
 }
 
 
-//=========================================================
+
 //UPDATE APPOINTMENT STATUS ONLY
-//=========================================================
+
 public boolean updateAppointmentStatus(int appointmentId, String status) {
 
   String sql =
@@ -1532,27 +1523,25 @@ public boolean updateAppointmentStatus(int appointmentId, String status) {
   }
 }
 
-//=========================================================
+
 //GET ALL BILLS
-//=========================================================
+
 public ArrayList<bill> getAllBills() {
  return loadBills(null);
 }
 
 
-//=========================================================
+
 //SEARCH BILLS
-//=========================================================
+
 public ArrayList<bill> searchBills(String keyword) {
  return loadBills(keyword);
 }
 
 
-//=========================================================
+
 //LOAD BILLS (shared by getAllBills / searchBills)
-//One row per appointment, with treatment total aggregated
-//from appointment_treatment_tb
-//=========================================================
+
 private ArrayList<bill> loadBills(String keyword) {
 
  ArrayList<bill> billList = new ArrayList<>();
@@ -1639,9 +1628,9 @@ private ArrayList<bill> loadBills(String keyword) {
  return billList;
 }
 
-//=========================================================
+
 //GET TOTAL APPOINTMENT COUNT
-//=========================================================
+
 public int getTotalAppointmentCount() {
 
   String sql = "SELECT COUNT(*) FROM appointment_tb";

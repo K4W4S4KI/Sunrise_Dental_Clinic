@@ -24,9 +24,9 @@ public class editAppointment extends HttpServlet {
 
     private appointmentService appointmentService = new appointmentService();
 
-    // =========================================================
+    
     // LOAD EDIT FORM
-    // =========================================================
+    
     @Override
     protected void doGet(
             HttpServletRequest request,
@@ -91,9 +91,9 @@ public class editAppointment extends HttpServlet {
                .forward(request, response);
     }
 
-    // =========================================================
+    
     // SAVE CHANGES
-    // =========================================================
+    
     @Override
     protected void doPost(
             HttpServletRequest request,
@@ -136,9 +136,9 @@ public class editAppointment extends HttpServlet {
         if (address != null) address = address.trim();
         if (contactNumber != null) contactNumber = contactNumber.trim();
 
-        // -----------------------------------------------------
+        
         // VALIDATION
-        // -----------------------------------------------------
+       
 
         if (patientName == null || patientName.isEmpty() ||
             contactNumber == null || contactNumber.isEmpty() ||
@@ -178,9 +178,9 @@ public class editAppointment extends HttpServlet {
             return;
         }
 
-        // -----------------------------------------------------
+       
         // CHECK DENTIST AVAILABILITY (excluding this appointment)
-        // -----------------------------------------------------
+       
 
         boolean available = appointmentService.isDentistAvailable(
                 dentistId,
@@ -201,9 +201,9 @@ public class editAppointment extends HttpServlet {
             return;
         }
 
-        // -----------------------------------------------------
+        
         // BUILD AND SAVE
-        // -----------------------------------------------------
+       
 
         appointment appt = new appointment();
 

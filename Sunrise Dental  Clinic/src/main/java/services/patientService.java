@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public class patientService {
 
-    // =========================================================
+  
     // GET ALL PATIENTS
-    // =========================================================
+   
 
     public ArrayList<patient> getAllPatients() {
 
@@ -59,9 +59,9 @@ public class patientService {
     }
 
 
-    // =========================================================
+    
     // SEARCH PATIENTS
-    // =========================================================
+    
 
     public ArrayList<patient> searchPatients(String keyword) {
 
@@ -119,9 +119,9 @@ public class patientService {
     }
 
 
-    // =========================================================
+    
     // GET PATIENT BY ID
-    // =========================================================
+   
 
     public patient getPatientById(int patientId) {
 
@@ -170,9 +170,9 @@ public class patientService {
     }
 
 
-    // =========================================================
+    
     // GET PATIENT BY CONTACT NUMBER
-    // =========================================================
+   
 
     public patient getPatientByContactNumber(String contactNumber) {
 
@@ -230,9 +230,9 @@ public class patientService {
     }
 
 
-    // =========================================================
+    
     // ADD PATIENT
-    // =========================================================
+    
 
     public boolean addPatient(patient pat) {
 
@@ -277,10 +277,9 @@ public class patientService {
     }
 
 
-    // =========================================================
+    
     // UPDATE PATIENT
-    // =========================================================
-
+    
     public boolean updatePatient(patient pat) {
 
         String sql =
@@ -339,10 +338,9 @@ public class patientService {
     }
 
 
-    // =========================================================
+   
     // DELETE PATIENT
-    // =========================================================
-
+    
     public boolean deletePatient(int patientId) {
 
         String sql =
@@ -395,9 +393,9 @@ public class patientService {
         }
     }
     
- // =========================================================
+
  // GET TOTAL PATIENT COUNT
- // =========================================================
+ 
 
  public int getTotalPatientCount() {
 

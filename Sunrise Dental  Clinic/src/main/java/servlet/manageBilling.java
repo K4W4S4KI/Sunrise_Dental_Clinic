@@ -58,9 +58,9 @@ public class manageBilling extends HttpServlet {
             billList = new ArrayList<bill>();
         }
 
-        // -------------------------------------------------
+        
         // TOTAL REVENUE (sum of grand totals)
-        // -------------------------------------------------
+        
 
         BigDecimal totalRevenue = BigDecimal.ZERO;
 

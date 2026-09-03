@@ -30,9 +30,9 @@ public class addappointment extends HttpServlet {
     private patientService patientService =
             new patientService();
 
-    // =========================================================
+    
     // DISPLAY ADD APPOINTMENT PAGE
-    // =========================================================
+    
     @Override
     protected void doGet(
             HttpServletRequest request,
@@ -65,9 +65,9 @@ public class addappointment extends HttpServlet {
         }
     }
 
-    // =========================================================
+    
     // CREATE APPOINTMENT
-    // =========================================================
+    
     @Override
     protected void doPost(
             HttpServletRequest request,
@@ -78,9 +78,9 @@ public class addappointment extends HttpServlet {
 
         String contextPath = request.getContextPath();
 
-        // -----------------------------------------------------
+        
         // READ FORM DATA
-        // -----------------------------------------------------
+      
 
         String patientIdStr   = request.getParameter("patientId");
         String phone          = request.getParameter("phone");
@@ -252,9 +252,9 @@ public class addappointment extends HttpServlet {
         }
     }
 
-    // =========================================================
+    
     // HELPER - redirect back to GET handler with an error code
-    // =========================================================
+   
     private void redirectWithError(
             HttpServletResponse response,
             String contextPath,
